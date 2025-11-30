@@ -35,7 +35,7 @@ export function NotificationOverlay({ isOpen, timeLeft, totalTime, onClose }: No
                 className="h-full bg-primary"
                 initial={{ width: "100%" }}
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 1, ease: "linear" }}
+                transition={{ duration: 0.3, ease: "linear" }}
               />
             </div>
 

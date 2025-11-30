@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Digital Eye Relief",
+  "version": "1.0.0",
+  "description": "Follow the 20-20-20 rule to reduce digital eye strain. Every 20 minutes, look 20 feet away for 20 seconds.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_page": "options.html"
+}

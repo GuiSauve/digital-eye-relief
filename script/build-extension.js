@@ -4,22 +4,39 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
+const distDir = path.join(rootDir, 'dist-extension');
+
+// Move HTML files from extension/ subdirectory to root
+const htmlFiles = ['popup.html', 'options.html'];
+htmlFiles.forEach(file => {
+  const source = path.join(distDir, 'extension', file);
+  const dest = path.join(distDir, file);
+  if (fs.existsSync(source)) {
+    fs.renameSync(source, dest);
+  }
+});
+
+// Remove empty extension directory
+const extensionDir = path.join(distDir, 'extension');
+if (fs.existsSync(extensionDir) && fs.readdirSync(extensionDir).length === 0) {
+  fs.rmdirSync(extensionDir);
+}
 
 // Copy manifest.json
 fs.copyFileSync(
   path.join(rootDir, 'extension', 'manifest.json'),
-  path.join(rootDir, 'dist-extension', 'manifest.json')
+  path.join(distDir, 'manifest.json')
 );
 
 // Copy background.js
 fs.copyFileSync(
   path.join(rootDir, 'extension', 'background.js'),
-  path.join(rootDir, 'dist-extension', 'background.js')
+  path.join(distDir, 'background.js')
 );
 
 // Copy icons directory
 const iconsSource = path.join(rootDir, 'extension', 'icons');
-const iconsDest = path.join(rootDir, 'dist-extension', 'icons');
+const iconsDest = path.join(distDir, 'icons');
 
 if (fs.existsSync(iconsSource)) {
   if (!fs.existsSync(iconsDest)) {

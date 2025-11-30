@@ -148,28 +148,63 @@ function updateBadge(status, value) {
   }
 }
 
-// Stop all timers
+// Pause timers and save remaining time
+function pauseTimers() {
+  chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+    if (result.timerStatus === 'focus' && result.timerStartTime && result.timerDuration) {
+      // Calculate remaining time and save it
+      const elapsed = Date.now() - result.timerStartTime;
+      const remainingMs = Math.max(0, result.timerDuration - elapsed);
+      
+      chrome.alarms.clear('focusTimer');
+      chrome.alarms.clear('updateBadge');
+      chrome.storage.sync.set({ 
+        timerStatus: 'paused',
+        pausedRemainingMs: remainingMs
+      });
+      updateBadge('idle');
+    } else {
+      // If not in focus mode, just stop everything
+      stopTimers();
+    }
+  });
+}
+
+// Stop all timers and clear paused state (full reset)
 function stopTimers() {
   chrome.alarms.clear('focusTimer');
   chrome.alarms.clear('breakTimer');
   chrome.alarms.clear('updateBadge');
-  chrome.storage.sync.set({ timerStatus: 'idle' });
+  chrome.storage.sync.set({ 
+    timerStatus: 'idle',
+    pausedRemainingMs: null 
+  });
   updateBadge('idle');
 }
 
 // Handle messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'startTimer') {
-    chrome.storage.sync.get(['settings'], (result) => {
+    // Check if we're resuming from a paused state
+    chrome.storage.sync.get(['settings', 'timerStatus', 'pausedRemainingMs'], (result) => {
       const settings = result.settings || DEFAULT_SETTINGS;
-      startFocusTimer(settings.focusDuration);
+      
+      if (result.timerStatus === 'paused' && result.pausedRemainingMs > 0) {
+        // Resume from paused time
+        const remainingMinutes = result.pausedRemainingMs / 60000;
+        chrome.storage.sync.set({ pausedRemainingMs: null }); // Clear paused state
+        startFocusTimer(remainingMinutes);
+      } else {
+        // Start fresh with full duration
+        startFocusTimer(settings.focusDuration);
+      }
       sendResponse({ success: true });
     });
     return true;
   }
   
   if (request.action === 'pauseTimer') {
-    stopTimers();
+    pauseTimers();
     sendResponse({ success: true });
     return true;
   }
@@ -191,7 +226,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'getTimerState') {
-    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration', 'pausedRemainingMs'], (result) => {
       sendResponse(result);
     });
     return true;

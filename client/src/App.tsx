@@ -4,13 +4,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
+import { ExtensionMockup } from "@/pages/extension-mockup";
 
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
+      {/* Main Route serves the Extension Mockup */}
+      <Route path="/" component={ExtensionMockup} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -210,8 +210,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'resetTimer') {
-    stopTimers();
-    sendResponse({ success: true });
+    // Stop all timers and reset to current settings
+    chrome.alarms.clear('focusTimer');
+    chrome.alarms.clear('breakTimer');
+    chrome.alarms.clear('updateBadge');
+    
+    // Fetch current settings and reset timerDuration to reflect them
+    chrome.storage.sync.get(['settings'], (result) => {
+      const settings = result.settings || DEFAULT_SETTINGS;
+      chrome.storage.sync.set({ 
+        timerStatus: 'idle',
+        pausedRemainingMs: null,
+        timerStartTime: null,
+        timerDuration: settings.focusDuration * 60 * 1000
+      });
+      updateBadge('idle');
+      sendResponse({ success: true });
+    });
     return true;
   }
   

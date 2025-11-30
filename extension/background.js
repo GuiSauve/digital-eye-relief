@@ -5,7 +5,7 @@ const DEFAULT_SETTINGS = {
   focusDuration: 20, // minutes
   breakDuration: 20, // seconds
   soundEnabled: true,
-  notificationType: 'system', // 'modal', 'system', or 'badge'
+  notificationType: 'modal', // 'modal' or 'badge'
   isActive: false
 };
 
@@ -15,6 +15,13 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.get(['settings'], (result) => {
     if (!result.settings) {
       chrome.storage.sync.set({ settings: DEFAULT_SETTINGS });
+    } else {
+      // Migrate legacy 'system' notificationType to 'modal'
+      if (result.settings.notificationType === 'system') {
+        chrome.storage.sync.set({ 
+          settings: { ...result.settings, notificationType: 'modal' }
+        });
+      }
     }
   });
 });
@@ -63,17 +70,16 @@ function handleFocusComplete() {
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
     
-    // Show notification
-    if (settings.notificationType === 'system') {
-      chrome.notifications.create('breakReminder', {
-        type: 'basic',
-        iconUrl: 'icons/icon-128.png',
-        title: 'Time for an Eye Break! 👀',
-        message: 'Look at something 20 feet (6 meters) away for 20 seconds.',
-        priority: 2,
-        requireInteraction: true
-      });
-    }
+    // Always show a system notification when focus time ends (popup might be closed)
+    // The notificationType setting controls the popup UI, not the background notification
+    chrome.notifications.create('breakReminder', {
+      type: 'basic',
+      iconUrl: 'icons/icon-128.png',
+      title: 'Time for an Eye Break! 👀',
+      message: 'Look at something 20 feet (6 meters) away for 20 seconds.',
+      priority: 2,
+      requireInteraction: true
+    });
     
     // Play sound if enabled
     if (settings.soundEnabled) {

@@ -10,7 +10,7 @@ interface SettingsProps {
     focusDuration: number;
     breakDuration: number;
     soundEnabled: boolean;
-    notificationType: "modal" | "badge" | "system";
+    notificationType: "modal" | "badge";
   };
   onUpdateSettings: (settings: any) => void;
   onBack: () => void;
@@ -104,10 +104,6 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                 <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:bg-secondary/30 transition-colors cursor-pointer">
                   <RadioGroupItem value="modal" id="r-modal" />
                   <Label htmlFor="r-modal" className="cursor-pointer flex-1">Full Screen Modal</Label>
-                </div>
-                <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:bg-secondary/30 transition-colors cursor-pointer">
-                  <RadioGroupItem value="system" id="r-system" />
-                  <Label htmlFor="r-system" className="cursor-pointer flex-1">System Notification</Label>
                 </div>
                 <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:bg-secondary/30 transition-colors cursor-pointer">
                   <RadioGroupItem value="badge" id="r-badge" />

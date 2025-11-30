@@ -37,7 +37,7 @@ export function Popup({
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold font-display text-lg">
             20
           </div>
-          <span className="font-display font-bold text-foreground text-lg">Eye Saver</span>
+          <span className="font-display font-bold text-foreground text-lg">Digital Eye Relief</span>
         </div>
         <Button
           variant="ghost"

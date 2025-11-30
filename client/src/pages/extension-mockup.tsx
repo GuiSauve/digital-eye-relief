@@ -40,7 +40,7 @@ export function ExtensionMockup() {
       <div className="z-10 flex flex-col items-center gap-8 max-w-6xl w-full">
         
         <div className="text-center space-y-4 mb-2">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-stone-800 tracking-tight">20-20-20 Eye Saver</h1>
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-stone-800 tracking-tight">Digital Eye Relief</h1>
           <p className="text-stone-600 max-w-lg mx-auto text-lg leading-relaxed">
             A chrome extension to help you reduce eye strain. <br/>
             <span className="text-sm text-stone-500">Below is a fully interactive mockup of the extension interface.</span>

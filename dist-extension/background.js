@@ -26,19 +26,40 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-// Handle alarm events
+// Handle all alarm events in one listener
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'focusTimer') {
     handleFocusComplete();
   } else if (alarm.name === 'breakTimer') {
     handleBreakComplete();
+  } else if (alarm.name === 'updateBadge') {
+    // Update the badge with remaining time
+    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+      if (result.timerStatus === 'focus' && result.timerStartTime && result.timerDuration) {
+        const elapsed = Date.now() - result.timerStartTime;
+        const remaining = Math.ceil((result.timerDuration - elapsed) / 60000);
+        if (remaining > 0) {
+          updateBadge('focus', remaining);
+        }
+      }
+    });
   }
 });
 
 // Start the focus timer
 function startFocusTimer(durationMinutes) {
+  // Clear any existing alarms first
+  chrome.alarms.clear('focusTimer');
+  chrome.alarms.clear('updateBadge');
+  
   chrome.alarms.create('focusTimer', {
     delayInMinutes: durationMinutes
+  });
+  
+  // Create badge update alarm that fires every minute
+  chrome.alarms.create('updateBadge', { 
+    delayInMinutes: 1,
+    periodInMinutes: 1 
   });
   
   chrome.storage.sync.set({ 
@@ -131,6 +152,7 @@ function updateBadge(status, value) {
 function stopTimers() {
   chrome.alarms.clear('focusTimer');
   chrome.alarms.clear('breakTimer');
+  chrome.alarms.clear('updateBadge');
   chrome.storage.sync.set({ timerStatus: 'idle' });
   updateBadge('idle');
 }
@@ -173,22 +195,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse(result);
     });
     return true;
-  }
-});
-
-// Update badge every minute while timer is running
-chrome.alarms.create('updateBadge', { periodInMinutes: 1 });
-
-chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === 'updateBadge') {
-    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
-      if (result.timerStatus === 'focus') {
-        const elapsed = Date.now() - result.timerStartTime;
-        const remaining = Math.ceil((result.timerDuration - elapsed) / 60000);
-        if (remaining > 0) {
-          updateBadge('focus', remaining);
-        }
-      }
-    });
   }
 });

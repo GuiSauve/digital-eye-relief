@@ -116,7 +116,8 @@ export function ExtensionMockup() {
             <div className="p-4 bg-white rounded-2xl shadow-sm border border-stone-100 flex flex-col items-center">
               <div className="text-3xl font-bold text-stone-800 mb-1">20</div>
               <div className="text-xs text-stone-500 font-bold uppercase tracking-wider">Feet</div>
-              <p className="text-xs text-stone-400 mt-2 leading-tight">distance away</p>
+              <div className="text-[10px] text-stone-400 font-medium uppercase tracking-wide -mt-0.5 mb-1">(6 Meters)</div>
+              <p className="text-xs text-stone-400 leading-tight">distance away</p>
             </div>
             <div className="p-4 bg-white rounded-2xl shadow-sm border border-stone-100 flex flex-col items-center">
               <div className="text-3xl font-bold text-stone-800 mb-1">20</div>
@@ -126,7 +127,7 @@ export function ExtensionMockup() {
           </div>
           
           <p className="text-sm text-stone-500 italic border-t border-stone-100 pt-4 mt-2">
-            "Every 20 minutes, take a 20-second break and look at something 20 feet away."
+            "Every 20 minutes, take a 20-second break and look at something 20 feet (6 meters) away."
           </p>
         </div>
       </div>

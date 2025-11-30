@@ -76,6 +76,7 @@ export function Popup({
                 status === "break" && "text-blue-400"
               )}
               strokeDasharray={circumference}
+              initial={{ strokeDashoffset: circumference }}
               animate={{ strokeDashoffset }}
               transition={{ duration: 1, ease: "linear" }}
               strokeLinecap="round"

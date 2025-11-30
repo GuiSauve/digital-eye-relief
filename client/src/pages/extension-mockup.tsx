@@ -97,6 +97,38 @@ export function ExtensionMockup() {
                 )}
             </div>
         </div>
+
+        {/* Info Section */}
+        <div className="max-w-2xl w-full text-center space-y-6 mt-4 p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-white/20 shadow-xl shadow-stone-200/50">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-display font-bold text-stone-800">Why the 20-20-20 Rule?</h3>
+            <p className="text-stone-600 leading-relaxed max-w-lg mx-auto">
+              Recommended by the <span className="font-semibold text-primary">American Optometric Association</span>, this rule is the gold standard for preventing digital eye strain.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 md:gap-8">
+            <div className="p-4 bg-white rounded-2xl shadow-sm border border-stone-100 flex flex-col items-center">
+              <div className="text-3xl font-bold text-stone-800 mb-1">20</div>
+              <div className="text-xs text-stone-500 font-bold uppercase tracking-wider">Minutes</div>
+              <p className="text-xs text-stone-400 mt-2 leading-tight">of screen time</p>
+            </div>
+            <div className="p-4 bg-white rounded-2xl shadow-sm border border-stone-100 flex flex-col items-center">
+              <div className="text-3xl font-bold text-stone-800 mb-1">20</div>
+              <div className="text-xs text-stone-500 font-bold uppercase tracking-wider">Feet</div>
+              <p className="text-xs text-stone-400 mt-2 leading-tight">distance away</p>
+            </div>
+            <div className="p-4 bg-white rounded-2xl shadow-sm border border-stone-100 flex flex-col items-center">
+              <div className="text-3xl font-bold text-stone-800 mb-1">20</div>
+              <div className="text-xs text-stone-500 font-bold uppercase tracking-wider">Seconds</div>
+              <p className="text-xs text-stone-400 mt-2 leading-tight">break duration</p>
+            </div>
+          </div>
+          
+          <p className="text-sm text-stone-500 italic border-t border-stone-100 pt-4 mt-2">
+            "Every 20 minutes, take a 20-second break and look at something 20 feet away."
+          </p>
+        </div>
       </div>
 
       {/* Overlay Notification - Renders full screen over the mockup page */}

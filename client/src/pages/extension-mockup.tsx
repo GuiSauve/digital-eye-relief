@@ -118,28 +118,6 @@ export function ExtensionMockup() {
             </Button>
           </motion.div>
           
-          {/* Social Proof */}
-          <motion.div 
-            className="flex items-center justify-center gap-8 pt-8 text-stone-500"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-primary/70 border-2 border-white" />
-                ))}
-              </div>
-              <span className="text-sm font-medium">Loved by developers</span>
-            </div>
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Sparkles key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-              ))}
-              <span className="text-sm font-medium ml-1">5.0 rating</span>
-            </div>
-          </motion.div>
         </div>
         
         {/* Scroll Indicator */}
@@ -345,7 +323,7 @@ export function ExtensionMockup() {
             Ready to protect your eyes?
           </h2>
           <p className="text-lg text-stone-600 mb-8 max-w-xl mx-auto">
-            Join thousands of developers and digital workers who use Digital Eye Relief to stay healthy and focused.
+            Start taking care of your eyes today with a simple, free tool designed for healthier screen time.
           </p>
           
           <Button 

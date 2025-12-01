@@ -83,6 +83,24 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     handleFocusComplete();
   } else if (alarm.name === 'breakTimer') {
     handleBreakComplete();
+  } else if (alarm.name === 'breakCheck') {
+    // Update badge countdown during break (completion handled by breakTimer)
+    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+      if (result.timerStatus === 'break' && result.timerStartTime && result.timerDuration) {
+        const elapsed = Date.now() - result.timerStartTime;
+        const remaining = Math.max(0, Math.ceil((result.timerDuration - elapsed) / 1000));
+        
+        if (remaining > 0) {
+          updateBadge('break', remaining);
+        } else {
+          // Break ended, clear the check alarm (breakTimer handles completion)
+          chrome.alarms.clear('breakCheck');
+        }
+      } else {
+        // Not in break mode anymore, stop checking
+        chrome.alarms.clear('breakCheck');
+      }
+    });
   } else if (alarm.name === 'updateBadge') {
     // Update the badge with remaining time
     chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
@@ -123,18 +141,37 @@ function startFocusTimer(durationMinutes) {
 }
 
 // Start the break timer
+// Note: Chrome alarms have a minimum delay of ~30 seconds for delayInMinutes,
+// but using 'when' with an absolute timestamp allows precise short-duration alarms
 function startBreakTimer(durationSeconds) {
-  chrome.alarms.create('breakTimer', {
-    delayInMinutes: durationSeconds / 60
-  });
+  // Clear any existing break-related alarms
+  chrome.alarms.clear('breakTimer');
+  chrome.alarms.clear('breakCheck');
+  
+  const startTime = Date.now();
+  const duration = durationSeconds * 1000;
+  const endTime = startTime + duration;
   
   chrome.storage.sync.set({ 
     timerStatus: 'break',
-    timerStartTime: Date.now(),
-    timerDuration: durationSeconds * 1000
+    timerStartTime: startTime,
+    timerDuration: duration
   });
   
-  updateBadge('break', Math.ceil(durationSeconds / 60));
+  // Use 'when' for precise timing - this allows sub-30-second alarms
+  chrome.alarms.create('breakTimer', {
+    when: endTime
+  });
+  
+  // Also create a periodic alarm to update the badge countdown
+  if (durationSeconds > 5) {
+    chrome.alarms.create('breakCheck', {
+      delayInMinutes: 0.083, // ~5 seconds
+      periodInMinutes: 0.083
+    });
+  }
+  
+  updateBadge('break', durationSeconds);
 }
 
 // Handle when focus period completes
@@ -165,6 +202,9 @@ function handleFocusComplete() {
 
 // Handle when break period completes
 function handleBreakComplete() {
+  // Clear the breakCheck alarm since break is done
+  chrome.alarms.clear('breakCheck');
+  
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
     
@@ -191,7 +231,8 @@ function updateBadge(status, value) {
     chrome.action.setBadgeText({ text: String(value) });
     chrome.action.setBadgeBackgroundColor({ color: '#6B9F7B' }); // Sage green
   } else if (status === 'break') {
-    chrome.action.setBadgeText({ text: '!' });
+    // Show seconds remaining for break (e.g., "20s")
+    chrome.action.setBadgeText({ text: value + 's' });
     chrome.action.setBadgeBackgroundColor({ color: '#60A5FA' }); // Blue
   } else {
     chrome.action.setBadgeText({ text: '' });
@@ -224,6 +265,7 @@ function pauseTimers() {
 function stopTimers() {
   chrome.alarms.clear('focusTimer');
   chrome.alarms.clear('breakTimer');
+  chrome.alarms.clear('breakCheck');
   chrome.alarms.clear('updateBadge');
   chrome.storage.sync.set({ 
     timerStatus: 'idle',
@@ -263,6 +305,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Stop all timers and reset to current settings
     chrome.alarms.clear('focusTimer');
     chrome.alarms.clear('breakTimer');
+    chrome.alarms.clear('breakCheck');
     chrome.alarms.clear('updateBadge');
     
     // Fetch current settings and reset timerDuration to reflect them
@@ -282,6 +325,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
   if (request.action === 'skipBreak') {
     chrome.alarms.clear('breakTimer');
+    chrome.alarms.clear('breakCheck');
     chrome.storage.sync.get(['settings'], (result) => {
       const settings = result.settings || DEFAULT_SETTINGS;
       startFocusTimer(settings.focusDuration);

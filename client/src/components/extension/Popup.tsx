@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PopupProps {
-  status: "idle" | "focus" | "break";
+  status: "idle" | "focus" | "break" | "paused";
   timeLeft: number;
   progress: number;
   formatTime: (s: number) => string;
@@ -89,7 +89,7 @@ export function Popup({
               animate={{ opacity: 1, y: 0 }}
               className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1"
             >
-              {status === "idle" ? "Ready" : status === "break" ? "Relax Eyes" : "Focusing"}
+              {status === "idle" ? "Ready" : status === "break" ? "Relax Eyes" : status === "paused" ? "Paused" : "Focusing"}
             </motion.span>
             <span className="text-5xl font-display font-bold text-foreground tabular-nums tracking-tight">
               {formatTime(timeLeft)}
@@ -105,15 +105,17 @@ export function Popup({
             className="w-12 h-12 rounded-full border-2 hover:border-primary hover:text-primary transition-all"
             onClick={onReset}
             disabled={status === "idle"}
+            data-testid="button-reset"
           >
             <RefreshCcw className="w-5 h-5" />
           </Button>
 
-          {status === "idle" || status === "break" ? (
+          {status === "idle" || status === "break" || status === "paused" ? (
             <Button
               size="lg"
               className="w-16 h-16 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all hover:scale-105"
               onClick={onStart}
+              data-testid="button-play"
             >
               <Play className="w-8 h-8 ml-1" fill="currentColor" />
             </Button>
@@ -122,6 +124,7 @@ export function Popup({
               size="lg"
               className="w-16 h-16 rounded-full bg-orange-400 hover:bg-orange-500 text-white shadow-lg shadow-orange-400/20 transition-all hover:scale-105"
               onClick={onPause}
+              data-testid="button-pause"
             >
               <Pause className="w-8 h-8" fill="currentColor" />
             </Button>

@@ -1,42 +1,78 @@
 import { useState, useEffect, useCallback } from "react";
 
-export type TimerStatus = "idle" | "focus" | "break";
+export type TimerStatus = "idle" | "focus" | "break" | "paused";
+
+interface Settings {
+  focusDuration: number;
+  breakDuration: number;
+  soundEnabled?: boolean;
+  notificationType?: string;
+}
+
+interface StorageResult {
+  settings?: Settings;
+  timerStatus?: TimerStatus;
+  timerStartTime?: number;
+  timerDuration?: number;
+  pausedRemainingMs?: number;
+}
 
 export function useChromeExtensionTimer() {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(20 * 60);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<Settings>({
     focusDuration: 20,
     breakDuration: 20,
   });
 
-  // Load initial state from Chrome storage
   useEffect(() => {
-    chrome.storage.sync.get(["settings", "timerStatus", "timerStartTime", "timerDuration"], (result) => {
-      if (result.settings) {
-        setSettings(result.settings);
-      }
-      if (result.timerStatus) {
-        setStatus(result.timerStatus);
-        
-        // Calculate remaining time
-        if (result.timerStartTime && result.timerDuration) {
-          const elapsed = Date.now() - result.timerStartTime;
-          const remaining = Math.max(0, Math.floor((result.timerDuration - elapsed) / 1000));
-          setTimeLeft(remaining);
-        }
-      } else {
-        setTimeLeft(result.settings?.focusDuration * 60 || 20 * 60);
-      }
-    });
+    const loadState = () => {
+      chrome.storage.sync.get(
+        ["settings", "timerStatus", "timerStartTime", "timerDuration", "pausedRemainingMs"],
+        (result: StorageResult) => {
+          if (result.settings) {
+            setSettings(result.settings);
+          }
 
-    // Listen for storage changes
-    const handleStorageChange = (changes: any) => {
-      if (changes.timerStatus) {
-        setStatus(changes.timerStatus.newValue);
+          const timerStatus = result.timerStatus || "idle";
+          setStatus(timerStatus);
+
+          if (timerStatus === "paused" && result.pausedRemainingMs) {
+            setTimeLeft(Math.floor(result.pausedRemainingMs / 1000));
+          } else if ((timerStatus === "focus" || timerStatus === "break") && 
+                     result.timerStartTime && result.timerDuration) {
+            const elapsed = Date.now() - result.timerStartTime;
+            const remaining = Math.max(0, Math.floor((result.timerDuration - elapsed) / 1000));
+            setTimeLeft(remaining);
+          } else {
+            const focusDuration = result.settings?.focusDuration || 20;
+            setTimeLeft(focusDuration * 60);
+          }
+        }
+      );
+    };
+
+    loadState();
+
+    const handleStorageChange = (changes: { [key: string]: { newValue?: unknown; oldValue?: unknown } }) => {
+      if (changes.timerStatus?.newValue) {
+        setStatus(changes.timerStatus.newValue as TimerStatus);
       }
-      if (changes.settings) {
-        setSettings(changes.settings.newValue);
+      if (changes.settings?.newValue) {
+        const newSettings = changes.settings.newValue as Settings;
+        setSettings(newSettings);
+        
+        chrome.storage.sync.get(["timerStatus"], (result: StorageResult) => {
+          if (result.timerStatus === "idle" || !result.timerStatus) {
+            setTimeLeft(newSettings.focusDuration * 60);
+          }
+        });
+      }
+      if (changes.timerDuration?.newValue && changes.timerStatus?.newValue === "idle") {
+        setTimeLeft(Math.floor((changes.timerDuration.newValue as number) / 1000));
+      }
+      if (changes.pausedRemainingMs?.newValue && changes.timerStatus?.newValue === "paused") {
+        setTimeLeft(Math.floor((changes.pausedRemainingMs.newValue as number) / 1000));
       }
     };
 
@@ -47,12 +83,14 @@ export function useChromeExtensionTimer() {
     };
   }, []);
 
-  // Update countdown every second
   useEffect(() => {
-    if (status === "idle") return;
+    if (status !== "focus" && status !== "break") return;
 
     const interval = setInterval(() => {
-      chrome.storage.sync.get(["timerStartTime", "timerDuration"], (result) => {
+      chrome.storage.sync.get(["timerStartTime", "timerDuration", "timerStatus"], (result: StorageResult) => {
+        if (result.timerStatus !== "focus" && result.timerStatus !== "break") {
+          return;
+        }
         if (result.timerStartTime && result.timerDuration) {
           const elapsed = Date.now() - result.timerStartTime;
           const remaining = Math.max(0, Math.floor((result.timerDuration - elapsed) / 1000));
@@ -65,15 +103,41 @@ export function useChromeExtensionTimer() {
   }, [status]);
 
   const startFocus = useCallback(() => {
-    chrome.runtime.sendMessage({ action: "startTimer" });
+    chrome.runtime.sendMessage({ action: "startTimer" }, () => {
+      chrome.storage.sync.get(["timerStatus", "timerStartTime", "timerDuration"], (result: StorageResult) => {
+        if (result.timerStatus) {
+          setStatus(result.timerStatus);
+        }
+        if (result.timerStartTime && result.timerDuration) {
+          const elapsed = Date.now() - result.timerStartTime;
+          const remaining = Math.max(0, Math.floor((result.timerDuration - elapsed) / 1000));
+          setTimeLeft(remaining);
+        }
+      });
+    });
   }, []);
 
   const pauseTimer = useCallback(() => {
-    chrome.runtime.sendMessage({ action: "pauseTimer" });
+    chrome.runtime.sendMessage({ action: "pauseTimer" }, () => {
+      chrome.storage.sync.get(["timerStatus", "pausedRemainingMs"], (result: StorageResult) => {
+        if (result.timerStatus) {
+          setStatus(result.timerStatus);
+        }
+        if (result.pausedRemainingMs) {
+          setTimeLeft(Math.floor(result.pausedRemainingMs / 1000));
+        }
+      });
+    });
   }, []);
 
   const resetTimer = useCallback(() => {
-    chrome.runtime.sendMessage({ action: "resetTimer" });
+    chrome.runtime.sendMessage({ action: "resetTimer" }, () => {
+      chrome.storage.sync.get(["timerStatus", "timerDuration", "settings"], (result: StorageResult) => {
+        setStatus("idle");
+        const duration = result.timerDuration || (result.settings?.focusDuration || 20) * 60 * 1000;
+        setTimeLeft(Math.floor(duration / 1000));
+      });
+    });
   }, []);
 
   const formatTime = (seconds: number) => {
@@ -82,9 +146,11 @@ export function useChromeExtensionTimer() {
     return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
-  const progress = status === "focus" 
+  const progress = status === "focus"
     ? ((settings.focusDuration * 60 - timeLeft) / (settings.focusDuration * 60)) * 100
-    : ((settings.breakDuration - timeLeft) / settings.breakDuration) * 100;
+    : status === "break"
+    ? ((settings.breakDuration - timeLeft) / settings.breakDuration) * 100
+    : 0;
 
   return {
     status,

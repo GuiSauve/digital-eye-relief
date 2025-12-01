@@ -51,6 +51,33 @@ if (fs.existsSync(iconsSource)) {
   });
 }
 
+// Copy offscreen document files
+fs.copyFileSync(
+  path.join(rootDir, 'extension', 'offscreen.html'),
+  path.join(distDir, 'offscreen.html')
+);
+fs.copyFileSync(
+  path.join(rootDir, 'extension', 'offscreen.js'),
+  path.join(distDir, 'offscreen.js')
+);
+
+// Copy sounds directory
+const soundsSource = path.join(rootDir, 'extension', 'sounds');
+const soundsDest = path.join(distDir, 'sounds');
+
+if (fs.existsSync(soundsSource)) {
+  if (!fs.existsSync(soundsDest)) {
+    fs.mkdirSync(soundsDest, { recursive: true });
+  }
+  
+  fs.readdirSync(soundsSource).forEach(file => {
+    fs.copyFileSync(
+      path.join(soundsSource, file),
+      path.join(soundsDest, file)
+    );
+  });
+}
+
 console.log('✅ Extension build complete! Output in dist-extension/');
 console.log('📦 Load the extension:');
 console.log('   1. Open Chrome and go to chrome://extensions/');

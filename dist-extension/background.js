@@ -9,6 +9,57 @@ const DEFAULT_SETTINGS = {
   isActive: false
 };
 
+// Track if offscreen document exists
+let creatingOffscreen = false;
+
+// Create offscreen document for audio playback
+async function setupOffscreenDocument() {
+  const offscreenUrl = 'offscreen.html';
+  
+  // Check if offscreen document already exists
+  const existingContexts = await chrome.runtime.getContexts({
+    contextTypes: ['OFFSCREEN_DOCUMENT'],
+    documentUrls: [chrome.runtime.getURL(offscreenUrl)]
+  });
+  
+  if (existingContexts.length > 0) {
+    return; // Already exists
+  }
+  
+  // Prevent race condition
+  if (creatingOffscreen) {
+    return;
+  }
+  
+  creatingOffscreen = true;
+  
+  try {
+    await chrome.offscreen.createDocument({
+      url: offscreenUrl,
+      reasons: ['AUDIO_PLAYBACK'],
+      justification: 'Play notification sound for break reminders'
+    });
+  } catch (error) {
+    console.error('Error creating offscreen document:', error);
+  } finally {
+    creatingOffscreen = false;
+  }
+}
+
+// Play notification sound
+async function playNotificationSound() {
+  await setupOffscreenDocument();
+  
+  try {
+    await chrome.runtime.sendMessage({
+      action: 'playSound',
+      sound: 'sounds/singing-bowl.mp3'
+    });
+  } catch (error) {
+    console.error('Error playing sound:', error);
+  }
+}
+
 // Initialize extension on install
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Digital Eye Relief installed');
@@ -104,8 +155,7 @@ function handleFocusComplete() {
     
     // Play sound if enabled
     if (settings.soundEnabled) {
-      // Note: Sound playing in service workers requires additional setup
-      // Can be implemented with offscreen documents in Manifest V3
+      playNotificationSound();
     }
     
     // Start break timer

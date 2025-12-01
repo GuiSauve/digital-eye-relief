@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
-export type TimerStatus = "idle" | "focus" | "break";
+export type TimerStatus = "idle" | "focus" | "break" | "paused";
 
 interface UseExtensionTimerProps {
   focusDurationMinutes?: number;
@@ -13,6 +13,7 @@ export function useExtensionTimer({
 }: UseExtensionTimerProps = {}) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(focusDurationMinutes * 60);
+  const pausedTimeRef = useRef<number>(0);
   
   // Settings state (normally would be in Chrome storage)
   const [settings, setSettings] = useState({
@@ -25,15 +26,21 @@ export function useExtensionTimer({
   const resetTimer = useCallback(() => {
     setStatus("idle");
     setTimeLeft(settings.focusDuration * 60);
+    pausedTimeRef.current = 0;
   }, [settings.focusDuration]);
 
   const startFocus = useCallback(() => {
+    if (status === "paused" && pausedTimeRef.current > 0) {
+      setTimeLeft(pausedTimeRef.current);
+      pausedTimeRef.current = 0;
+    }
     setStatus("focus");
-  }, []);
+  }, [status]);
 
   const pauseTimer = useCallback(() => {
-    setStatus("idle");
-  }, []);
+    pausedTimeRef.current = timeLeft;
+    setStatus("paused");
+  }, [timeLeft]);
 
   const startBreak = useCallback(() => {
     setStatus("break");
@@ -83,9 +90,22 @@ export function useExtensionTimer({
     return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
-  const progress = status === "focus" 
-    ? ((settings.focusDuration * 60 - timeLeft) / (settings.focusDuration * 60)) * 100
-    : ((settings.breakDuration - timeLeft) / settings.breakDuration) * 100;
+  // Calculate progress based on current status
+  const calculateProgress = () => {
+    if (status === "idle") {
+      return 0;
+    }
+    if (status === "focus" || status === "paused") {
+      // For focus and paused, calculate based on focus duration
+      return ((settings.focusDuration * 60 - timeLeft) / (settings.focusDuration * 60)) * 100;
+    }
+    if (status === "break") {
+      return ((settings.breakDuration - timeLeft) / settings.breakDuration) * 100;
+    }
+    return 0;
+  };
+
+  const progress = calculateProgress();
 
   return {
     status,

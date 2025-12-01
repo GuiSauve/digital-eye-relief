@@ -228,11 +228,14 @@ function handleBreakComplete() {
 // Update extension badge
 function updateBadge(status, value) {
   if (status === 'focus') {
-    chrome.action.setBadgeText({ text: String(value) });
+    // Round to nearest integer for minutes display
+    const minutes = Math.ceil(value);
+    chrome.action.setBadgeText({ text: String(minutes) });
     chrome.action.setBadgeBackgroundColor({ color: '#6B9F7B' }); // Sage green
   } else if (status === 'break') {
     // Show seconds remaining for break (e.g., "20s")
-    chrome.action.setBadgeText({ text: value + 's' });
+    const seconds = Math.ceil(value);
+    chrome.action.setBadgeText({ text: seconds + 's' });
     chrome.action.setBadgeBackgroundColor({ color: '#60A5FA' }); // Blue
   } else {
     chrome.action.setBadgeText({ text: '' });

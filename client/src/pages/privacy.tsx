@@ -89,13 +89,6 @@ export function Privacy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-stone-800 mb-3">Children's Privacy</h2>
-            <p className="text-stone-600 leading-relaxed">
-              Digital Eye Relief does not knowingly collect any information from children under 13 years of age. The extension is suitable for users of all ages as it does not collect any personal data.
-            </p>
-          </section>
-
-          <section>
             <h2 className="text-xl font-bold text-stone-800 mb-3">Changes to This Policy</h2>
             <p className="text-stone-600 leading-relaxed">
               We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.

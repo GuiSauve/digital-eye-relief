@@ -30,7 +30,7 @@ export function Popup({
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="w-[360px] h-[500px] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden relative font-sans">
+    <div className="w-full h-[500px] bg-white flex flex-col overflow-hidden relative font-sans">
       {/* Header */}
       <div className="p-6 flex justify-between items-center bg-gradient-to-b from-green-50/50 to-transparent">
         <div className="flex items-center gap-2">

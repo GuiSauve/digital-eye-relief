@@ -5,7 +5,7 @@ import { NotificationOverlay } from "@/components/extension/NotificationOverlay"
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
-import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown } from "lucide-react";
+import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -312,6 +312,85 @@ export function ExtensionMockup() {
                     )}
                 </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 px-4 bg-gradient-to-b from-stone-50 to-stone-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <HelpCircle className="w-6 h-6 text-primary" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-stone-600">
+              Everything you need to know about eye health and the 20-20-20 rule
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-1">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">What is the 20-20-20 rule?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>The 20-20-20 rule is a guideline recommended by the <strong>American Optometric Association</strong> to reduce digital eye strain. The rule is simple: every <strong>20 minutes</strong> of screen time, look at something <strong>20 feet (6 meters) away</strong> for <strong>20 seconds</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
+              </div>
+            </details>
+            
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-2">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">Does the 20-20-20 rule really work?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>Yes, research supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method <strong>reduces accommodation stress</strong> on eye muscles, <strong>improves tear film stability</strong> (helping with dry eyes), and <strong>decreases symptoms of asthenopia</strong> (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks.</p>
+              </div>
+            </details>
+            
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-3">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">What causes digital eye strain?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>Digital eye strain (also called <strong>Computer Vision Syndrome</strong>) is caused by prolonged screen use. When focusing on screens, we blink <strong>up to 66% less frequently</strong>, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. Research indicates that <strong>up to 97% of digital device users</strong> experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain.</p>
+              </div>
+            </details>
+            
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-4">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">How does Digital Eye Relief help?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>Digital Eye Relief is a free Chrome extension that <strong>automatically reminds you</strong> to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends <strong>gentle notifications</strong> when it's time for a break. Features include customizable timer intervals, choice of notification styles (full-screen overlay or subtle badge), optional calming sounds, and a beautiful, distraction-free design.</p>
+              </div>
+            </details>
+            
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-5">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">Is Digital Eye Relief free?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>Yes, Digital Eye Relief is <strong>completely free</strong> to use. There are no premium features, subscriptions, in-app purchases, or hidden costs. The extension is also <strong>privacy-focused</strong> — it doesn't collect any personal data, doesn't require an account, and works entirely on your device. We believe eye health shouldn't have a paywall.</p>
+              </div>
+            </details>
+            
+            <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-6">
+              <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">Who should use the 20-20-20 rule?</h3>
+                <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-6 pb-6 text-stone-600">
+                <p>Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes <strong>office workers, programmers, designers, students, gamers</strong>, and anyone who uses computers, tablets, or smartphones for prolonged periods. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision.</p>
+              </div>
+            </details>
           </div>
         </div>
       </section>

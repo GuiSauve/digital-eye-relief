@@ -4,6 +4,7 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["glib", "nss", "nspr", "atk", "at-spi2-atk", "cups", "libdrm", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "xorg.libX11", "mesa", "expat", "xorg.libXext", "alsa-lib", "pango", "cairo", "libxkbcommon", "gtk3", "dbus-glib"]
 
 [deployment]
 deploymentTarget = "static"
@@ -14,6 +15,10 @@ run = ["npm", "run", "start"]
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 33335
+externalPort = 3001
 
 [[ports]]
 localPort = 40693

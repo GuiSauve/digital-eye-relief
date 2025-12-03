@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { ExtensionMockup } from "@/pages/extension-mockup";
+import { Privacy } from "@/pages/privacy";
 
 function Router() {
   return (
     <Switch>
       {/* Main Route serves the Extension Mockup */}
       <Route path="/" component={ExtensionMockup} />
+      <Route path="/privacy" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
   );

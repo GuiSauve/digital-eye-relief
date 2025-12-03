@@ -5,7 +5,8 @@ import { NotificationOverlay } from "@/components/extension/NotificationOverlay"
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
-import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown } from "lucide-react";
+import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -447,9 +448,15 @@ export function ExtensionMockup() {
             <Eye className="w-5 h-5 text-primary" />
             <span className="font-display font-bold text-white">Digital Eye Relief</span>
           </div>
-          <p className="text-sm">
-            Made with ❤️ for healthier screen time
-          </p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-sm hover:text-white transition-colors flex items-center gap-1" data-testid="link-privacy-policy">
+              <FileText className="w-4 h-4" />
+              Privacy Policy
+            </Link>
+            <p className="text-sm">
+              Made with ❤️ for healthier screen time
+            </p>
+          </div>
         </div>
       </footer>
 

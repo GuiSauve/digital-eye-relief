@@ -98,15 +98,19 @@ export function ExtensionMockup() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Button 
-              size="lg" 
-              className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all hover:scale-105"
-              onClick={() => window.open('https://chrome.google.com/webstore', '_blank')}
-              data-testid="button-add-to-chrome"
-            >
-              <Chrome className="w-5 h-5 mr-2" />
-              Add to Chrome — It's Free
-            </Button>
+            <div className="relative group">
+              <Button 
+                size="lg" 
+                className="h-14 px-8 text-lg rounded-full bg-stone-400 hover:bg-stone-500 shadow-xl shadow-stone-400/30 transition-all cursor-default"
+                data-testid="button-add-to-chrome"
+              >
+                <Chrome className="w-5 h-5 mr-2" />
+                Coming Soon to Chrome
+              </Button>
+              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-stone-800 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Currently in review — check back soon!
+              </div>
+            </div>
             <Button 
               size="lg" 
               variant="outline"
@@ -326,15 +330,19 @@ export function ExtensionMockup() {
             Start taking care of your eyes today with a simple, free tool designed for healthier screen time.
           </p>
           
-          <Button 
-            size="lg" 
-            className="h-16 px-10 text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all hover:scale-105"
-            onClick={() => window.open('https://chrome.google.com/webstore', '_blank')}
-            data-testid="button-download-cta"
-          >
-            <Chrome className="w-6 h-6 mr-3" />
-            Add to Chrome — It's Free
-          </Button>
+          <div className="relative group inline-block">
+            <Button 
+              size="lg" 
+              className="h-16 px-10 text-xl rounded-full bg-stone-400 hover:bg-stone-500 shadow-xl shadow-stone-400/30 transition-all cursor-default"
+              data-testid="button-download-cta"
+            >
+              <Chrome className="w-6 h-6 mr-3" />
+              Coming Soon to Chrome
+            </Button>
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-stone-800 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              Currently in review — check back soon!
+            </div>
+          </div>
           
           <div className="flex items-center justify-center gap-6 mt-8 text-sm text-stone-500">
             <div className="flex items-center gap-2">

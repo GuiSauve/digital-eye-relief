@@ -17,25 +17,15 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
-  const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
-  const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const playPreviewSound = (type: 'breakStart' | 'breakEnd') => {
-    if (type === 'breakStart') {
-      if (!breakStartAudioRef.current) {
-        breakStartAudioRef.current = new Audio('/sounds/singing-bowl.mp3');
-        breakStartAudioRef.current.volume = 0.7;
-      }
-      breakStartAudioRef.current.currentTime = 0;
-      breakStartAudioRef.current.play().catch(err => console.log('Audio play error:', err));
-    } else {
-      if (!breakEndAudioRef.current) {
-        breakEndAudioRef.current = new Audio('/sounds/break-end-chime.mp3');
-        breakEndAudioRef.current.volume = 0.7;
-      }
-      breakEndAudioRef.current.currentTime = 0;
-      breakEndAudioRef.current.play().catch(err => console.log('Audio play error:', err));
+  const playPreviewSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/sounds/singing-bowl.mp3');
+      audioRef.current.volume = 0.7;
     }
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(err => console.log('Audio play error:', err));
   };
 
   return (

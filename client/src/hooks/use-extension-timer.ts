@@ -20,7 +20,7 @@ export function useExtensionTimer({
     focusDuration: focusDurationMinutes,
     breakDuration: breakDurationSeconds,
     soundEnabled: true,
-    notificationType: "badge" as "modal" | "badge",
+    notificationType: "badge" as const,
   });
 
   const resetTimer = useCallback(() => {

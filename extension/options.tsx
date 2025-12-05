@@ -8,16 +8,19 @@ function OptionsApp() {
     focusDuration: 20,
     breakDuration: 20,
     soundEnabled: true,
-    notificationType: "badge" as "modal" | "badge",
+    notificationType: "badge" as const,
   });
 
   const [saved, setSaved] = useState(false);
 
-  // Load settings from Chrome Storage
+  // Load settings from Chrome Storage (always coerce notificationType to badge)
   useEffect(() => {
     chrome.storage.sync.get(["settings"], (result) => {
       if (result.settings) {
-        setSettings(result.settings);
+        setSettings({
+          ...result.settings,
+          notificationType: "badge" as const,
+        });
       }
     });
   }, []);

@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface SettingsProps {
   settings: {
     focusDuration: number;
     breakDuration: number;
     soundEnabled: boolean;
-    notificationType: "modal" | "badge";
+    notificationType: "badge";
   };
   onUpdateSettings: (settings: any) => void;
   onBack: () => void;
@@ -115,23 +114,6 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               />
             </div>
 
-            <div className="space-y-3 pt-2">
-              <Label className="text-xs text-muted-foreground">Reminder Style</Label>
-              <RadioGroup
-                value={settings.notificationType}
-                onValueChange={(val) => onUpdateSettings({ ...settings, notificationType: val })}
-                className="gap-3"
-              >
-                <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:bg-secondary/30 transition-colors cursor-pointer">
-                  <RadioGroupItem value="modal" id="r-modal" />
-                  <Label htmlFor="r-modal" className="cursor-pointer flex-1">Full Screen Modal</Label>
-                </div>
-                <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:bg-secondary/30 transition-colors cursor-pointer">
-                  <RadioGroupItem value="badge" id="r-badge" />
-                  <Label htmlFor="r-badge" className="cursor-pointer flex-1">Icon Badge Only</Label>
-                </div>
-              </RadioGroup>
-            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ function OptionsApp() {
     focusDuration: 20,
     breakDuration: 20,
     soundEnabled: true,
-    notificationType: "modal" as "modal" | "badge",
+    notificationType: "badge" as "modal" | "badge",
   });
 
   const [saved, setSaved] = useState(false);

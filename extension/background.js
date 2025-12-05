@@ -5,7 +5,7 @@ const DEFAULT_SETTINGS = {
   focusDuration: 20, // minutes
   breakDuration: 20, // seconds
   soundEnabled: true,
-  notificationType: 'modal', // 'modal' or 'badge'
+  notificationType: 'badge', // 'modal' or 'badge'
   isActive: false
 };
 
@@ -67,10 +67,10 @@ chrome.runtime.onInstalled.addListener(() => {
     if (!result.settings) {
       chrome.storage.sync.set({ settings: DEFAULT_SETTINGS });
     } else {
-      // Migrate legacy 'system' notificationType to 'modal'
+      // Migrate legacy 'system' notificationType to 'badge'
       if (result.settings.notificationType === 'system') {
         chrome.storage.sync.set({ 
-          settings: { ...result.settings, notificationType: 'modal' }
+          settings: { ...result.settings, notificationType: 'badge' }
         });
       }
     }

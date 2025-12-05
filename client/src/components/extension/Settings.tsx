@@ -58,29 +58,49 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                 <Label>Focus Duration</Label>
                 <span className="font-mono text-muted-foreground">{settings.focusDuration} min</span>
               </div>
-              <Slider
-                defaultValue={[settings.focusDuration]}
-                min={5}
-                max={60}
-                step={5}
-                onValueChange={(val) => onUpdateSettings({ ...settings, focusDuration: val[0] })}
-                className="py-2"
-              />
+              <div className="relative">
+                <Slider
+                  defaultValue={[settings.focusDuration]}
+                  min={5}
+                  max={60}
+                  step={5}
+                  onValueChange={(val) => onUpdateSettings({ ...settings, focusDuration: val[0] })}
+                  className="py-2"
+                />
+                {/* Default marker at 20 min: (20-5)/(60-5) = 27.27% */}
+                <div 
+                  className="absolute top-full mt-0.5 flex flex-col items-center"
+                  style={{ left: 'calc(27.27% - 1px)' }}
+                >
+                  <div className="w-0.5 h-2 bg-primary/40 rounded-full" />
+                  <span className="text-[10px] text-primary/60 font-medium mt-0.5">20</span>
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 mt-6">
               <div className="flex justify-between text-sm">
                 <Label>Break Duration</Label>
                 <span className="font-mono text-muted-foreground">{settings.breakDuration} sec</span>
               </div>
-              <Slider
-                defaultValue={[settings.breakDuration]}
-                min={10}
-                max={60}
-                step={5}
-                onValueChange={(val) => onUpdateSettings({ ...settings, breakDuration: val[0] })}
-                className="py-2"
-              />
+              <div className="relative">
+                <Slider
+                  defaultValue={[settings.breakDuration]}
+                  min={10}
+                  max={60}
+                  step={5}
+                  onValueChange={(val) => onUpdateSettings({ ...settings, breakDuration: val[0] })}
+                  className="py-2"
+                />
+                {/* Default marker at 20 sec: (20-10)/(60-10) = 20% */}
+                <div 
+                  className="absolute top-full mt-0.5 flex flex-col items-center"
+                  style={{ left: 'calc(20% - 1px)' }}
+                >
+                  <div className="w-0.5 h-2 bg-primary/40 rounded-full" />
+                  <span className="text-[10px] text-primary/60 font-medium mt-0.5">20</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

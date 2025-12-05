@@ -70,7 +70,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               </div>
               <div className="relative">
                 <Slider
-                  defaultValue={[settings.focusDuration]}
+                  value={[settings.focusDuration]}
                   min={5}
                   max={60}
                   step={5}
@@ -95,7 +95,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               </div>
               <div className="relative">
                 <Slider
-                  defaultValue={[settings.breakDuration]}
+                  value={[settings.breakDuration]}
                   min={10}
                   max={60}
                   step={5}

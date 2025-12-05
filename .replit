@@ -4,13 +4,39 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["glib", "nss", "nspr", "atk", "at-spi2-atk", "cups", "libdrm", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "xorg.libX11", "mesa", "expat", "xorg.libXext", "alsa-lib", "pango", "cairo", "libxkbcommon", "gtk3", "dbus-glib"]
+packages = [
+  "glib",
+  "nss",
+  "nspr",
+  "atk",
+  "at-spi2-atk",
+  "cups",
+  "libdrm",
+  "xorg.libXcomposite",
+  "xorg.libXdamage",
+  "xorg.libXfixes",
+  "xorg.libXrandr",
+  "xorg.libxcb",
+  "xorg.libX11",
+  "mesa",
+  "expat",
+  "xorg.libXext",
+  "alsa-lib",
+  "pango",
+  "cairo",
+  "libxkbcommon",
+  "gtk3",
+  "dbus-glib",
+]
 
 [deployment]
 deploymentTarget = "static"
 build = ["npm", "run", "build"]
 publicDir = "dist/public"
 run = ["npm", "run", "start"]
+[[deployment.rewrites]]
+from = "/*"
+to = "/index.html"
 
 [[ports]]
 localPort = 5000

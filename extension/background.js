@@ -47,13 +47,13 @@ async function setupOffscreenDocument() {
 }
 
 // Play notification sound
-async function playNotificationSound() {
+async function playNotificationSound(soundFile = 'sounds/singing-bowl.mp3') {
   await setupOffscreenDocument();
   
   try {
     await chrome.runtime.sendMessage({
       action: 'playSound',
-      sound: 'sounds/singing-bowl.mp3'
+      sound: soundFile
     });
   } catch (error) {
     console.error('Error playing sound:', error);
@@ -207,6 +207,11 @@ function handleBreakComplete() {
   
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
+    
+    // Play bells sound if enabled (different from break start sound)
+    if (settings.soundEnabled) {
+      playNotificationSound('sounds/bells.mp3');
+    }
     
     chrome.notifications.create('breakComplete', {
       type: 'basic',

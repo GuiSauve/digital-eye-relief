@@ -15,6 +15,10 @@ export function useExtensionTimer({
   const [timeLeft, setTimeLeft] = useState(focusDurationMinutes * 60);
   const pausedTimeRef = useRef<number>(0);
   
+  // Audio refs for sound notifications
+  const breakStartSoundRef = useRef<HTMLAudioElement | null>(null);
+  const breakEndSoundRef = useRef<HTMLAudioElement | null>(null);
+  
   // Settings state (normally would be in Chrome storage)
   const [settings, setSettings] = useState({
     focusDuration: focusDurationMinutes,
@@ -22,6 +26,27 @@ export function useExtensionTimer({
     soundEnabled: true,
     notificationType: "badge" as const,
   });
+  
+  // Play sound helper
+  const playSound = useCallback((type: 'breakStart' | 'breakEnd') => {
+    if (!settings.soundEnabled) return;
+    
+    if (type === 'breakStart') {
+      if (!breakStartSoundRef.current) {
+        breakStartSoundRef.current = new Audio('/sounds/singing-bowl.mp3');
+        breakStartSoundRef.current.volume = 0.7;
+      }
+      breakStartSoundRef.current.currentTime = 0;
+      breakStartSoundRef.current.play().catch(err => console.log('Audio play error:', err));
+    } else {
+      if (!breakEndSoundRef.current) {
+        breakEndSoundRef.current = new Audio('/sounds/break-end-chime.mp3');
+        breakEndSoundRef.current.volume = 0.7;
+      }
+      breakEndSoundRef.current.currentTime = 0;
+      breakEndSoundRef.current.play().catch(err => console.log('Audio play error:', err));
+    }
+  }, [settings.soundEnabled]);
 
   const resetTimer = useCallback(() => {
     setStatus("idle");
@@ -61,10 +86,13 @@ export function useExtensionTimer({
           if (prev <= 1) {
             // Timer finished
             if (status === "focus") {
+              // Focus ended, break starting - play break start sound
+              playSound('breakStart');
               setStatus("break");
               return settings.breakDuration;
             } else {
-              // Break finished
+              // Break finished - play break end sound
+              playSound('breakEnd');
               setStatus("focus");
               return settings.focusDuration * 60;
             }
@@ -75,7 +103,7 @@ export function useExtensionTimer({
     }
 
     return () => clearInterval(interval);
-  }, [status, settings.breakDuration, settings.focusDuration]);
+  }, [status, settings.breakDuration, settings.focusDuration, playSound]);
 
   // Update timeLeft if settings change while idle
   useEffect(() => {

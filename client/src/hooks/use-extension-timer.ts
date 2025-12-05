@@ -7,6 +7,13 @@ interface UseExtensionTimerProps {
   breakDurationSeconds?: number;
 }
 
+// Sound utilities
+const playSound = (soundFile: string) => {
+  const audio = new Audio(soundFile);
+  audio.volume = 0.7;
+  audio.play().catch(err => console.log('Audio play error:', err));
+};
+
 export function useExtensionTimer({
   focusDurationMinutes = 20,
   breakDurationSeconds = 20,
@@ -61,10 +68,17 @@ export function useExtensionTimer({
           if (prev <= 1) {
             // Timer finished
             if (status === "focus") {
+              // Focus ended, break starting - play singing bowl
+              if (settings.soundEnabled) {
+                playSound('/sounds/singing-bowl.mp3');
+              }
               setStatus("break");
               return settings.breakDuration;
             } else {
-              // Break finished
+              // Break finished, back to focus - play bells
+              if (settings.soundEnabled) {
+                playSound('/sounds/bells.mp3');
+              }
               setStatus("focus");
               return settings.focusDuration * 60;
             }
@@ -75,7 +89,7 @@ export function useExtensionTimer({
     }
 
     return () => clearInterval(interval);
-  }, [status, settings.breakDuration, settings.focusDuration]);
+  }, [status, settings.breakDuration, settings.focusDuration, settings.soundEnabled]);
 
   // Update timeLeft if settings change while idle
   useEffect(() => {

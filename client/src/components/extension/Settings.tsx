@@ -1,4 +1,5 @@
-import { ChevronLeft, Bell, Clock, Volume2 } from "lucide-react";
+import { ChevronLeft, Bell, Clock, Volume2, Play } from "lucide-react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -17,8 +18,19 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playPreviewSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/sounds/singing-bowl.mp3');
+      audioRef.current.volume = 0.7;
+    }
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(err => console.log('Audio play error:', err));
+  };
+
   return (
-    <div className="w-[360px] h-[500px] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden relative font-sans">
+    <div className="w-full h-[500px] bg-white flex flex-col overflow-hidden relative font-sans">
       {/* Header */}
       <div className="p-6 flex items-center gap-4 bg-gradient-to-b from-secondary/50 to-transparent">
         <Button
@@ -86,6 +98,15 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               <div className="flex items-center gap-2">
                 <Volume2 className="w-4 h-4 text-muted-foreground" />
                 <Label htmlFor="sound-toggle">Sound Effect</Label>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 rounded-full hover:bg-primary/10 hover:text-primary"
+                  onClick={playPreviewSound}
+                  data-testid="button-preview-sound"
+                >
+                  <Play className="w-3.5 h-3.5" fill="currentColor" />
+                </Button>
               </div>
               <Switch
                 id="sound-toggle"

@@ -5,7 +5,7 @@ const DEFAULT_SETTINGS = {
   focusDuration: 20, // minutes
   breakDuration: 20, // seconds
   soundEnabled: true,
-  notificationType: 'modal', // 'modal' or 'badge'
+  notificationType: 'badge', // 'modal' or 'badge'
   isActive: false
 };
 
@@ -47,13 +47,13 @@ async function setupOffscreenDocument() {
 }
 
 // Play notification sound
-async function playNotificationSound() {
+async function playNotificationSound(soundFile = 'sounds/singing-bowl.mp3') {
   await setupOffscreenDocument();
   
   try {
     await chrome.runtime.sendMessage({
       action: 'playSound',
-      sound: 'sounds/singing-bowl.mp3'
+      sound: soundFile
     });
   } catch (error) {
     console.error('Error playing sound:', error);
@@ -67,10 +67,10 @@ chrome.runtime.onInstalled.addListener(() => {
     if (!result.settings) {
       chrome.storage.sync.set({ settings: DEFAULT_SETTINGS });
     } else {
-      // Migrate legacy 'system' notificationType to 'modal'
+      // Migrate legacy 'system' notificationType to 'badge'
       if (result.settings.notificationType === 'system') {
         chrome.storage.sync.set({ 
-          settings: { ...result.settings, notificationType: 'modal' }
+          settings: { ...result.settings, notificationType: 'badge' }
         });
       }
     }
@@ -207,6 +207,11 @@ function handleBreakComplete() {
   
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
+    
+    // Play bells sound if enabled (different from break start sound)
+    if (settings.soundEnabled) {
+      playNotificationSound('sounds/bells.mp3');
+    }
     
     chrome.notifications.create('breakComplete', {
       type: 'basic',

@@ -17,15 +17,25 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
+  const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
 
-  const playPreviewSound = () => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio('/sounds/singing-bowl.mp3');
-      audioRef.current.volume = 0.7;
+  const playBreakStartSound = () => {
+    if (!breakStartAudioRef.current) {
+      breakStartAudioRef.current = new Audio('/sounds/singing-bowl.mp3');
+      breakStartAudioRef.current.volume = 0.7;
     }
-    audioRef.current.currentTime = 0;
-    audioRef.current.play().catch(err => console.log('Audio play error:', err));
+    breakStartAudioRef.current.currentTime = 0;
+    breakStartAudioRef.current.play().catch(err => console.log('Audio play error:', err));
+  };
+
+  const playBreakEndSound = () => {
+    if (!breakEndAudioRef.current) {
+      breakEndAudioRef.current = new Audio('/sounds/bells.mp3');
+      breakEndAudioRef.current.volume = 0.7;
+    }
+    breakEndAudioRef.current.currentTime = 0;
+    breakEndAudioRef.current.play().catch(err => console.log('Audio play error:', err));
   };
 
   return (
@@ -116,22 +126,42 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Volume2 className="w-4 h-4 text-muted-foreground" />
-                <Label htmlFor="sound-toggle">Sound Effect</Label>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-7 w-7 rounded-full hover:bg-primary/10 hover:text-primary"
-                  onClick={playPreviewSound}
-                  data-testid="button-preview-sound"
-                >
-                  <Play className="w-3.5 h-3.5" fill="currentColor" />
-                </Button>
+                <Label htmlFor="sound-toggle">Sound Effects</Label>
               </div>
               <Switch
                 id="sound-toggle"
                 checked={settings.soundEnabled}
                 onCheckedChange={(checked) => onUpdateSettings({ ...settings, soundEnabled: checked })}
               />
+            </div>
+
+            <div className="space-y-2 pl-6">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Break starts</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 px-2 rounded-full hover:bg-primary/10 hover:text-primary gap-1"
+                  onClick={playBreakStartSound}
+                  data-testid="button-preview-break-start"
+                >
+                  <Play className="w-3 h-3" fill="currentColor" />
+                  <span className="text-xs">Preview</span>
+                </Button>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Break ends</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 px-2 rounded-full hover:bg-primary/10 hover:text-primary gap-1"
+                  onClick={playBreakEndSound}
+                  data-testid="button-preview-break-end"
+                >
+                  <Play className="w-3 h-3" fill="currentColor" />
+                  <span className="text-xs">Preview</span>
+                </Button>
+              </div>
             </div>
 
           </div>

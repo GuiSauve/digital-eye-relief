@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Pause, RefreshCcw, Settings as SettingsIcon } from "lucide-react";
+import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -39,14 +39,38 @@ export function Popup({
           </div>
           <span className="font-display font-bold text-foreground text-lg">Digital Eye Relief</span>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-primary rounded-full"
-          onClick={onOpenSettings}
-        >
-          <SettingsIcon className="w-5 h-5" />
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-muted-foreground hover:text-primary rounded-full"
+            onClick={() => {
+              const shareUrl = 'https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin';
+              if (navigator.share) {
+                navigator.share({
+                  title: 'Digital Eye Relief',
+                  text: 'Protect your eyes with this free Chrome extension!',
+                  url: shareUrl
+                }).catch(() => {
+                  navigator.clipboard.writeText(shareUrl);
+                });
+              } else {
+                navigator.clipboard.writeText(shareUrl);
+              }
+            }}
+            data-testid="button-share"
+          >
+            <Share2 className="w-5 h-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-muted-foreground hover:text-primary rounded-full"
+            onClick={onOpenSettings}
+          >
+            <SettingsIcon className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
 
       {/* Main Content */}

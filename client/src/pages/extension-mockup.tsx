@@ -99,19 +99,20 @@ export function ExtensionMockup() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative group">
+            <a 
+              href="https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button 
                 size="lg" 
-                className="h-14 px-8 text-lg rounded-full bg-stone-400 hover:bg-stone-500 shadow-xl shadow-stone-400/30 transition-all cursor-default"
+                className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all"
                 data-testid="button-add-to-chrome"
               >
                 <Chrome className="w-5 h-5 mr-2" />
-                Coming Soon to Chrome
+                Add to Chrome — It's Free
               </Button>
-              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-stone-800 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                Currently in review — check back soon!
-              </div>
-            </div>
+            </a>
             <Button 
               size="lg" 
               variant="outline"
@@ -410,19 +411,20 @@ export function ExtensionMockup() {
             Start taking care of your eyes today with a simple, free tool designed for healthier screen time.
           </p>
           
-          <div className="relative group inline-block">
+          <a 
+            href="https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button 
               size="lg" 
-              className="h-16 px-10 text-xl rounded-full bg-stone-400 hover:bg-stone-500 shadow-xl shadow-stone-400/30 transition-all cursor-default"
+              className="h-16 px-10 text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all"
               data-testid="button-download-cta"
             >
               <Chrome className="w-6 h-6 mr-3" />
-              Coming Soon to Chrome
+              Add to Chrome — It's Free
             </Button>
-            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-stone-800 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-              Currently in review — check back soon!
-            </div>
-          </div>
+          </a>
           
           <div className="flex items-center justify-center gap-6 mt-8 text-sm text-stone-500">
             <div className="flex items-center gap-2">

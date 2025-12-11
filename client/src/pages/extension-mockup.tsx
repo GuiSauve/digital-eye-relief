@@ -144,7 +144,7 @@ export function ExtensionMockup() {
               The Science Behind Healthy Eyes
             </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              Recommended by the <span className="font-semibold text-primary">American Optometric Association</span>, 
+              Recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">American Optometric Association</a>, 
               the 20-20-20 rule is the gold standard for preventing digital eye strain.
             </p>
           </div>
@@ -340,7 +340,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>The 20-20-20 rule is a guideline recommended by the <strong>American Optometric Association</strong> to reduce digital eye strain. The rule is simple: every <strong>20 minutes</strong> of screen time, look at something <strong>20 feet (6 meters) away</strong> for <strong>20 seconds</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
+                <p>The 20-20-20 rule is a guideline recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">American Optometric Association</a> to reduce digital eye strain. The rule is simple: every <strong>20 minutes</strong> of screen time, look at something <strong>20 feet (6 meters) away</strong> for <strong>20 seconds</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
               </div>
             </details>
             
@@ -350,7 +350,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Yes, research supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method <strong>reduces accommodation stress</strong> on eye muscles, <strong>improves tear film stability</strong> (helping with dry eyes), and <strong>decreases symptoms of asthenopia</strong> (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks.</p>
+                <p>Yes, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9434525/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">peer-reviewed research</a> supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method <strong>reduces accommodation stress</strong> on eye muscles, <strong>improves tear film stability</strong> (helping with dry eyes), and <strong>decreases symptoms of asthenopia</strong> (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks.</p>
               </div>
             </details>
             
@@ -360,7 +360,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Digital eye strain (also called <strong>Computer Vision Syndrome</strong>) is caused by prolonged screen use. When focusing on screens, we blink <strong>up to 66% less frequently</strong>, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. Research indicates that <strong>up to 97% of digital device users</strong> experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain.</p>
+                <p>Digital eye strain (also called <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Computer Vision Syndrome</a>) is caused by prolonged screen use. When focusing on screens, we blink <strong>40-60% less frequently</strong>, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6020759/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Research indicates</a> that <strong>50-90% of digital device users</strong> experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain.</p>
               </div>
             </details>
             

@@ -55,7 +55,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
       </div>
 
       {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto p-6 pt-0 space-y-8">
+      <div className="flex-1 overflow-y-auto p-6 pt-0 pb-8 space-y-8">
         {/* Timer Settings */}
         <div className="space-y-6">
           <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-2">

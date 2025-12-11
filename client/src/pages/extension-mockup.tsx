@@ -171,7 +171,7 @@ export function ExtensionMockup() {
                 <span className="text-4xl font-bold text-blue-500">20</span>
               </div>
               <h3 className="text-xl font-bold text-stone-800 mb-2">Feet Away</h3>
-              <p className="text-stone-600">Look at something 6 meters distant</p>
+              <p className="text-stone-600">Look at something 20 feet (6 meters) distant</p>
             </motion.div>
             
             <motion.div 

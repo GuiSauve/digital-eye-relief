@@ -1,5 +1,5 @@
 import { ChevronLeft, Bell, Clock, Volume2, Play, Lightbulb, Monitor, Armchair, Eye, ChevronDown } from "lucide-react";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -17,7 +17,6 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
-  const [tipsExpanded, setTipsExpanded] = useState(false);
   const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
   const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -169,21 +168,16 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
         </div>
 
         {/* Workspace Setup Tips */}
-        <div className="space-y-4">
-          <button
-            onClick={() => setTipsExpanded(!tipsExpanded)}
-            className="w-full flex items-center justify-between text-primary font-semibold border-b border-border pb-2 hover:opacity-80 transition-opacity"
-            data-testid="button-toggle-tips"
-          >
+        <details className="group" data-testid="details-tips">
+          <summary className="w-full flex items-center justify-between text-primary font-semibold border-b border-border pb-2 hover:opacity-80 transition-opacity cursor-pointer list-none">
             <div className="flex items-center gap-2">
               <Lightbulb className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">Workspace Setup Tips</span>
             </div>
-            <ChevronDown className={`w-4 h-4 transition-transform ${tipsExpanded ? 'rotate-180' : ''}`} />
-          </button>
+            <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+          </summary>
 
-          {tipsExpanded && (
-            <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-4">
               <div className="flex gap-3 p-3 bg-secondary/30 rounded-lg">
                 <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Monitor className="w-4 h-4 text-primary" />
@@ -223,9 +217,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   <p className="text-xs text-muted-foreground mt-0.5">Make a conscious effort to blink fully — we blink 40-60% less when using screens</p>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+          </div>
+        </details>
       </div>
     </div>
   );

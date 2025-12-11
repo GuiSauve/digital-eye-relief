@@ -5,7 +5,7 @@ import { NotificationOverlay } from "@/components/extension/NotificationOverlay"
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
-import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText, Share2 } from "lucide-react";
+import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -29,30 +29,6 @@ export function ExtensionMockup() {
 
   const scrollToDemo = () => {
     document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleShare = async () => {
-    const shareData = {
-      title: 'Digital Eye Relief',
-      text: 'Protect your eyes with this free Chrome extension that reminds you to take breaks using the 20-20-20 rule.',
-      url: 'https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin'
-    };
-    
-    if (navigator.share && navigator.canShare?.(shareData)) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        // User cancelled or share failed, fallback to clipboard
-        copyToClipboard();
-      }
-    } else {
-      copyToClipboard();
-    }
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText('https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin');
-    alert('Link copied to clipboard!');
   };
 
   return (
@@ -463,18 +439,6 @@ export function ExtensionMockup() {
               <Heart className="w-4 h-4" />
               <span>100% Free</span>
             </div>
-          </div>
-
-          <div className="mt-10">
-            <Button
-              variant="ghost"
-              className="text-stone-500 hover:text-primary hover:bg-primary/5 gap-2"
-              onClick={handleShare}
-              data-testid="button-share"
-            >
-              <Share2 className="w-4 h-4" />
-              Share with someone you care about
-            </Button>
           </div>
         </div>
       </section>

@@ -221,7 +221,7 @@ export function ExtensionMockup() {
                 <Bell className="w-6 h-6 text-blue-500" />
               </div>
               <h3 className="font-bold text-stone-800 mb-2">Gentle Notifications</h3>
-              <p className="text-sm text-stone-600">Choose between full-screen overlays or subtle badge reminders</p>
+              <p className="text-sm text-stone-600">Subtle badge reminders with optional calming sounds at break start and end</p>
             </motion.div>
             
             <motion.div 
@@ -370,7 +370,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Digital Eye Relief is a free Chrome extension that <strong>automatically reminds you</strong> to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends <strong>gentle notifications</strong> when it's time for a break. Features include customizable timer intervals, choice of notification styles (full-screen overlay or subtle badge), optional calming sounds, and a beautiful, distraction-free design.</p>
+                <p>Digital Eye Relief is a free Chrome extension that <strong>automatically reminds you</strong> to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends <strong>gentle notifications</strong> when it's time for a break. Features include customizable timer intervals, subtle badge reminders, optional calming sounds at break start and end, and a beautiful, distraction-free design.</p>
               </div>
             </details>
             

@@ -1,5 +1,5 @@
-import { ChevronLeft, Bell, Clock, Volume2, Play } from "lucide-react";
-import { useRef } from "react";
+import { ChevronLeft, Bell, Clock, Volume2, Play, Lightbulb, Monitor, Armchair, Eye, ChevronDown } from "lucide-react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -17,6 +17,7 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
+  const [tipsExpanded, setTipsExpanded] = useState(false);
   const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
   const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -165,6 +166,65 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
             </div>
 
           </div>
+        </div>
+
+        {/* Workspace Setup Tips */}
+        <div className="space-y-4">
+          <button
+            onClick={() => setTipsExpanded(!tipsExpanded)}
+            className="w-full flex items-center justify-between text-primary font-semibold border-b border-border pb-2 hover:opacity-80 transition-opacity"
+            data-testid="button-toggle-tips"
+          >
+            <div className="flex items-center gap-2">
+              <Lightbulb className="w-4 h-4" />
+              <span className="text-sm uppercase tracking-wide">Workspace Setup Tips</span>
+            </div>
+            <ChevronDown className={`w-4 h-4 transition-transform ${tipsExpanded ? 'rotate-180' : ''}`} />
+          </button>
+
+          {tipsExpanded && (
+            <div className="space-y-3 pt-2">
+              <div className="flex gap-3 p-3 bg-secondary/30 rounded-lg">
+                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Monitor className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Screen Position</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Position your screen 20-28 inches away, with the top at or slightly below eye level</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 p-3 bg-secondary/30 rounded-lg">
+                <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Lightbulb className="w-4 h-4 text-blue-500" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Lighting</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Reduce glare by positioning your screen away from windows and bright overhead lights</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 p-3 bg-secondary/30 rounded-lg">
+                <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Armchair className="w-4 h-4 text-emerald-500" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Posture</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Keep feet flat on the floor with arms parallel to the keyboard</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 p-3 bg-secondary/30 rounded-lg">
+                <div className="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Eye className="w-4 h-4 text-purple-500" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Blinking</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Make a conscious effort to blink fully — we blink 40-60% less when using screens</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

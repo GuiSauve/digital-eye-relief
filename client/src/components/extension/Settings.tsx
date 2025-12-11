@@ -184,7 +184,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                 </div>
                 <div>
                   <p className="text-sm font-medium text-foreground">Screen Position</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Position your screen 20-28 inches away, with the top at or slightly below eye level</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Position your screen 20-28 inches (50-70 cm) away, with the top at or slightly below eye level</p>
                 </div>
               </div>
 

@@ -85,24 +85,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     handleFocusComplete();
   } else if (alarm.name === 'breakTimer') {
     handleBreakComplete();
-  } else if (alarm.name === 'breakCheck') {
-    // Update badge countdown during break (completion handled by breakTimer)
-    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
-      if (result.timerStatus === 'break' && result.timerStartTime && result.timerDuration) {
-        const elapsed = Date.now() - result.timerStartTime;
-        const remaining = Math.max(0, Math.ceil((result.timerDuration - elapsed) / 1000));
-        
-        if (remaining > 0) {
-          updateBadge('break', remaining);
-        } else {
-          // Break ended, clear the check alarm (breakTimer handles completion)
-          chrome.alarms.clear('breakCheck');
-        }
-      } else {
-        // Not in break mode anymore, stop checking
-        chrome.alarms.clear('breakCheck');
-      }
-    });
   } else if (alarm.name === 'updateBadge') {
     // Update the badge with remaining time
     chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
@@ -142,13 +124,20 @@ function startFocusTimer(durationMinutes) {
   updateBadge('focus', durationMinutes);
 }
 
+// Track break countdown interval
+let breakCountdownInterval = null;
+
 // Start the break timer
 // Note: Chrome alarms have a minimum delay of ~30 seconds for delayInMinutes,
 // but using 'when' with an absolute timestamp allows precise short-duration alarms
 function startBreakTimer(durationSeconds) {
-  // Clear any existing break-related alarms
+  // Clear any existing break-related alarms and intervals
   chrome.alarms.clear('breakTimer');
   chrome.alarms.clear('breakCheck');
+  if (breakCountdownInterval) {
+    clearInterval(breakCountdownInterval);
+    breakCountdownInterval = null;
+  }
   
   const startTime = Date.now();
   const duration = durationSeconds * 1000;
@@ -165,15 +154,22 @@ function startBreakTimer(durationSeconds) {
     when: endTime
   });
   
-  // Also create a periodic alarm to update the badge countdown
-  if (durationSeconds > 5) {
-    chrome.alarms.create('breakCheck', {
-      delayInMinutes: 0.083, // ~5 seconds
-      periodInMinutes: 0.083
-    });
-  }
-  
+  // Use setInterval for smooth second-by-second badge updates during break
+  // This works because service workers stay alive during active timers
   updateBadge('break', durationSeconds);
+  
+  breakCountdownInterval = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+    
+    if (remaining > 0) {
+      updateBadge('break', remaining);
+    } else {
+      // Break ended, clear interval
+      clearInterval(breakCountdownInterval);
+      breakCountdownInterval = null;
+    }
+  }, 1000);
 }
 
 // Handle when focus period completes
@@ -204,8 +200,11 @@ function handleFocusComplete() {
 
 // Handle when break period completes
 function handleBreakComplete() {
-  // Clear the breakCheck alarm since break is done
-  chrome.alarms.clear('breakCheck');
+  // Clear the countdown interval since break is done
+  if (breakCountdownInterval) {
+    clearInterval(breakCountdownInterval);
+    breakCountdownInterval = null;
+  }
   
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;

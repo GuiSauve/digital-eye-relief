@@ -142,7 +142,7 @@ export function Popup({
       </div>
       
       {/* Stats Footer */}
-      <div className="p-4 pb-6 bg-secondary/30 mt-auto">
+      <div className="p-4 pb-10 bg-secondary/30 mt-auto">
         <div className="flex justify-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">

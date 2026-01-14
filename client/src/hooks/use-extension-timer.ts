@@ -30,6 +30,14 @@ export function useExtensionTimer({
     soundVolume: 70,
     notificationType: "badge" as const,
   });
+  
+  // Stats for tracking usage
+  const [stats, setStats] = useState({
+    todayBreaks: 0,
+    totalBreaks: 0,
+    currentStreak: 1,
+    lastActiveDate: new Date().toDateString(),
+  });
 
   const resetTimer = useCallback(() => {
     setStatus("idle");
@@ -80,6 +88,12 @@ export function useExtensionTimer({
               if (settings.soundEnabled) {
                 playSound('/sounds/bells.mp3', settings.soundVolume);
               }
+              // Update stats
+              setStats(prev => ({
+                ...prev,
+                todayBreaks: prev.todayBreaks + 1,
+                totalBreaks: prev.totalBreaks + 1,
+              }));
               setStatus("focus");
               return settings.focusDuration * 60;
             }
@@ -134,5 +148,6 @@ export function useExtensionTimer({
     skipBreak,
     settings,
     setSettings,
+    stats,
   };
 }

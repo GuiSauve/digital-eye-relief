@@ -10,12 +10,20 @@ interface Settings {
   notificationType?: string;
 }
 
+interface Stats {
+  todayBreaks: number;
+  totalBreaks: number;
+  currentStreak: number;
+  lastActiveDate: string;
+}
+
 interface StorageResult {
   settings?: Settings;
   timerStatus?: TimerStatus;
   timerStartTime?: number;
   timerDuration?: number;
   pausedRemainingMs?: number;
+  stats?: Stats;
 }
 
 export function useChromeExtensionTimer() {
@@ -25,14 +33,32 @@ export function useChromeExtensionTimer() {
     focusDuration: 20,
     breakDuration: 20,
   });
+  const [stats, setStats] = useState<Stats>({
+    todayBreaks: 0,
+    totalBreaks: 0,
+    currentStreak: 0,
+    lastActiveDate: "",
+  });
 
   useEffect(() => {
     const loadState = () => {
       chrome.storage.sync.get(
-        ["settings", "timerStatus", "timerStartTime", "timerDuration", "pausedRemainingMs"],
+        ["settings", "timerStatus", "timerStartTime", "timerDuration", "pausedRemainingMs", "stats"],
         (result: StorageResult) => {
           if (result.settings) {
             setSettings(result.settings);
+          }
+
+          if (result.stats) {
+            const today = new Date().toDateString();
+            if (result.stats.lastActiveDate !== today) {
+              setStats({
+                ...result.stats,
+                todayBreaks: 0,
+              });
+            } else {
+              setStats(result.stats);
+            }
           }
 
           const timerStatus = result.timerStatus || "idle";
@@ -74,6 +100,9 @@ export function useChromeExtensionTimer() {
       }
       if (changes.pausedRemainingMs?.newValue && changes.timerStatus?.newValue === "paused") {
         setTimeLeft(Math.floor((changes.pausedRemainingMs.newValue as number) / 1000));
+      }
+      if (changes.stats?.newValue) {
+        setStats(changes.stats.newValue as Stats);
       }
     };
 
@@ -162,5 +191,6 @@ export function useChromeExtensionTimer() {
     pauseTimer,
     resetTimer,
     settings,
+    stats,
   };
 }

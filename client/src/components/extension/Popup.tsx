@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
-import { Play, Pause, RefreshCcw, Settings as SettingsIcon } from "lucide-react";
+import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+interface Stats {
+  todayBreaks: number;
+  totalBreaks: number;
+  currentStreak: number;
+  lastActiveDate: string;
+}
 
 interface PopupProps {
   status: "idle" | "focus" | "break" | "paused";
@@ -12,6 +19,7 @@ interface PopupProps {
   onPause: () => void;
   onReset: () => void;
   onOpenSettings: () => void;
+  stats?: Stats;
 }
 
 export function Popup({
@@ -23,6 +31,7 @@ export function Popup({
   onPause,
   onReset,
   onOpenSettings,
+  stats,
 }: PopupProps) {
   // Calculate circle stroke properties
   const radius = 80;
@@ -132,11 +141,28 @@ export function Popup({
         </div>
       </div>
       
-      {/* Status Footer */}
-      <div className="p-4 text-center bg-secondary/30">
-        <p className="text-xs text-muted-foreground font-medium">
-          Next break in {status === 'idle' ? '20:00' : status === 'break' ? 'now' : formatTime(timeLeft)}
-        </p>
+      {/* Stats Footer */}
+      <div className="p-4 bg-secondary/30">
+        <div className="flex justify-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
+              <Eye className="w-3.5 h-3.5 text-primary" />
+            </div>
+            <div className="text-left">
+              <p className="text-xs text-muted-foreground">Today</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.todayBreaks ?? 0} breaks</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center">
+              <Flame className="w-3.5 h-3.5 text-orange-500" />
+            </div>
+            <div className="text-left">
+              <p className="text-xs text-muted-foreground">Streak</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.currentStreak ?? 0} days</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

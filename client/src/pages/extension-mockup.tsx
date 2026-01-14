@@ -22,10 +22,11 @@ export function ExtensionMockup() {
     resetTimer,
     skipBreak,
     settings,
-    setSettings
+    setSettings,
+    stats
   } = useExtensionTimer();
 
-  const showOverlay = status === "break" && settings.notificationType === "modal";
+  const showOverlay = false; // Modal overlay disabled - badge notifications only
 
   const scrollToDemo = () => {
     document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -304,6 +305,7 @@ export function ExtensionMockup() {
                         onPause={pauseTimer}
                         onReset={resetTimer}
                         onOpenSettings={() => setView("settings")}
+                        stats={stats}
                     />
                     ) : (
                     <Settings

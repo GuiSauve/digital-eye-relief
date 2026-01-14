@@ -206,6 +206,9 @@ function handleBreakComplete() {
     breakCountdownInterval = null;
   }
   
+  // Update stats - increment break count
+  updateStats();
+  
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
     
@@ -228,6 +231,45 @@ function handleBreakComplete() {
         startFocusTimer(settings.focusDuration);
       }
     });
+  });
+}
+
+// Update usage stats when a break is completed
+function updateStats() {
+  const today = new Date().toDateString();
+  
+  chrome.storage.sync.get(['stats'], (result) => {
+    const stats = result.stats || {
+      todayBreaks: 0,
+      totalBreaks: 0,
+      currentStreak: 0,
+      lastActiveDate: ''
+    };
+    
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toDateString();
+    
+    let newStreak = stats.currentStreak;
+    
+    if (stats.lastActiveDate === today) {
+      // Same day, just increment counts
+    } else if (stats.lastActiveDate === yesterdayStr) {
+      // Consecutive day - increment streak
+      newStreak = stats.currentStreak + 1;
+    } else if (stats.lastActiveDate !== today) {
+      // Not consecutive - reset streak to 1
+      newStreak = 1;
+    }
+    
+    const newStats = {
+      todayBreaks: stats.lastActiveDate === today ? stats.todayBreaks + 1 : 1,
+      totalBreaks: stats.totalBreaks + 1,
+      currentStreak: newStreak,
+      lastActiveDate: today
+    };
+    
+    chrome.storage.sync.set({ stats: newStats });
   });
 }
 

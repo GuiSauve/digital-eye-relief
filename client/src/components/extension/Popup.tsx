@@ -92,7 +92,7 @@ export function Popup({
               {status === "idle" ? "Ready" : status === "break" ? "Relax Eyes" : status === "paused" ? "Paused" : "Focusing"}
             </motion.span>
             <span className="text-5xl font-display font-bold text-foreground tabular-nums tracking-tight">
-              {formatTime(timeLeft)}
+              {status === "break" ? `${timeLeft}s` : formatTime(timeLeft)}
             </span>
           </div>
         </div>

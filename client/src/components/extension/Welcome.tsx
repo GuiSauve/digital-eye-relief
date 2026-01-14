@@ -8,15 +8,15 @@ interface WelcomeProps {
 
 export function Welcome({ onGetStarted }: WelcomeProps) {
   return (
-    <div className="w-full h-[500px] bg-gradient-to-b from-green-50 to-white flex flex-col overflow-hidden relative font-sans">
-      <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
+    <div className="w-full h-[500px] bg-gradient-to-b from-green-50 to-white flex flex-col overflow-auto relative font-sans">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="w-20 h-20 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 mb-6"
+          className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 mb-4"
         >
-          <Eye className="w-10 h-10" />
+          <Eye className="w-8 h-8" />
         </motion.div>
 
         <motion.h1
@@ -32,16 +32,16 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-muted-foreground text-sm max-w-[280px] mb-8"
+          className="text-muted-foreground text-sm max-w-[280px] mb-4"
         >
-          Protect your eyes with the 20-20-20 rule. Every 20 minutes, look at something 20 feet away for 20 seconds.
+          Protect your eyes with the 20-20-20 rule. Every 20 minutes, look at something 20 feet (6 meters) away for 20 seconds.
         </motion.p>
 
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="space-y-3 w-full max-w-[260px] mb-8"
+          className="space-y-2 w-full max-w-[260px] mb-4"
         >
           <div className="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-border/50">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -74,7 +74,7 @@ export function Welcome({ onGetStarted }: WelcomeProps) {
         </motion.div>
       </div>
 
-      <div className="p-4 text-center">
+      <div className="p-2 text-center">
         <p className="text-xs text-muted-foreground">
           Your eyes will thank you
         </p>

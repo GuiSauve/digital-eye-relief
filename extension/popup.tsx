@@ -51,7 +51,7 @@ function PopupApp() {
   }
 
   return (
-    <div className="w-[360px]">
+    <div className="w-[360px] h-[520px]">
       <Popup
         status={status}
         timeLeft={timeLeft}

@@ -294,7 +294,7 @@ export function ExtensionMockup() {
                 </div>
 
                 {/* Extension Content */}
-                <div className="relative h-[520px] bg-white">
+                <div className="relative h-[520px] bg-secondary/30 rounded-b-2xl overflow-hidden">
                     {view === "popup" ? (
                     <Popup
                         status={status}

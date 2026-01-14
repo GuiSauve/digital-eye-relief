@@ -10,6 +10,7 @@ interface SettingsProps {
     focusDuration: number;
     breakDuration: number;
     soundEnabled: boolean;
+    soundVolume: number;
     notificationType: "badge";
   };
   onUpdateSettings: (settings: any) => void;
@@ -23,8 +24,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
   const playBreakStartSound = () => {
     if (!breakStartAudioRef.current) {
       breakStartAudioRef.current = new Audio('/sounds/singing-bowl.mp3');
-      breakStartAudioRef.current.volume = 0.7;
     }
+    breakStartAudioRef.current.volume = (settings.soundVolume ?? 70) / 100;
     breakStartAudioRef.current.currentTime = 0;
     breakStartAudioRef.current.play().catch(err => console.log('Audio play error:', err));
   };
@@ -32,8 +33,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
   const playBreakEndSound = () => {
     if (!breakEndAudioRef.current) {
       breakEndAudioRef.current = new Audio('/sounds/bells.mp3');
-      breakEndAudioRef.current.volume = 0.7;
     }
+    breakEndAudioRef.current.volume = (settings.soundVolume ?? 70) / 100;
     breakEndAudioRef.current.currentTime = 0;
     breakEndAudioRef.current.play().catch(err => console.log('Audio play error:', err));
   };
@@ -135,7 +136,22 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               />
             </div>
 
-            <div className="space-y-2 pl-6">
+            <div className="space-y-4 pl-6">
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Volume</span>
+                  <span className="font-mono text-muted-foreground">{settings.soundVolume ?? 70}%</span>
+                </div>
+                <Slider
+                  value={[settings.soundVolume ?? 70]}
+                  min={0}
+                  max={100}
+                  step={5}
+                  onValueChange={(val) => onUpdateSettings({ ...settings, soundVolume: val[0] })}
+                  className="py-2"
+                  data-testid="slider-volume"
+                />
+              </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Break starts</span>
                 <Button

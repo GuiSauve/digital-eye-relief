@@ -6,6 +6,7 @@ interface Settings {
   focusDuration: number;
   breakDuration: number;
   soundEnabled?: boolean;
+  soundVolume?: number;
   notificationType?: string;
 }
 

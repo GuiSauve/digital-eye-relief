@@ -8,6 +8,7 @@ function OptionsApp() {
     focusDuration: 20,
     breakDuration: 20,
     soundEnabled: true,
+    soundVolume: 70,
     notificationType: "badge" as const,
   });
 
@@ -18,7 +19,10 @@ function OptionsApp() {
     chrome.storage.sync.get(["settings"], (result) => {
       if (result.settings) {
         setSettings({
-          ...result.settings,
+          focusDuration: result.settings.focusDuration ?? 20,
+          breakDuration: result.settings.breakDuration ?? 20,
+          soundEnabled: result.settings.soundEnabled ?? true,
+          soundVolume: result.settings.soundVolume ?? 70,
           notificationType: "badge" as const,
         });
       }

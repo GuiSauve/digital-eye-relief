@@ -5,6 +5,7 @@ const DEFAULT_SETTINGS = {
   focusDuration: 20, // minutes
   breakDuration: 20, // seconds
   soundEnabled: true,
+  soundVolume: 70, // 0-100
   notificationType: 'badge', // 'modal' or 'badge'
   isActive: false
 };
@@ -47,13 +48,14 @@ async function setupOffscreenDocument() {
 }
 
 // Play notification sound
-async function playNotificationSound(soundFile = 'sounds/singing-bowl.mp3') {
+async function playNotificationSound(soundFile = 'sounds/singing-bowl.mp3', volume = 70) {
   await setupOffscreenDocument();
   
   try {
     await chrome.runtime.sendMessage({
       action: 'playSound',
-      sound: soundFile
+      sound: soundFile,
+      volume: volume
     });
   } catch (error) {
     console.error('Error playing sound:', error);
@@ -192,7 +194,7 @@ function handleFocusComplete() {
     
     // Play sound if enabled
     if (settings.soundEnabled) {
-      playNotificationSound();
+      playNotificationSound('sounds/singing-bowl.mp3', settings.soundVolume ?? 70);
     }
     
     // Start break timer
@@ -210,7 +212,7 @@ function handleBreakComplete() {
     
     // Play bells sound if enabled (different from break start sound)
     if (settings.soundEnabled) {
-      playNotificationSound('sounds/bells.mp3');
+      playNotificationSound('sounds/bells.mp3', settings.soundVolume ?? 70);
     }
     
     chrome.notifications.create('breakComplete', {

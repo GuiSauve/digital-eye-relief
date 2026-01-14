@@ -5,15 +5,15 @@ const audioPlayer = document.getElementById('audio-player');
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'playSound') {
-    playSound(message.sound);
+    playSound(message.sound, message.volume ?? 70);
     sendResponse({ success: true });
   }
   return true;
 });
 
-function playSound(soundFile) {
+function playSound(soundFile, volume = 70) {
   audioPlayer.src = soundFile;
-  audioPlayer.volume = 0.7;
+  audioPlayer.volume = volume / 100;
   audioPlayer.play().catch(error => {
     console.error('Error playing sound:', error);
   });

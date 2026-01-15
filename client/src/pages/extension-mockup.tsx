@@ -3,6 +3,9 @@ import { Popup } from "@/components/extension/Popup";
 import { Settings } from "@/components/extension/Settings";
 import { NotificationOverlay } from "@/components/extension/NotificationOverlay";
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { languages, Language } from "@/i18n";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
 import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText } from "lucide-react";
@@ -12,6 +15,7 @@ import { motion } from "framer-motion";
 
 export function ExtensionMockup() {
   const [view, setView] = useState<"popup" | "settings">("popup");
+  const { language, t } = useLanguage();
   const {
     status,
     timeLeft,
@@ -32,9 +36,15 @@ export function ExtensionMockup() {
     document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const getPrivacyPath = () => language === 'en' ? '/privacy' : `/${language}/privacy`;
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-stone-50 to-stone-100 relative overflow-x-hidden">
-      
+      {/* Language Selector - Fixed Position */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSelector />
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20">
         {/* Background Pattern */}
@@ -79,9 +89,9 @@ export function ExtensionMockup() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Protect your eyes.
+            {t.hero.tagline1}
             <br />
-            <span className="text-primary">Stay focused.</span>
+            <span className="text-primary">{t.hero.tagline2}</span>
           </motion.h1>
           
           <motion.p 
@@ -90,7 +100,7 @@ export function ExtensionMockup() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            A simple Chrome extension that reminds you to take eye breaks using the medically-recommended 20-20-20 rule.
+            {t.hero.description}
           </motion.p>
           
           {/* CTA Buttons */}
@@ -111,7 +121,7 @@ export function ExtensionMockup() {
                 data-testid="button-add-to-chrome"
               >
                 <Chrome className="w-5 h-5 mr-2" />
-                Add to Chrome — It's Free
+                {t.hero.addToChrome}
               </Button>
             </a>
             <Button 
@@ -121,7 +131,7 @@ export function ExtensionMockup() {
               onClick={scrollToDemo}
               data-testid="button-try-demo"
             >
-              Try Interactive Demo
+              {t.hero.tryDemo}
             </Button>
           </motion.div>
           
@@ -142,11 +152,12 @@ export function ExtensionMockup() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
-              The Science Behind Healthy Eyes
+              {t.science.title}
             </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              Recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">American Optometric Association</a>, 
-              the 20-20-20 rule is the gold standard for preventing digital eye strain.
+              {t.science.description.split('{aoa}')[0]}
+              <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">{t.science.aoaName}</a>
+              {t.science.description.split('{aoa}')[1]}
             </p>
           </div>
           
@@ -159,8 +170,8 @@ export function ExtensionMockup() {
               <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-4xl font-bold text-primary">20</span>
               </div>
-              <h3 className="text-xl font-bold text-stone-800 mb-2">Minutes</h3>
-              <p className="text-stone-600">Every 20 minutes of screen time</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">{t.science.minutes}</h3>
+              <p className="text-stone-600">{t.science.minutesDesc}</p>
             </motion.div>
             
             <motion.div 
@@ -171,8 +182,8 @@ export function ExtensionMockup() {
               <div className="w-20 h-20 bg-blue-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-4xl font-bold text-blue-500">20</span>
               </div>
-              <h3 className="text-xl font-bold text-stone-800 mb-2">Feet Away</h3>
-              <p className="text-stone-600">Look at something 20 feet (6 meters) distant</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">{t.science.feetAway}</h3>
+              <p className="text-stone-600">{t.science.feetAwayDesc}</p>
             </motion.div>
             
             <motion.div 
@@ -183,8 +194,8 @@ export function ExtensionMockup() {
               <div className="w-20 h-20 bg-emerald-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-4xl font-bold text-emerald-500">20</span>
               </div>
-              <h3 className="text-xl font-bold text-stone-800 mb-2">Seconds</h3>
-              <p className="text-stone-600">Just a short, refreshing break</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">{t.science.seconds}</h3>
+              <p className="text-stone-600">{t.science.secondsDesc}</p>
             </motion.div>
           </div>
         </div>
@@ -195,10 +206,10 @@ export function ExtensionMockup() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
-              Simple. Gentle. Effective.
+              {t.features.title}
             </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              Designed to help without getting in your way
+              {t.features.description}
             </p>
           </div>
           
@@ -210,8 +221,8 @@ export function ExtensionMockup() {
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                 <Timer className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-bold text-stone-800 mb-2">Customizable Timer</h3>
-              <p className="text-sm text-stone-600">Set your own focus and break durations to match your workflow</p>
+              <h3 className="font-bold text-stone-800 mb-2">{t.features.timer.title}</h3>
+              <p className="text-sm text-stone-600">{t.features.timer.description}</p>
             </motion.div>
             
             <motion.div 
@@ -221,8 +232,8 @@ export function ExtensionMockup() {
               <div className="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center mb-4">
                 <Bell className="w-6 h-6 text-blue-500" />
               </div>
-              <h3 className="font-bold text-stone-800 mb-2">Gentle Notifications</h3>
-              <p className="text-sm text-stone-600">Subtle badge reminders with optional calming sounds at break start and end</p>
+              <h3 className="font-bold text-stone-800 mb-2">{t.features.notifications.title}</h3>
+              <p className="text-sm text-stone-600">{t.features.notifications.description}</p>
             </motion.div>
             
             <motion.div 
@@ -232,8 +243,8 @@ export function ExtensionMockup() {
               <div className="w-12 h-12 bg-emerald-400/10 rounded-xl flex items-center justify-center mb-4">
                 <Volume2 className="w-6 h-6 text-emerald-500" />
               </div>
-              <h3 className="font-bold text-stone-800 mb-2">Calming Sounds</h3>
-              <p className="text-sm text-stone-600">A gentle temple bell reminds you even when on other tabs</p>
+              <h3 className="font-bold text-stone-800 mb-2">{t.features.sounds.title}</h3>
+              <p className="text-sm text-stone-600">{t.features.sounds.description}</p>
             </motion.div>
             
             <motion.div 
@@ -243,8 +254,8 @@ export function ExtensionMockup() {
               <div className="w-12 h-12 bg-purple-400/10 rounded-xl flex items-center justify-center mb-4">
                 <Heart className="w-6 h-6 text-purple-500" />
               </div>
-              <h3 className="font-bold text-stone-800 mb-2">Calm Focus Design</h3>
-              <p className="text-sm text-stone-600">Beautiful, minimal interface that promotes relaxation</p>
+              <h3 className="font-bold text-stone-800 mb-2">{t.features.design.title}</h3>
+              <p className="text-sm text-stone-600">{t.features.design.description}</p>
             </motion.div>
           </div>
         </div>
@@ -255,10 +266,10 @@ export function ExtensionMockup() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
-              Try It Now
+              {t.demo.title}
             </h2>
             <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-              This is a fully interactive demo of the extension. Click the buttons to see how it works!
+              {t.demo.description}
             </p>
           </div>
           
@@ -328,27 +339,27 @@ export function ExtensionMockup() {
               <HelpCircle className="w-6 h-6 text-primary" />
             </div>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
-              Frequently Asked Questions
+              {t.faq.title}
             </h2>
             <p className="text-lg text-stone-600">
-              Everything you need to know about eye health and the 20-20-20 rule
+              {t.faq.description}
             </p>
           </div>
           
           <div className="space-y-4">
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-1">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">What is the 20-20-20 rule?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q1.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>The 20-20-20 rule is a guideline recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">American Optometric Association</a> to reduce digital eye strain. The rule is simple: every <strong>20 minutes</strong> of screen time, look at something <strong>20 feet (6 meters) away</strong> for <strong>20 seconds</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
+                <p>The 20-20-20 rule is a guideline recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">{t.science.aoaName}</a> to reduce digital eye strain. The rule is simple: every <strong>20 {t.science.minutes.toLowerCase()}</strong> of screen time, look at something <strong>20 {t.science.feetAway.toLowerCase()}</strong> for <strong>20 {t.science.seconds.toLowerCase()}</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
               </div>
             </details>
             
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-2">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">Does the 20-20-20 rule really work?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q2.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
@@ -358,7 +369,7 @@ export function ExtensionMockup() {
             
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-3">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">What causes digital eye strain?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q3.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
@@ -368,7 +379,7 @@ export function ExtensionMockup() {
             
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-4">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">How does Digital Eye Relief help?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q4.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
@@ -378,7 +389,7 @@ export function ExtensionMockup() {
             
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-5">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">Is Digital Eye Relief free?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q5.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
@@ -388,7 +399,7 @@ export function ExtensionMockup() {
             
             <details className="group bg-white rounded-2xl border border-stone-200 shadow-sm" data-testid="faq-item-6">
               <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
-                <h3 className="text-lg font-semibold text-stone-800 pr-4">Who should use the 20-20-20 rule?</h3>
+                <h3 className="text-lg font-semibold text-stone-800 pr-4">{t.faq.q6.question}</h3>
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
@@ -407,10 +418,10 @@ export function ExtensionMockup() {
           </div>
           
           <h2 className="text-3xl md:text-4xl font-display font-bold text-stone-800 mb-4">
-            Ready to protect your eyes?
+            {t.cta.title}
           </h2>
           <p className="text-lg text-stone-600 mb-8 max-w-xl mx-auto">
-            Start taking care of your eyes today with a simple, free tool designed for healthier screen time.
+            {t.cta.description}
           </p>
           
           <a 
@@ -424,22 +435,22 @@ export function ExtensionMockup() {
               data-testid="button-download-cta"
             >
               <Chrome className="w-6 h-6 mr-3" />
-              Add to Chrome — It's Free
+              {t.hero.addToChrome}
             </Button>
           </a>
           
           <div className="flex items-center justify-center gap-6 mt-8 text-sm text-stone-500">
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4" />
-              <span>Privacy-focused</span>
+              <span>{t.cta.privacyFocused}</span>
             </div>
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4" />
-              <span>No account required</span>
+              <span>{t.cta.noAccount}</span>
             </div>
             <div className="flex items-center gap-2">
               <Heart className="w-4 h-4" />
-              <span>100% Free</span>
+              <span>{t.cta.free}</span>
             </div>
           </div>
         </div>
@@ -453,12 +464,12 @@ export function ExtensionMockup() {
             <span className="font-display font-bold text-white">Digital Eye Relief</span>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-sm hover:text-white transition-colors flex items-center gap-1" data-testid="link-privacy-policy">
+            <Link href={getPrivacyPath()} className="text-sm hover:text-white transition-colors flex items-center gap-1" data-testid="link-privacy-policy">
               <FileText className="w-4 h-4" />
-              Privacy Policy
+              {t.footer.privacyPolicy}
             </Link>
             <p className="text-sm">
-              Made with ❤️ for healthier screen time
+              {t.footer.madeWith}
             </p>
           </div>
         </div>

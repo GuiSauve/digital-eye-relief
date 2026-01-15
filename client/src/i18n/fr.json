@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "title": "Digital Eye Relief - Protégez vos yeux avec la règle 20-20-20",
+    "description": "Une extension Chrome gratuite qui vous rappelle de faire des pauses visuelles en utilisant la règle 20-20-20 recommandée médicalement. Réduisez la fatigue oculaire numérique et restez concentré."
+  },
+  "hero": {
+    "tagline1": "Protégez vos yeux.",
+    "tagline2": "Restez concentré.",
+    "description": "Une simple extension Chrome qui vous rappelle de faire des pauses visuelles en utilisant la règle 20-20-20 recommandée médicalement.",
+    "addToChrome": "Ajouter à Chrome — C'est Gratuit",
+    "tryDemo": "Essayer la Démo Interactive"
+  },
+  "science": {
+    "title": "La Science Derrière des Yeux Sains",
+    "description": "Recommandée par l'{aoa}, la règle 20-20-20 est la référence pour prévenir la fatigue oculaire numérique.",
+    "aoaName": "Association Américaine d'Optométrie",
+    "minutes": "Minutes",
+    "minutesDesc": "Toutes les 20 minutes d'écran",
+    "feetAway": "Pieds de Distance",
+    "feetAwayDesc": "Regardez quelque chose à 20 pieds (6 mètres)",
+    "seconds": "Secondes",
+    "secondsDesc": "Juste une courte pause rafraîchissante"
+  },
+  "features": {
+    "title": "Simple. Doux. Efficace.",
+    "description": "Conçu pour aider sans vous gêner",
+    "timer": {
+      "title": "Minuteur Personnalisable",
+      "description": "Définissez vos propres durées de concentration et de pause pour correspondre à votre flux de travail"
+    },
+    "notifications": {
+      "title": "Notifications Douces",
+      "description": "Rappels subtils sur le badge avec des sons apaisants optionnels au début et à la fin de la pause"
+    },
+    "sounds": {
+      "title": "Sons Apaisants",
+      "description": "Une douce cloche de temple vous rappelle même sur d'autres onglets"
+    },
+    "design": {
+      "title": "Design Zen",
+      "description": "Interface belle et minimale qui favorise la relaxation"
+    }
+  },
+  "demo": {
+    "title": "Essayez Maintenant",
+    "description": "Ceci est une démo entièrement interactive de l'extension. Cliquez sur les boutons pour voir comment ça fonctionne !"
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "description": "Tout ce que vous devez savoir sur la santé oculaire et la règle 20-20-20",
+    "q1": {
+      "question": "Qu'est-ce que la règle 20-20-20 ?",
+      "answer": "La règle 20-20-20 est une directive recommandée par l'{aoa} pour réduire la fatigue oculaire numérique. La règle est simple : toutes les {minutes} de temps d'écran, regardez quelque chose à {feet} pendant {seconds}. Cela aide à détendre vos muscles oculaires et réduit la fatigue due à la mise au point prolongée sur les écrans proches."
+    },
+    "q2": {
+      "question": "La règle 20-20-20 fonctionne-t-elle vraiment ?",
+      "answer": "Oui, {research} soutient l'efficacité de la règle 20-20-20. Les études cliniques montrent que prendre des pauses régulières avec cette méthode {reduces} sur les muscles oculaires, {improves} (aidant avec les yeux secs), et {decreases} (fatigue oculaire). De nombreux utilisateurs rapportent moins de maux de tête, moins de fatigue oculaire et une meilleure concentration après avoir mis en place des pauses régulières."
+    },
+    "q3": {
+      "question": "Qu'est-ce qui cause la fatigue oculaire numérique ?",
+      "answer": "La fatigue oculaire numérique (aussi appelée {cvs}) est causée par l'utilisation prolongée d'écrans. En fixant les écrans, nous clignons {blink} moins fréquemment, ce qui provoque des yeux secs et irrités. L'effort constant de mise au point fatigue également les muscles ciliaires de vos yeux. {research} que {percent} présentent des symptômes incluant fatigue oculaire, sécheresse, vision floue, maux de tête et douleurs au cou."
+    },
+    "q4": {
+      "question": "Comment Digital Eye Relief aide-t-il ?",
+      "answer": "Digital Eye Relief est une extension Chrome gratuite qui {auto} faire des pauses visuelles en utilisant la règle 20-20-20. Elle fonctionne silencieusement en arrière-plan, suit votre temps d'écran, et envoie {gentle} quand c'est l'heure d'une pause. Les fonctionnalités incluent des intervalles de minuteur personnalisables, des rappels subtils sur le badge, des sons apaisants optionnels au début et à la fin de la pause, et un beau design sans distraction."
+    },
+    "q5": {
+      "question": "Digital Eye Relief est-il gratuit ?",
+      "answer": "Oui, Digital Eye Relief est {free} à utiliser. Il n'y a pas de fonctionnalités premium, d'abonnements, d'achats intégrés ou de coûts cachés. L'extension est également {privacy} — elle ne collecte aucune donnée personnelle, ne nécessite pas de compte, et fonctionne entièrement sur votre appareil. Nous pensons que la santé oculaire ne devrait pas avoir de barrière payante."
+    },
+    "q6": {
+      "question": "Qui devrait utiliser la règle 20-20-20 ?",
+      "answer": "Toute personne qui passe beaucoup de temps devant les écrans peut bénéficier de la règle 20-20-20. Cela inclut {users}. C'est particulièrement important pour les personnes qui présentent déjà des symptômes de fatigue oculaire comme les yeux secs, les maux de tête ou la vision floue."
+    }
+  },
+  "cta": {
+    "title": "Prêt à protéger vos yeux ?",
+    "description": "Commencez à prendre soin de vos yeux aujourd'hui avec un outil simple et gratuit conçu pour un temps d'écran plus sain.",
+    "privacyFocused": "Axé sur la confidentialité",
+    "noAccount": "Pas de compte requis",
+    "free": "100% Gratuit"
+  },
+  "footer": {
+    "privacyPolicy": "Politique de Confidentialité",
+    "madeWith": "Fait avec ❤️ pour un temps d'écran plus sain"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

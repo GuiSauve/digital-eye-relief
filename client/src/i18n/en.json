@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "title": "Digital Eye Relief - Protect Your Eyes with the 20-20-20 Rule",
+    "description": "A free Chrome extension that reminds you to take eye breaks using the medically-recommended 20-20-20 rule. Reduce digital eye strain and stay focused."
+  },
+  "hero": {
+    "tagline1": "Protect your eyes.",
+    "tagline2": "Stay focused.",
+    "description": "A simple Chrome extension that reminds you to take eye breaks using the medically-recommended 20-20-20 rule.",
+    "addToChrome": "Add to Chrome — It's Free",
+    "tryDemo": "Try Interactive Demo"
+  },
+  "science": {
+    "title": "The Science Behind Healthy Eyes",
+    "description": "Recommended by the {aoa}, the 20-20-20 rule is the gold standard for preventing digital eye strain.",
+    "aoaName": "American Optometric Association",
+    "minutes": "Minutes",
+    "minutesDesc": "Every 20 minutes of screen time",
+    "feetAway": "Feet Away",
+    "feetAwayDesc": "Look at something 20 feet (6 meters) distant",
+    "seconds": "Seconds",
+    "secondsDesc": "Just a short, refreshing break"
+  },
+  "features": {
+    "title": "Simple. Gentle. Effective.",
+    "description": "Designed to help without getting in your way",
+    "timer": {
+      "title": "Customizable Timer",
+      "description": "Set your own focus and break durations to match your workflow"
+    },
+    "notifications": {
+      "title": "Gentle Notifications",
+      "description": "Subtle badge reminders with optional calming sounds at break start and end"
+    },
+    "sounds": {
+      "title": "Calming Sounds",
+      "description": "A gentle temple bell reminds you even when on other tabs"
+    },
+    "design": {
+      "title": "Calm Focus Design",
+      "description": "Beautiful, minimal interface that promotes relaxation"
+    }
+  },
+  "demo": {
+    "title": "Try It Now",
+    "description": "This is a fully interactive demo of the extension. Click the buttons to see how it works!"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about eye health and the 20-20-20 rule",
+    "q1": {
+      "question": "What is the 20-20-20 rule?",
+      "answer": "The 20-20-20 rule is a guideline recommended by the {aoa} to reduce digital eye strain. The rule is simple: every {minutes} of screen time, look at something {feet} for {seconds}. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens."
+    },
+    "q2": {
+      "question": "Does the 20-20-20 rule really work?",
+      "answer": "Yes, {research} supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method {reduces} on eye muscles, {improves} (helping with dry eyes), and {decreases} (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks."
+    },
+    "q3": {
+      "question": "What causes digital eye strain?",
+      "answer": "Digital eye strain (also called {cvs}) is caused by prolonged screen use. When focusing on screens, we blink {blink} less frequently, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. {research} that {percent} experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain."
+    },
+    "q4": {
+      "question": "How does Digital Eye Relief help?",
+      "answer": "Digital Eye Relief is a free Chrome extension that {auto} to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends {gentle} when it's time for a break. Features include customizable timer intervals, subtle badge reminders, optional calming sounds at break start and end, and a beautiful, distraction-free design."
+    },
+    "q5": {
+      "question": "Is Digital Eye Relief free?",
+      "answer": "Yes, Digital Eye Relief is {free} to use. There are no premium features, subscriptions, in-app purchases, or hidden costs. The extension is also {privacy} — it doesn't collect any personal data, doesn't require an account, and works entirely on your device. We believe eye health shouldn't have a paywall."
+    },
+    "q6": {
+      "question": "Who should use the 20-20-20 rule?",
+      "answer": "Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes {users}. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision."
+    }
+  },
+  "cta": {
+    "title": "Ready to protect your eyes?",
+    "description": "Start taking care of your eyes today with a simple, free tool designed for healthier screen time.",
+    "privacyFocused": "Privacy-focused",
+    "noAccount": "No account required",
+    "free": "100% Free"
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "madeWith": "Made with ❤️ for healthier screen time"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

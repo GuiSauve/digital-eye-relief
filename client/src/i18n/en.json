@@ -50,27 +50,30 @@
     "description": "Everything you need to know about eye health and the 20-20-20 rule",
     "q1": {
       "question": "What is the 20-20-20 rule?",
-      "answer": "The 20-20-20 rule is a guideline recommended by the {aoa} to reduce digital eye strain. The rule is simple: every {minutes} of screen time, look at something {feet} for {seconds}. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens."
+      "answer": "The 20-20-20 rule is a guideline recommended by the {aoa} to reduce digital eye strain. The rule is simple: every 20 minutes of screen time, look at something 20 feet (6 meters) away for 20 seconds. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens."
     },
     "q2": {
       "question": "Does the 20-20-20 rule really work?",
-      "answer": "Yes, {research} supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method {reduces} on eye muscles, {improves} (helping with dry eyes), and {decreases} (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks."
+      "answer": "Yes, {research} supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method reduces accommodation stress on eye muscles, improves tear film stability (helping with dry eyes), and decreases symptoms of asthenopia (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks.",
+      "researchLink": "peer-reviewed research"
     },
     "q3": {
       "question": "What causes digital eye strain?",
-      "answer": "Digital eye strain (also called {cvs}) is caused by prolonged screen use. When focusing on screens, we blink {blink} less frequently, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. {research} that {percent} experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain."
+      "answer": "Digital eye strain (also called {cvs}) is caused by prolonged screen use. When focusing on screens, we blink 40-60% less frequently, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. {research} indicates that 50-90% of digital device users experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain.",
+      "cvsLink": "Computer Vision Syndrome",
+      "researchLink": "Research"
     },
     "q4": {
       "question": "How does Digital Eye Relief help?",
-      "answer": "Digital Eye Relief is a free Chrome extension that {auto} to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends {gentle} when it's time for a break. Features include customizable timer intervals, subtle badge reminders, optional calming sounds at break start and end, and a beautiful, distraction-free design."
+      "answer": "Digital Eye Relief is a free Chrome extension that automatically reminds you to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends gentle notifications when it's time for a break. Features include customizable timer intervals, subtle badge reminders, optional calming sounds at break start and end, and a beautiful, distraction-free design."
     },
     "q5": {
       "question": "Is Digital Eye Relief free?",
-      "answer": "Yes, Digital Eye Relief is {free} to use. There are no premium features, subscriptions, in-app purchases, or hidden costs. The extension is also {privacy} — it doesn't collect any personal data, doesn't require an account, and works entirely on your device. We believe eye health shouldn't have a paywall."
+      "answer": "Yes, Digital Eye Relief is completely free to use. There are no premium features, subscriptions, in-app purchases, or hidden costs. The extension is also privacy-focused — it doesn't collect any personal data, doesn't require an account, and works entirely on your device. We believe eye health shouldn't have a paywall."
     },
     "q6": {
       "question": "Who should use the 20-20-20 rule?",
-      "answer": "Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes {users}. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision."
+      "answer": "Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes office workers, programmers, designers, students, gamers, and anyone who uses computers, tablets, or smartphones for prolonged periods. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision."
     }
   },
   "cta": {

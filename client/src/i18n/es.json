@@ -50,27 +50,30 @@
     "description": "Todo lo que necesitas saber sobre la salud visual y la regla 20-20-20",
     "q1": {
       "question": "¿Qué es la regla 20-20-20?",
-      "answer": "La regla 20-20-20 es una guía recomendada por la {aoa} para reducir la fatiga visual digital. La regla es simple: cada {minutes} de tiempo de pantalla, mira algo a {feet} durante {seconds}. Esto ayuda a relajar los músculos de tus ojos y reduce la fatiga por enfocar prolongadamente en pantallas cercanas."
+      "answer": "La regla 20-20-20 es una guía recomendada por la {aoa} para reducir la fatiga visual digital. La regla es simple: cada 20 minutos de tiempo de pantalla, mira algo a 20 pies (6 metros) de distancia durante 20 segundos. Esto ayuda a relajar los músculos de tus ojos y reduce la fatiga por enfocar prolongadamente en pantallas cercanas."
     },
     "q2": {
       "question": "¿Realmente funciona la regla 20-20-20?",
-      "answer": "Sí, {research} respalda la efectividad de la regla 20-20-20. Los estudios clínicos muestran que tomar descansos regulares usando este método {reduces} en los músculos oculares, {improves} (ayudando con los ojos secos), y {decreases} (fatiga visual). Muchos usuarios reportan menos dolores de cabeza, menos fatiga visual y mejor enfoque después de implementar descansos regulares."
+      "answer": "Sí, {research} respalda la efectividad de la regla 20-20-20. Los estudios clínicos muestran que tomar descansos regulares usando este método reduce el estrés de acomodación en los músculos oculares, mejora la estabilidad de la película lagrimal (ayudando con los ojos secos), y disminuye los síntomas de astenopia (fatiga visual). Muchos usuarios reportan menos dolores de cabeza, menos fatiga visual y mejor enfoque después de implementar descansos regulares.",
+      "researchLink": "investigación revisada por expertos"
     },
     "q3": {
       "question": "¿Qué causa la fatiga visual digital?",
-      "answer": "La fatiga visual digital (también llamada {cvs}) es causada por el uso prolongado de pantallas. Al enfocar en pantallas, parpadeamos {blink} con menos frecuencia, causando ojos secos e irritados. El esfuerzo constante de enfoque también fatiga los músculos ciliares de tus ojos. {research} que {percent} experimentan síntomas que incluyen fatiga visual, sequedad, visión borrosa, dolores de cabeza y dolor de cuello."
+      "answer": "La fatiga visual digital (también llamada {cvs}) es causada por el uso prolongado de pantallas. Al enfocar en pantallas, parpadeamos 40-60% menos frecuentemente, causando ojos secos e irritados. El esfuerzo constante de enfoque también fatiga los músculos ciliares de tus ojos. {research} indica que el 50-90% de los usuarios de dispositivos digitales experimentan síntomas que incluyen fatiga visual, sequedad, visión borrosa, dolores de cabeza y dolor de cuello.",
+      "cvsLink": "Síndrome de Visión por Computadora",
+      "researchLink": "La investigación"
     },
     "q4": {
       "question": "¿Cómo ayuda Digital Eye Relief?",
-      "answer": "Digital Eye Relief es una extensión gratuita de Chrome que {auto} tomar descansos visuales usando la regla 20-20-20. Funciona silenciosamente en segundo plano, rastrea tu tiempo de pantalla, y envía {gentle} cuando es hora de un descanso. Las características incluyen intervalos de temporizador personalizables, recordatorios sutiles en la insignia, sonidos relajantes opcionales al inicio y fin del descanso, y un hermoso diseño sin distracciones."
+      "answer": "Digital Eye Relief es una extensión gratuita de Chrome que te recuerda automáticamente tomar descansos visuales usando la regla 20-20-20. Funciona silenciosamente en segundo plano, rastrea tu tiempo de pantalla, y envía notificaciones suaves cuando es hora de un descanso. Las características incluyen intervalos de temporizador personalizables, recordatorios sutiles en la insignia, sonidos relajantes opcionales al inicio y fin del descanso, y un hermoso diseño sin distracciones."
     },
     "q5": {
       "question": "¿Es gratis Digital Eye Relief?",
-      "answer": "Sí, Digital Eye Relief es {free} de usar. No hay características premium, suscripciones, compras dentro de la aplicación ni costos ocultos. La extensión también está {privacy} — no recopila datos personales, no requiere una cuenta, y funciona completamente en tu dispositivo. Creemos que la salud visual no debería tener un muro de pago."
+      "answer": "Sí, Digital Eye Relief es completamente gratis de usar. No hay características premium, suscripciones, compras dentro de la aplicación ni costos ocultos. La extensión también está enfocada en la privacidad — no recopila datos personales, no requiere una cuenta, y funciona completamente en tu dispositivo. Creemos que la salud visual no debería tener un muro de pago."
     },
     "q6": {
       "question": "¿Quién debería usar la regla 20-20-20?",
-      "answer": "Cualquiera que pase mucho tiempo mirando pantallas puede beneficiarse de la regla 20-20-20. Esto incluye {users}. Es especialmente importante para personas que ya experimentan síntomas de fatiga visual como ojos secos, dolores de cabeza o visión borrosa."
+      "answer": "Cualquiera que pase mucho tiempo mirando pantallas puede beneficiarse de la regla 20-20-20. Esto incluye trabajadores de oficina, programadores, diseñadores, estudiantes, gamers, y cualquiera que use computadoras, tablets o smartphones por períodos prolongados. Es especialmente importante para personas que ya experimentan síntomas de fatiga visual como ojos secos, dolores de cabeza o visión borrosa."
     }
   },
   "cta": {

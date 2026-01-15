@@ -5,7 +5,6 @@ import { NotificationOverlay } from "@/components/extension/NotificationOverlay"
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import { languages, Language } from "@/i18n";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
 import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText } from "lucide-react";
@@ -353,7 +352,9 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>The 20-20-20 rule is a guideline recommended by the <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">{t.science.aoaName}</a> to reduce digital eye strain. The rule is simple: every <strong>20 {t.science.minutes.toLowerCase()}</strong> of screen time, look at something <strong>20 {t.science.feetAway.toLowerCase()}</strong> for <strong>20 {t.science.seconds.toLowerCase()}</strong>. This helps relax your eye muscles and reduces fatigue from prolonged focusing on nearby screens.</p>
+                <p dangerouslySetInnerHTML={{ __html: t.faq.q1.answer
+                  .replace('{aoa}', `<a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold">${t.science.aoaName}</a>`)
+                }} />
               </div>
             </details>
             
@@ -363,7 +364,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Yes, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9434525/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">peer-reviewed research</a> supports the effectiveness of the 20-20-20 rule. Clinical studies show that taking regular breaks using this method <strong>reduces accommodation stress</strong> on eye muscles, <strong>improves tear film stability</strong> (helping with dry eyes), and <strong>decreases symptoms of asthenopia</strong> (eye strain). Many users report reduced headaches, less eye fatigue, and improved focus after implementing regular screen breaks.</p>
+                <p dangerouslySetInnerHTML={{ __html: t.faq.q2.answer.replace('{research}', `<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9434525/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold">${t.faq.q2.researchLink}</a>`) }} />
               </div>
             </details>
             
@@ -373,7 +374,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Digital eye strain (also called <a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Computer Vision Syndrome</a>) is caused by prolonged screen use. When focusing on screens, we blink <strong>40-60% less frequently</strong>, leading to dry, irritated eyes. The constant focusing effort also fatigues the ciliary muscles in your eyes. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6020759/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Research indicates</a> that <strong>50-90% of digital device users</strong> experience symptoms including eye fatigue, dryness, blurred vision, headaches, and neck pain.</p>
+                <p dangerouslySetInnerHTML={{ __html: t.faq.q3.answer.replace('{cvs}', `<a href="https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold">${t.faq.q3.cvsLink}</a>`).replace('{research}', `<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6020759/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-semibold">${t.faq.q3.researchLink}</a>`) }} />
               </div>
             </details>
             
@@ -383,7 +384,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Digital Eye Relief is a free Chrome extension that <strong>automatically reminds you</strong> to take eye breaks using the 20-20-20 rule. It runs quietly in the background, tracks your screen time, and sends <strong>gentle notifications</strong> when it's time for a break. Features include customizable timer intervals, subtle badge reminders, optional calming sounds at break start and end, and a beautiful, distraction-free design.</p>
+                <p>{t.faq.q4.answer}</p>
               </div>
             </details>
             
@@ -393,7 +394,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Yes, Digital Eye Relief is <strong>completely free</strong> to use. There are no premium features, subscriptions, in-app purchases, or hidden costs. The extension is also <strong>privacy-focused</strong> — it doesn't collect any personal data, doesn't require an account, and works entirely on your device. We believe eye health shouldn't have a paywall.</p>
+                <p>{t.faq.q5.answer}</p>
               </div>
             </details>
             
@@ -403,7 +404,7 @@ export function ExtensionMockup() {
                 <ChevronDown className="w-5 h-5 text-stone-400 group-open:rotate-180 transition-transform" />
               </summary>
               <div className="px-6 pb-6 text-stone-600">
-                <p>Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes <strong>office workers, programmers, designers, students, gamers</strong>, and anyone who uses computers, tablets, or smartphones for prolonged periods. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision.</p>
+                <p>{t.faq.q6.answer}</p>
               </div>
             </details>
           </div>

@@ -50,27 +50,30 @@
     "description": "Alles, was Sie über Augengesundheit und die 20-20-20-Regel wissen müssen",
     "q1": {
       "question": "Was ist die 20-20-20-Regel?",
-      "answer": "Die 20-20-20-Regel ist eine Richtlinie, die von der {aoa} empfohlen wird, um digitale Augenbelastung zu reduzieren. Die Regel ist einfach: alle {minutes} Bildschirmzeit, schauen Sie auf etwas in {feet} für {seconds}. Dies hilft, Ihre Augenmuskeln zu entspannen und reduziert die Ermüdung durch längeres Fokussieren auf nahe Bildschirme."
+      "answer": "Die 20-20-20-Regel ist eine Richtlinie, die von der {aoa} empfohlen wird, um digitale Augenbelastung zu reduzieren. Die Regel ist einfach: alle 20 Minuten Bildschirmzeit, schauen Sie auf etwas in 20 Fuß (6 Meter) Entfernung für 20 Sekunden. Dies hilft, Ihre Augenmuskeln zu entspannen und reduziert die Ermüdung durch längeres Fokussieren auf nahe Bildschirme."
     },
     "q2": {
       "question": "Funktioniert die 20-20-20-Regel wirklich?",
-      "answer": "Ja, {research} unterstützt die Wirksamkeit der 20-20-20-Regel. Klinische Studien zeigen, dass regelmäßige Pausen mit dieser Methode {reduces} auf die Augenmuskeln, {improves} (hilft bei trockenen Augen), und {decreases} (Augenbelastung). Viele Benutzer berichten von weniger Kopfschmerzen, weniger Augenermüdung und verbesserter Konzentration nach der Einführung regelmäßiger Bildschirmpausen."
+      "answer": "Ja, {research} unterstützt die Wirksamkeit der 20-20-20-Regel. Klinische Studien zeigen, dass regelmäßige Pausen mit dieser Methode den Akkommodationsstress der Augenmuskeln reduzieren, die Tränenfilmstabilität verbessern (hilft bei trockenen Augen), und die Symptome der Asthenopie (Augenbelastung) verringern. Viele Benutzer berichten von weniger Kopfschmerzen, weniger Augenermüdung und verbesserter Konzentration nach der Einführung regelmäßiger Bildschirmpausen.",
+      "researchLink": "peer-reviewed Forschung"
     },
     "q3": {
       "question": "Was verursacht digitale Augenbelastung?",
-      "answer": "Digitale Augenbelastung (auch bekannt als {cvs}) wird durch längere Bildschirmnutzung verursacht. Beim Fokussieren auf Bildschirme blinzeln wir {blink} seltener, was zu trockenen, gereizten Augen führt. Die ständige Fokussierungsanstrengung ermüdet auch die Ziliarmuskeln in Ihren Augen. {research} dass {percent} Symptome wie Augenermüdung, Trockenheit, verschwommenes Sehen, Kopfschmerzen und Nackenschmerzen haben."
+      "answer": "Digitale Augenbelastung (auch bekannt als {cvs}) wird durch längere Bildschirmnutzung verursacht. Beim Fokussieren auf Bildschirme blinzeln wir 40-60% seltener, was zu trockenen, gereizten Augen führt. Die ständige Fokussierungsanstrengung ermüdet auch die Ziliarmuskeln in Ihren Augen. {research} zeigt, dass 50-90% der Nutzer digitaler Geräte Symptome wie Augenermüdung, Trockenheit, verschwommenes Sehen, Kopfschmerzen und Nackenschmerzen haben.",
+      "cvsLink": "Computer-Vision-Syndrom",
+      "researchLink": "Forschung"
     },
     "q4": {
       "question": "Wie hilft Digital Eye Relief?",
-      "answer": "Digital Eye Relief ist eine kostenlose Chrome-Erweiterung, die {auto} Augenpausen mit der 20-20-20-Regel zu machen. Sie läuft leise im Hintergrund, verfolgt Ihre Bildschirmzeit und sendet {gentle}, wenn es Zeit für eine Pause ist. Zu den Funktionen gehören anpassbare Timer-Intervalle, dezente Badge-Erinnerungen, optionale beruhigende Klänge zu Beginn und Ende der Pause und ein schönes, ablenkungsfreies Design."
+      "answer": "Digital Eye Relief ist eine kostenlose Chrome-Erweiterung, die Sie automatisch daran erinnert, Augenpausen mit der 20-20-20-Regel zu machen. Sie läuft leise im Hintergrund, verfolgt Ihre Bildschirmzeit und sendet sanfte Benachrichtigungen, wenn es Zeit für eine Pause ist. Zu den Funktionen gehören anpassbare Timer-Intervalle, dezente Badge-Erinnerungen, optionale beruhigende Klänge zu Beginn und Ende der Pause und ein schönes, ablenkungsfreies Design."
     },
     "q5": {
       "question": "Ist Digital Eye Relief kostenlos?",
-      "answer": "Ja, Digital Eye Relief ist {free} zu nutzen. Es gibt keine Premium-Funktionen, Abonnements, In-App-Käufe oder versteckte Kosten. Die Erweiterung ist auch {privacy} — sie sammelt keine persönlichen Daten, erfordert kein Konto und funktioniert vollständig auf Ihrem Gerät. Wir glauben, dass Augengesundheit keine Paywall haben sollte."
+      "answer": "Ja, Digital Eye Relief ist völlig kostenlos zu nutzen. Es gibt keine Premium-Funktionen, Abonnements, In-App-Käufe oder versteckte Kosten. Die Erweiterung ist auch datenschutzorientiert — sie sammelt keine persönlichen Daten, erfordert kein Konto und funktioniert vollständig auf Ihrem Gerät. Wir glauben, dass Augengesundheit keine Paywall haben sollte."
     },
     "q6": {
       "question": "Wer sollte die 20-20-20-Regel verwenden?",
-      "answer": "Jeder, der viel Zeit vor Bildschirmen verbringt, kann von der 20-20-20-Regel profitieren. Dazu gehören {users}. Es ist besonders wichtig für Menschen, die bereits Symptome von Augenbelastung wie trockene Augen, Kopfschmerzen oder verschwommenes Sehen haben."
+      "answer": "Jeder, der viel Zeit vor Bildschirmen verbringt, kann von der 20-20-20-Regel profitieren. Dazu gehören Büroangestellte, Programmierer, Designer, Studenten, Gamer und alle, die Computer, Tablets oder Smartphones über längere Zeiträume nutzen. Es ist besonders wichtig für Menschen, die bereits Symptome von Augenbelastung wie trockene Augen, Kopfschmerzen oder verschwommenes Sehen haben."
     }
   },
   "cta": {

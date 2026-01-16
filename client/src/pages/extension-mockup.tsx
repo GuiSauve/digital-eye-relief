@@ -430,13 +430,14 @@ export function ExtensionMockup() {
             href="https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin"
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full sm:w-auto max-w-md"
           >
             <Button 
               size="lg" 
-              className="h-16 px-10 text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all"
+              className="h-auto min-h-[4rem] px-6 sm:px-10 py-4 text-lg sm:text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full whitespace-normal"
               data-testid="button-download-cta"
             >
-              <Chrome className="w-6 h-6 mr-3" />
+              <Chrome className="w-6 h-6 mr-3 flex-shrink-0" />
               {t.hero.addToChrome}
             </Button>
           </a>

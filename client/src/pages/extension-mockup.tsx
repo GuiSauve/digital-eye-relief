@@ -68,7 +68,7 @@ export function ExtensionMockup() {
           transition={{ duration: 7, repeat: Infinity }}
         />
         
-        <div className="z-10 text-center max-w-4xl mx-auto space-y-8">
+        <div className="z-10 text-center w-full max-w-4xl mx-auto space-y-8 px-6">
           {/* Logo */}
           <motion.div 
             className="flex items-center justify-center gap-3 mb-6"
@@ -83,7 +83,7 @@ export function ExtensionMockup() {
           
           {/* Tagline */}
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-stone-800 tracking-tight leading-tight px-4 sm:px-0"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-display font-bold text-stone-800 tracking-tight leading-tight w-full break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -94,7 +94,7 @@ export function ExtensionMockup() {
           </motion.h1>
           
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
+            className="text-base sm:text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}

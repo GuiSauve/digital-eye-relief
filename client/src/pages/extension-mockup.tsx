@@ -104,7 +104,7 @@ export function ExtensionMockup() {
           
           {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -113,20 +113,21 @@ export function ExtensionMockup() {
               href="https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin"
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
               <Button 
                 size="lg" 
-                className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all"
+                className="h-auto min-h-[3.5rem] px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full sm:w-auto whitespace-normal"
                 data-testid="button-add-to-chrome"
               >
-                <Chrome className="w-5 h-5 mr-2" />
+                <Chrome className="w-5 h-5 mr-2 flex-shrink-0" />
                 {t.hero.addToChrome}
               </Button>
             </a>
             <Button 
               size="lg" 
               variant="outline"
-              className="h-14 px-8 text-lg rounded-full border-2 hover:bg-stone-100"
+              className="h-auto min-h-[3.5rem] px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full border-2 hover:bg-stone-100 w-full sm:w-auto whitespace-normal"
               onClick={scrollToDemo}
               data-testid="button-try-demo"
             >

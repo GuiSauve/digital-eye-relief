@@ -83,7 +83,7 @@ export function ExtensionMockup() {
           
           {/* Tagline */}
           <motion.h1 
-            className="text-5xl md:text-7xl font-display font-bold text-stone-800 tracking-tight leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-stone-800 tracking-tight leading-tight px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -94,7 +94,7 @@ export function ExtensionMockup() {
           </motion.h1>
           
           <motion.p 
-            className="text-xl md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}

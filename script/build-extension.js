@@ -78,6 +78,31 @@ if (fs.existsSync(soundsSource)) {
   });
 }
 
+// Copy _locales directory for i18n support
+const localesSource = path.join(rootDir, 'extension', '_locales');
+const localesDest = path.join(distDir, '_locales');
+
+function copyDirectory(src, dest) {
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+  
+  fs.readdirSync(src).forEach(item => {
+    const srcPath = path.join(src, item);
+    const destPath = path.join(dest, item);
+    
+    if (fs.statSync(srcPath).isDirectory()) {
+      copyDirectory(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
+}
+
+if (fs.existsSync(localesSource)) {
+  copyDirectory(localesSource, localesDest);
+}
+
 console.log('✅ Extension build complete! Output in dist-extension/');
 console.log('📦 Load the extension:');
 console.log('   1. Open Chrome and go to chrome://extensions/');

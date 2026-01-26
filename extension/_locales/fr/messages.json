@@ -104,15 +104,23 @@
     "description": "Enable notifications toggle"
   },
   "notificationBreakTitle": {
-    "message": "Temps pour une Pause Visuelle !",
+    "message": "Temps pour une Pause Visuelle ! 👀",
     "description": "Break notification title"
   },
   "notificationBreakMessage": {
-    "message": "Regardez quelque chose à 20 pieds de distance pendant 20 secondes.",
+    "message": "Regardez quelque chose à 20 pieds (6 mètres) de distance pendant 20 secondes.",
     "description": "Break notification message"
   },
+  "notificationBreakTitleMeeting": {
+    "message": "Rappel de Pause Visuelle 👀",
+    "description": "Break notification title during meeting mode"
+  },
+  "notificationBreakMessageMeeting": {
+    "message": "Détournez le regard de l'écran quand c'est pratique (Mode Réunion actif)",
+    "description": "Break notification message during meeting mode"
+  },
   "notificationFocusTitle": {
-    "message": "Pause Terminée !",
+    "message": "Pause Terminée ! ✨",
     "description": "Focus resume notification title"
   },
   "notificationFocusMessage": {

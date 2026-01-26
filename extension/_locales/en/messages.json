@@ -104,15 +104,23 @@
     "description": "Enable notifications toggle"
   },
   "notificationBreakTitle": {
-    "message": "Time for an Eye Break!",
+    "message": "Time for an Eye Break! 👀",
     "description": "Break notification title"
   },
   "notificationBreakMessage": {
-    "message": "Look at something 20 feet away for 20 seconds.",
+    "message": "Look at something 20 feet (6 meters) away for 20 seconds.",
     "description": "Break notification message"
   },
+  "notificationBreakTitleMeeting": {
+    "message": "Eye Break Reminder 👀",
+    "description": "Break notification title during meeting mode"
+  },
+  "notificationBreakMessageMeeting": {
+    "message": "Look away from screen when convenient (Meeting Mode active)",
+    "description": "Break notification message during meeting mode"
+  },
   "notificationFocusTitle": {
-    "message": "Break Complete!",
+    "message": "Break Complete! ✨",
     "description": "Focus resume notification title"
   },
   "notificationFocusMessage": {

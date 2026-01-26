@@ -104,15 +104,23 @@
     "description": "Enable notifications toggle"
   },
   "notificationBreakTitle": {
-    "message": "Zeit für eine Augenpause!",
+    "message": "Zeit für eine Augenpause! 👀",
     "description": "Break notification title"
   },
   "notificationBreakMessage": {
-    "message": "Schauen Sie auf etwas 20 Fuß entfernt für 20 Sekunden.",
+    "message": "Schauen Sie auf etwas 20 Fuß (6 Meter) entfernt für 20 Sekunden.",
     "description": "Break notification message"
   },
+  "notificationBreakTitleMeeting": {
+    "message": "Augenpausen-Erinnerung 👀",
+    "description": "Break notification title during meeting mode"
+  },
+  "notificationBreakMessageMeeting": {
+    "message": "Schauen Sie vom Bildschirm weg, wenn es passt (Meeting-Modus aktiv)",
+    "description": "Break notification message during meeting mode"
+  },
   "notificationFocusTitle": {
-    "message": "Pause Beendet!",
+    "message": "Pause Beendet! ✨",
     "description": "Focus resume notification title"
   },
   "notificationFocusMessage": {

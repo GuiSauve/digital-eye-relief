@@ -104,15 +104,23 @@
     "description": "Enable notifications toggle"
   },
   "notificationBreakTitle": {
-    "message": "¡Hora de un Descanso Visual!",
+    "message": "¡Hora de un Descanso Visual! 👀",
     "description": "Break notification title"
   },
   "notificationBreakMessage": {
-    "message": "Mira algo a 20 pies de distancia durante 20 segundos.",
+    "message": "Mira algo a 20 pies (6 metros) de distancia durante 20 segundos.",
     "description": "Break notification message"
   },
+  "notificationBreakTitleMeeting": {
+    "message": "Recordatorio de Descanso Visual 👀",
+    "description": "Break notification title during meeting mode"
+  },
+  "notificationBreakMessageMeeting": {
+    "message": "Mira lejos de la pantalla cuando sea conveniente (Modo Reunión activo)",
+    "description": "Break notification message during meeting mode"
+  },
   "notificationFocusTitle": {
-    "message": "¡Descanso Completado!",
+    "message": "¡Descanso Completado! ✨",
     "description": "Focus resume notification title"
   },
   "notificationFocusMessage": {

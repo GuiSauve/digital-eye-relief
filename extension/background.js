@@ -206,10 +206,12 @@ function handleFocusComplete() {
     chrome.notifications.create('breakReminder', {
       type: 'basic',
       iconUrl: 'icons/icon-128.png',
-      title: settings.meetingMode ? 'Eye Break Reminder 👀' : 'Time for an Eye Break! 👀',
+      title: settings.meetingMode 
+        ? (chrome.i18n.getMessage('notificationBreakTitleMeeting') || 'Eye Break Reminder 👀')
+        : (chrome.i18n.getMessage('notificationBreakTitle') || 'Time for an Eye Break! 👀'),
       message: settings.meetingMode 
-        ? 'Look away from screen when convenient (Meeting Mode active)'
-        : 'Look at something 20 feet (6 meters) away for 20 seconds.',
+        ? (chrome.i18n.getMessage('notificationBreakMessageMeeting') || 'Look away from screen when convenient (Meeting Mode active)')
+        : (chrome.i18n.getMessage('notificationBreakMessage') || 'Look at something 20 feet (6 meters) away for 20 seconds.'),
       priority: settings.meetingMode ? 1 : 2,
       requireInteraction: !settings.meetingMode
     });
@@ -246,8 +248,8 @@ function handleBreakComplete() {
     chrome.notifications.create('breakComplete', {
       type: 'basic',
       iconUrl: 'icons/icon-128.png',
-      title: 'Break Complete! ✨',
-      message: 'Back to work. Your next break is in ' + settings.focusDuration + ' minutes.',
+      title: chrome.i18n.getMessage('notificationFocusTitle') || 'Break Complete! ✨',
+      message: (chrome.i18n.getMessage('notificationFocusMessage') || 'Great job! Your eyes are refreshed. Back to focus.'),
       priority: 1
     });
     

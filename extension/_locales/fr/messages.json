@@ -1,0 +1,154 @@
+{
+  "extName": {
+    "message": "Digital Eye Relief",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Suivez la règle 20-20-20 pour réduire la fatigue oculaire numérique. Toutes les 20 minutes, regardez à 20 pieds de distance pendant 20 secondes.",
+    "description": "Extension description"
+  },
+  "focus": {
+    "message": "Concentration",
+    "description": "Focus timer label"
+  },
+  "break": {
+    "message": "Pause",
+    "description": "Break timer label"
+  },
+  "paused": {
+    "message": "En pause",
+    "description": "Timer paused state"
+  },
+  "start": {
+    "message": "Démarrer",
+    "description": "Start button"
+  },
+  "pause": {
+    "message": "Pause",
+    "description": "Pause button"
+  },
+  "reset": {
+    "message": "Réinitialiser",
+    "description": "Reset button"
+  },
+  "skip": {
+    "message": "Passer",
+    "description": "Skip button"
+  },
+  "resume": {
+    "message": "Reprendre",
+    "description": "Resume button"
+  },
+  "settings": {
+    "message": "Paramètres",
+    "description": "Settings button/title"
+  },
+  "focusDuration": {
+    "message": "Durée de Concentration",
+    "description": "Focus duration setting label"
+  },
+  "breakDuration": {
+    "message": "Durée de Pause",
+    "description": "Break duration setting label"
+  },
+  "minutes": {
+    "message": "minutes",
+    "description": "Minutes unit"
+  },
+  "seconds": {
+    "message": "secondes",
+    "description": "Seconds unit"
+  },
+  "soundSettings": {
+    "message": "Paramètres Sonores",
+    "description": "Sound settings section title"
+  },
+  "enableSounds": {
+    "message": "Activer les Sons",
+    "description": "Enable sounds toggle label"
+  },
+  "volume": {
+    "message": "Volume",
+    "description": "Volume slider label"
+  },
+  "meetingMode": {
+    "message": "Mode Réunion",
+    "description": "Meeting mode toggle label"
+  },
+  "meetingModeDesc": {
+    "message": "Couper les alertes sonores pendant les réunions",
+    "description": "Meeting mode description"
+  },
+  "meetingModeActive": {
+    "message": "Mode Réunion Actif",
+    "description": "Meeting mode active banner"
+  },
+  "meetingModeActiveDesc": {
+    "message": "Les sons sont coupés. Le badge affiche toujours le temps.",
+    "description": "Meeting mode active description"
+  },
+  "autoDisable": {
+    "message": "Désactiver automatiquement après",
+    "description": "Auto-disable setting label"
+  },
+  "never": {
+    "message": "Jamais",
+    "description": "Never option"
+  },
+  "notifications": {
+    "message": "Notifications",
+    "description": "Notifications section title"
+  },
+  "enableNotifications": {
+    "message": "Activer les Notifications",
+    "description": "Enable notifications toggle"
+  },
+  "notificationBreakTitle": {
+    "message": "Temps pour une Pause Visuelle !",
+    "description": "Break notification title"
+  },
+  "notificationBreakMessage": {
+    "message": "Regardez quelque chose à 20 pieds de distance pendant 20 secondes.",
+    "description": "Break notification message"
+  },
+  "notificationFocusTitle": {
+    "message": "Pause Terminée !",
+    "description": "Focus resume notification title"
+  },
+  "notificationFocusMessage": {
+    "message": "Excellent ! Vos yeux sont reposés. Retour à la concentration.",
+    "description": "Focus resume notification message"
+  },
+  "todayStats": {
+    "message": "Statistiques du Jour",
+    "description": "Today's statistics section"
+  },
+  "breaksCompleted": {
+    "message": "Pauses Terminées",
+    "description": "Breaks completed stat"
+  },
+  "totalBreakTime": {
+    "message": "Temps Total de Pause",
+    "description": "Total break time stat"
+  },
+  "save": {
+    "message": "Enregistrer",
+    "description": "Save button"
+  },
+  "cancel": {
+    "message": "Annuler",
+    "description": "Cancel button"
+  },
+  "close": {
+    "message": "Fermer",
+    "description": "Close button"
+  },
+  "digitalEyeRelief": {
+    "message": "Digital Eye Relief",
+    "description": "App title"
+  },
+  "protectYourEyes": {
+    "message": "Protégez vos yeux avec la règle 20-20-20",
+    "description": "App tagline"
+  }
+}

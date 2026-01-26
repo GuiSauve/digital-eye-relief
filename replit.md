@@ -268,3 +268,30 @@ Added full internationalization (i18n) with URL-based routing:
 - Manual language switching via dropdown selector
 - Full translation of all landing page content
 - SEO-optimized with hreflang meta tags
+
+### Chrome Extension Internationalization (January 2026)
+
+Extended multi-language support to the Chrome extension itself:
+
+**Implementation:**
+- Added `_locales` folder with `messages.json` for all 4 languages
+- Updated `manifest.json` with `default_locale: "en"` and i18n placeholders
+- Created `useExtensionI18n` hook for React components
+- All UI strings in Popup and Settings are now translatable
+- Notification messages use Chrome's i18n API with fallbacks
+
+**Translated Strings:**
+- All timer states (Focus, Break, Paused, etc.)
+- All UI labels and buttons
+- Settings section headers and descriptions
+- Meeting Mode messages and notifications
+- Workspace setup tips
+- System notifications (break reminders, completion messages)
+
+**Chrome Extension i18n Files:**
+- `extension/_locales/en/messages.json` - English (default)
+- `extension/_locales/es/messages.json` - Spanish
+- `extension/_locales/fr/messages.json` - French
+- `extension/_locales/de/messages.json` - German
+
+The extension automatically displays in the user's browser language when available.

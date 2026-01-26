@@ -18,10 +18,11 @@ interface SettingsProps {
   };
   onUpdateSettings: (settings: any) => void;
   onBack: () => void;
+  language?: string;
 }
 
-export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
-  const { t } = useExtensionI18n();
+export function Settings({ settings, onUpdateSettings, onBack, language }: SettingsProps) {
+  const { t } = useExtensionI18n(language);
   const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
   const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
 

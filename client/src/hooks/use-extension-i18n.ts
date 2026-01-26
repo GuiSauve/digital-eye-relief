@@ -259,7 +259,7 @@ const translations: Record<string, Record<string, string>> = {
   }
 };
 
-export function useExtensionI18n() {
+export function useExtensionI18n(pageLanguage?: string) {
   const isChromeExtension = typeof chrome !== 'undefined' && chrome.i18n?.getMessage;
   
   const getMessage = (key: string): string => {
@@ -268,9 +268,10 @@ export function useExtensionI18n() {
       if (message) return message;
     }
     
-    const lang = typeof navigator !== 'undefined' 
+    // Use page language if provided, otherwise fall back to navigator language
+    const lang = pageLanguage || (typeof navigator !== 'undefined' 
       ? navigator.language.split('-')[0] 
-      : 'en';
+      : 'en');
     const langTranslations = translations[lang] || translations.en;
     return langTranslations[key] || translations.en[key] || key;
   };

@@ -23,6 +23,7 @@ interface PopupProps {
   stats?: Stats;
   meetingMode?: boolean;
   onToggleMeetingMode?: () => void;
+  language?: string;
 }
 
 export function Popup({
@@ -37,8 +38,9 @@ export function Popup({
   stats,
   meetingMode = false,
   onToggleMeetingMode,
+  language,
 }: PopupProps) {
-  const { t } = useExtensionI18n();
+  const { t } = useExtensionI18n(language);
   
   // Calculate circle stroke properties
   const radius = 80;

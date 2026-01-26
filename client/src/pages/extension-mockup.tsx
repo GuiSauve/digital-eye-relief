@@ -321,12 +321,14 @@ export function ExtensionMockup() {
                         stats={stats}
                         meetingMode={meetingMode}
                         onToggleMeetingMode={toggleMeetingMode}
+                        language={language}
                     />
                     ) : (
                     <Settings
                         settings={settings}
                         onUpdateSettings={setSettings}
                         onBack={() => setView("popup")}
+                        language={language}
                     />
                     )}
                 </div>

@@ -186,7 +186,7 @@ export function Popup({
             </div>
             <div className="text-left">
               <p className="text-xs text-muted-foreground">{t('today')}</p>
-              <p className="text-sm font-semibold text-foreground">{stats?.todayBreaks ?? 0} {t('breaks')}</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.todayBreaks ?? 0} {(stats?.todayBreaks ?? 0) === 1 ? t('breakSingular') : t('breaks')}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -195,7 +195,7 @@ export function Popup({
             </div>
             <div className="text-left">
               <p className="text-xs text-muted-foreground">{t('streak')}</p>
-              <p className="text-sm font-semibold text-foreground">{stats?.currentStreak ?? 0} {t('days')}</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.currentStreak ?? 0} {(stats?.currentStreak ?? 0) === 1 ? t('daySingular') : t('days')}</p>
             </div>
           </div>
         </div>

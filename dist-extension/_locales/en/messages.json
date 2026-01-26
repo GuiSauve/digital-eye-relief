@@ -179,6 +179,10 @@
     "message": "breaks",
     "description": "Breaks count"
   },
+  "breakSingular": {
+    "message": "break",
+    "description": "Break count singular"
+  },
   "streak": {
     "message": "Streak",
     "description": "Streak label"
@@ -186,6 +190,10 @@
   "days": {
     "message": "days",
     "description": "Days count"
+  },
+  "daySingular": {
+    "message": "day",
+    "description": "Day count singular"
   },
   "timerIntervals": {
     "message": "Timer Intervals",

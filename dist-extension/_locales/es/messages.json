@@ -179,6 +179,10 @@
     "message": "descansos",
     "description": "Breaks count"
   },
+  "breakSingular": {
+    "message": "descanso",
+    "description": "Break count singular"
+  },
   "streak": {
     "message": "Racha",
     "description": "Streak label"
@@ -186,6 +190,10 @@
   "days": {
     "message": "días",
     "description": "Days count"
+  },
+  "daySingular": {
+    "message": "día",
+    "description": "Day count singular"
   },
   "timerIntervals": {
     "message": "Intervalos del Temporizador",

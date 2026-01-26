@@ -88,14 +88,14 @@ export function Popup({
       
       {/* Meeting Mode Indicator */}
       {meetingMode && (
-        <div className="mx-6 -mt-2 mb-2 px-3 py-1.5 bg-amber-100 border border-amber-200 rounded-lg flex items-center gap-2">
-          <Users className="w-3.5 h-3.5 text-amber-600" />
+        <div className="mx-6 -mt-2 mb-1 px-3 py-1 bg-amber-100 border border-amber-200 rounded-lg flex items-center gap-2">
+          <Users className="w-3 h-3 text-amber-600 flex-shrink-0" />
           <span className="text-xs text-amber-700 font-medium">{t('meetingModeSoundsMuted')}</span>
         </div>
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 -mt-8">
+      <div className={cn("flex-1 flex flex-col items-center justify-center p-6", meetingMode ? "-mt-10" : "-mt-8")}>
         <div className="relative w-64 h-64 flex items-center justify-center">
           {/* Progress Ring Background */}
           <svg className="w-full h-full transform -rotate-90">
@@ -178,7 +178,7 @@ export function Popup({
       </div>
       
       {/* Stats Footer */}
-      <div className="p-4 pb-10 bg-secondary/30 mt-auto">
+      <div className={cn("p-4 bg-secondary/30 mt-auto", meetingMode ? "pb-6" : "pb-10")}>
         <div className="flex justify-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">

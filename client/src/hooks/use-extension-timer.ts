@@ -29,6 +29,8 @@ export function useExtensionTimer({
     soundEnabled: true,
     soundVolume: 70,
     notificationType: "badge" as const,
+    meetingMode: false,
+    meetingModeAutoDisableMinutes: 0,
   });
   
   // Stats for tracking usage
@@ -77,15 +79,15 @@ export function useExtensionTimer({
           if (prev <= 1) {
             // Timer finished
             if (status === "focus") {
-              // Focus ended, break starting - play singing bowl
-              if (settings.soundEnabled) {
+              // Focus ended, break starting - play singing bowl (unless meeting mode)
+              if (settings.soundEnabled && !settings.meetingMode) {
                 playSound('/sounds/singing-bowl.mp3', settings.soundVolume);
               }
               setStatus("break");
               return settings.breakDuration;
             } else {
-              // Break finished, back to focus - play bells
-              if (settings.soundEnabled) {
+              // Break finished, back to focus - play bells (unless meeting mode)
+              if (settings.soundEnabled && !settings.meetingMode) {
                 playSound('/sounds/bells.mp3', settings.soundVolume);
               }
               // Update stats
@@ -104,7 +106,7 @@ export function useExtensionTimer({
     }
 
     return () => clearInterval(interval);
-  }, [status, settings.breakDuration, settings.focusDuration, settings.soundEnabled]);
+  }, [status, settings.breakDuration, settings.focusDuration, settings.soundEnabled, settings.meetingMode]);
 
   // Update timeLeft if settings change while idle
   useEffect(() => {
@@ -136,6 +138,10 @@ export function useExtensionTimer({
 
   const progress = calculateProgress();
 
+  const toggleMeetingMode = useCallback(() => {
+    setSettings(prev => ({ ...prev, meetingMode: !prev.meetingMode }));
+  }, []);
+
   return {
     status,
     timeLeft,
@@ -149,5 +155,7 @@ export function useExtensionTimer({
     settings,
     setSettings,
     stats,
+    meetingMode: settings.meetingMode,
+    toggleMeetingMode,
   };
 }

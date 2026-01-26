@@ -17,7 +17,9 @@ function PopupApp() {
     startFocus,
     pauseTimer,
     resetTimer,
+    toggleMeetingMode,
     stats,
+    meetingMode,
   } = useChromeExtensionTimer();
 
   useEffect(() => {
@@ -62,6 +64,8 @@ function PopupApp() {
         onReset={resetTimer}
         onOpenSettings={handleOpenSettings}
         stats={stats}
+        meetingMode={meetingMode}
+        onToggleMeetingMode={toggleMeetingMode}
       />
     </div>
   );

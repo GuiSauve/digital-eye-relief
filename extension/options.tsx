@@ -10,13 +10,15 @@ function OptionsApp() {
     soundEnabled: true,
     soundVolume: 70,
     notificationType: "badge" as const,
+    meetingMode: false,
+    meetingModeAutoDisableMinutes: 0,
   });
 
   const [saved, setSaved] = useState(false);
 
   // Load settings from Chrome Storage (always coerce notificationType to badge)
   useEffect(() => {
-    chrome.storage.sync.get(["settings"], (result) => {
+    chrome.storage.sync.get(["settings"], (result: { settings?: typeof settings }) => {
       if (result.settings) {
         setSettings({
           focusDuration: result.settings.focusDuration ?? 20,
@@ -24,6 +26,8 @@ function OptionsApp() {
           soundEnabled: result.settings.soundEnabled ?? true,
           soundVolume: result.settings.soundVolume ?? 70,
           notificationType: "badge" as const,
+          meetingMode: result.settings.meetingMode ?? false,
+          meetingModeAutoDisableMinutes: result.settings.meetingModeAutoDisableMinutes ?? 0,
         });
       }
     });

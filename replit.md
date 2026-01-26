@@ -183,6 +183,7 @@ The Chrome extension is now **fully built and ready for Chrome Web Store submiss
 - ✅ Settings/Options page (`extension/options.tsx`) with Chrome Storage integration
 - ✅ Chrome notifications for break reminders
 - ✅ Badge indicators showing minutes remaining
+- ✅ Meeting Mode - Silences sound alerts during meetings while keeping badge notifications active
 - ✅ Extension icons generated in all required sizes (16, 32, 48, 128px)
 - ✅ Build system configured with Vite and post-build scripts
 - ✅ Complete documentation (EXTENSION_GUIDE.md, CHROME_WEB_STORE_SUBMISSION.md)
@@ -232,3 +233,38 @@ The web mockup at the root URL continues to serve as:
 - Marketing/landing page showcase
 
 Both the extension and web mockup share the same React components, ensuring visual consistency and reducing code duplication.
+
+## Recent Updates (January 2026)
+
+### Meeting Mode Feature
+
+Added a new "Meeting Mode" feature that allows users to silence sound alerts during meetings while keeping visual badge notifications active:
+
+**Features:**
+- Quick toggle button in the popup header (users icon)
+- Visual indicator banner when Meeting Mode is active
+- Orange badge color to indicate Meeting Mode is enabled
+- Auto-disable timer option (configurable in Settings: 0-120 minutes)
+- Softer system notifications during Meeting Mode
+
+**Implementation:**
+- `extension/background.js` - Meeting mode checks before playing sounds, auto-disable alarm handling
+- `client/src/components/extension/Popup.tsx` - Toggle button and indicator banner
+- `client/src/components/extension/Settings.tsx` - Auto-disable duration slider
+- Both web demo and Chrome extension support Meeting Mode
+
+### Multi-Language Support
+
+Added full internationalization (i18n) with URL-based routing:
+
+**Supported Languages:**
+- English (default, `/`)
+- Spanish (`/es`)
+- French (`/fr`)
+- German (`/de`)
+
+**Features:**
+- Automatic browser language detection on first visit
+- Manual language switching via dropdown selector
+- Full translation of all landing page content
+- SEO-optimized with hreflang meta tags

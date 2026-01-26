@@ -26,7 +26,9 @@ export function ExtensionMockup() {
     skipBreak,
     settings,
     setSettings,
-    stats
+    stats,
+    meetingMode,
+    toggleMeetingMode
   } = useExtensionTimer();
 
   const showOverlay = false; // Modal overlay disabled - badge notifications only
@@ -317,6 +319,8 @@ export function ExtensionMockup() {
                         onReset={resetTimer}
                         onOpenSettings={() => setView("settings")}
                         stats={stats}
+                        meetingMode={meetingMode}
+                        onToggleMeetingMode={toggleMeetingMode}
                     />
                     ) : (
                     <Settings

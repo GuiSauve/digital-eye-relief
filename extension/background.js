@@ -7,7 +7,9 @@ const DEFAULT_SETTINGS = {
   soundEnabled: true,
   soundVolume: 70, // 0-100
   notificationType: 'badge', // 'modal' or 'badge'
-  isActive: false
+  isActive: false,
+  meetingMode: false, // When true, sounds are silenced but badge notifications continue
+  meetingModeAutoDisableMinutes: 0 // 0 = manual only, otherwise auto-disable after X minutes
 };
 
 // Track if offscreen document exists
@@ -87,14 +89,33 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     handleBreakComplete();
   } else if (alarm.name === 'updateBadge') {
     // Update the badge with remaining time
-    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration', 'settings'], (result) => {
+      const settings = result.settings || DEFAULT_SETTINGS;
       if (result.timerStatus === 'focus' && result.timerStartTime && result.timerDuration) {
         const elapsed = Date.now() - result.timerStartTime;
         const remaining = Math.ceil((result.timerDuration - elapsed) / 60000);
         if (remaining > 0) {
-          updateBadge('focus', remaining);
+          updateBadge('focus', remaining, settings.meetingMode);
         }
       }
+    });
+  } else if (alarm.name === 'meetingModeAutoDisable') {
+    // Auto-disable meeting mode
+    chrome.storage.sync.get(['settings'], (result) => {
+      const settings = result.settings || DEFAULT_SETTINGS;
+      chrome.storage.sync.set({ 
+        settings: { ...settings, meetingMode: false }
+      });
+      // Update badge to remove meeting mode indicator
+      chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (timerResult) => {
+        if (timerResult.timerStatus === 'focus' && timerResult.timerStartTime && timerResult.timerDuration) {
+          const elapsed = Date.now() - timerResult.timerStartTime;
+          const remaining = Math.ceil((timerResult.timerDuration - elapsed) / 60000);
+          if (remaining > 0) {
+            updateBadge('focus', remaining, false);
+          }
+        }
+      });
     });
   }
 });
@@ -130,7 +151,7 @@ let breakCountdownInterval = null;
 // Start the break timer
 // Note: Chrome alarms have a minimum delay of ~30 seconds for delayInMinutes,
 // but using 'when' with an absolute timestamp allows precise short-duration alarms
-function startBreakTimer(durationSeconds) {
+function startBreakTimer(durationSeconds, meetingMode = false) {
   // Clear any existing break-related alarms and intervals
   chrome.alarms.clear('breakTimer');
   chrome.alarms.clear('breakCheck');
@@ -156,19 +177,22 @@ function startBreakTimer(durationSeconds) {
   
   // Use setInterval for smooth second-by-second badge updates during break
   // This works because service workers stay alive during active timers
-  updateBadge('break', durationSeconds);
+  updateBadge('break', durationSeconds, meetingMode);
   
   breakCountdownInterval = setInterval(() => {
-    const elapsed = Date.now() - startTime;
-    const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
-    
-    if (remaining > 0) {
-      updateBadge('break', remaining);
-    } else {
-      // Break ended, clear interval
-      clearInterval(breakCountdownInterval);
-      breakCountdownInterval = null;
-    }
+    chrome.storage.sync.get(['settings'], (result) => {
+      const currentMeetingMode = result.settings?.meetingMode ?? false;
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+      
+      if (remaining > 0) {
+        updateBadge('break', remaining, currentMeetingMode);
+      } else {
+        // Break ended, clear interval
+        clearInterval(breakCountdownInterval);
+        breakCountdownInterval = null;
+      }
+    });
   }, 1000);
 }
 
@@ -182,19 +206,21 @@ function handleFocusComplete() {
     chrome.notifications.create('breakReminder', {
       type: 'basic',
       iconUrl: 'icons/icon-128.png',
-      title: 'Time for an Eye Break! 👀',
-      message: 'Look at something 20 feet (6 meters) away for 20 seconds.',
-      priority: 2,
-      requireInteraction: true
+      title: settings.meetingMode ? 'Eye Break Reminder 👀' : 'Time for an Eye Break! 👀',
+      message: settings.meetingMode 
+        ? 'Look away from screen when convenient (Meeting Mode active)'
+        : 'Look at something 20 feet (6 meters) away for 20 seconds.',
+      priority: settings.meetingMode ? 1 : 2,
+      requireInteraction: !settings.meetingMode
     });
     
-    // Play sound if enabled
-    if (settings.soundEnabled) {
+    // Play sound if enabled AND meeting mode is off
+    if (settings.soundEnabled && !settings.meetingMode) {
       playNotificationSound('sounds/singing-bowl.mp3', settings.soundVolume ?? 70);
     }
     
     // Start break timer
-    startBreakTimer(settings.breakDuration);
+    startBreakTimer(settings.breakDuration, settings.meetingMode);
   });
 }
 
@@ -212,8 +238,8 @@ function handleBreakComplete() {
   chrome.storage.sync.get(['settings'], (result) => {
     const settings = result.settings || DEFAULT_SETTINGS;
     
-    // Play bells sound if enabled (different from break start sound)
-    if (settings.soundEnabled) {
+    // Play bells sound if enabled AND meeting mode is off
+    if (settings.soundEnabled && !settings.meetingMode) {
       playNotificationSound('sounds/bells.mp3', settings.soundVolume ?? 70);
     }
     
@@ -274,17 +300,19 @@ function updateStats() {
 }
 
 // Update extension badge
-function updateBadge(status, value) {
+function updateBadge(status, value, meetingMode = false) {
   if (status === 'focus') {
     // Round to nearest integer for minutes display
     const minutes = Math.ceil(value);
     chrome.action.setBadgeText({ text: String(minutes) });
-    chrome.action.setBadgeBackgroundColor({ color: '#6B9F7B' }); // Sage green
+    // Orange when in meeting mode, sage green otherwise
+    chrome.action.setBadgeBackgroundColor({ color: meetingMode ? '#F59E0B' : '#6B9F7B' });
   } else if (status === 'break') {
     // Show seconds remaining for break (e.g., "20s")
     const seconds = Math.ceil(value);
     chrome.action.setBadgeText({ text: seconds + 's' });
-    chrome.action.setBadgeBackgroundColor({ color: '#60A5FA' }); // Blue
+    // Orange when in meeting mode, blue otherwise
+    chrome.action.setBadgeBackgroundColor({ color: meetingMode ? '#F59E0B' : '#60A5FA' });
   } else {
     chrome.action.setBadgeText({ text: '' });
   }
@@ -388,6 +416,66 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'getTimerState') {
     chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration', 'pausedRemainingMs'], (result) => {
       sendResponse(result);
+    });
+    return true;
+  }
+  
+  if (request.action === 'toggleMeetingMode') {
+    chrome.storage.sync.get(['settings', 'timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+      const settings = result.settings || DEFAULT_SETTINGS;
+      const newMeetingMode = !settings.meetingMode;
+      
+      // Clear any existing auto-disable alarm
+      chrome.alarms.clear('meetingModeAutoDisable');
+      
+      // If turning on meeting mode and auto-disable is configured, set the alarm
+      if (newMeetingMode && settings.meetingModeAutoDisableMinutes > 0) {
+        chrome.alarms.create('meetingModeAutoDisable', {
+          delayInMinutes: settings.meetingModeAutoDisableMinutes
+        });
+      }
+      
+      // Update settings
+      chrome.storage.sync.set({ 
+        settings: { ...settings, meetingMode: newMeetingMode }
+      });
+      
+      // Update badge color to reflect meeting mode
+      if (result.timerStatus === 'focus' && result.timerStartTime && result.timerDuration) {
+        const elapsed = Date.now() - result.timerStartTime;
+        const remaining = Math.ceil((result.timerDuration - elapsed) / 60000);
+        if (remaining > 0) {
+          updateBadge('focus', remaining, newMeetingMode);
+        }
+      } else if (result.timerStatus === 'break') {
+        // For break, we need to calculate remaining seconds
+        const elapsed = Date.now() - result.timerStartTime;
+        const remaining = Math.max(0, Math.ceil((result.timerDuration - elapsed) / 1000));
+        updateBadge('break', remaining, newMeetingMode);
+      }
+      
+      sendResponse({ success: true, meetingMode: newMeetingMode });
+    });
+    return true;
+  }
+  
+  if (request.action === 'setMeetingModeAutoDisable') {
+    chrome.storage.sync.get(['settings'], (result) => {
+      const settings = result.settings || DEFAULT_SETTINGS;
+      const newSettings = { ...settings, meetingModeAutoDisableMinutes: request.minutes };
+      
+      // Clear any existing auto-disable alarm
+      chrome.alarms.clear('meetingModeAutoDisable');
+      
+      // If meeting mode is currently active and auto-disable is configured, set new alarm
+      if (settings.meetingMode && request.minutes > 0) {
+        chrome.alarms.create('meetingModeAutoDisable', {
+          delayInMinutes: request.minutes
+        });
+      }
+      
+      chrome.storage.sync.set({ settings: newSettings });
+      sendResponse({ success: true });
     });
     return true;
   }

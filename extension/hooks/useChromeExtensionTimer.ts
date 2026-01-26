@@ -8,6 +8,8 @@ interface Settings {
   soundEnabled?: boolean;
   soundVolume?: number;
   notificationType?: string;
+  meetingMode?: boolean;
+  meetingModeAutoDisableMinutes?: number;
 }
 
 interface Stats {
@@ -170,6 +172,14 @@ export function useChromeExtensionTimer() {
     });
   }, []);
 
+  const toggleMeetingMode = useCallback(() => {
+    chrome.runtime.sendMessage({ action: "toggleMeetingMode" }, (response) => {
+      if (response?.success) {
+        setSettings(prev => ({ ...prev, meetingMode: response.meetingMode }));
+      }
+    });
+  }, []);
+
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
@@ -190,7 +200,9 @@ export function useChromeExtensionTimer() {
     startFocus,
     pauseTimer,
     resetTimer,
+    toggleMeetingMode,
     settings,
     stats,
+    meetingMode: settings.meetingMode ?? false,
   };
 }

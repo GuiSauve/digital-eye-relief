@@ -1,4 +1,4 @@
-import { ChevronLeft, Bell, Clock, Volume2, Play, Lightbulb, Monitor, Armchair, Eye, ChevronDown } from "lucide-react";
+import { ChevronLeft, Bell, Clock, Volume2, Play, Lightbulb, Monitor, Armchair, Eye, ChevronDown, Users } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -12,6 +12,8 @@ interface SettingsProps {
     soundEnabled: boolean;
     soundVolume: number;
     notificationType: "badge";
+    meetingMode?: boolean;
+    meetingModeAutoDisableMinutes?: number;
   };
   onUpdateSettings: (settings: any) => void;
   onBack: () => void;
@@ -180,6 +182,44 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
               </div>
             </div>
 
+          </div>
+        </div>
+
+        {/* Meeting Mode Settings */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-2">
+            <Users className="w-4 h-4" />
+            <span className="text-sm uppercase tracking-wide">Meeting Mode</span>
+          </div>
+
+          <div className="space-y-4">
+            <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
+              <p className="text-xs text-amber-700">
+                When enabled, sound alerts are silenced but badge notifications continue. 
+                Perfect for meetings when you still want to track your eye breaks.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <Label>Auto-disable after</Label>
+                <span className="font-mono text-muted-foreground">
+                  {settings.meetingModeAutoDisableMinutes === 0 ? 'Manual' : `${settings.meetingModeAutoDisableMinutes} min`}
+                </span>
+              </div>
+              <Slider
+                value={[settings.meetingModeAutoDisableMinutes ?? 0]}
+                min={0}
+                max={120}
+                step={15}
+                onValueChange={(val) => onUpdateSettings({ ...settings, meetingModeAutoDisableMinutes: val[0] })}
+                className="py-2"
+                data-testid="slider-meeting-mode-auto-disable"
+              />
+              <p className="text-xs text-muted-foreground">
+                Set to 0 for manual control, or choose a duration to auto-disable Meeting Mode
+              </p>
+            </div>
           </div>
         </div>
 

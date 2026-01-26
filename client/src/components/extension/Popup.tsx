@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye } from "lucide-react";
+import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +20,8 @@ interface PopupProps {
   onReset: () => void;
   onOpenSettings: () => void;
   stats?: Stats;
+  meetingMode?: boolean;
+  onToggleMeetingMode?: () => void;
 }
 
 export function Popup({
@@ -32,6 +34,8 @@ export function Popup({
   onReset,
   onOpenSettings,
   stats,
+  meetingMode = false,
+  onToggleMeetingMode,
 }: PopupProps) {
   // Calculate circle stroke properties
   const radius = 80;
@@ -48,15 +52,42 @@ export function Popup({
           </div>
           <span className="font-display font-bold text-foreground text-lg">Digital Eye Relief</span>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-primary rounded-full"
-          onClick={onOpenSettings}
-        >
-          <SettingsIcon className="w-5 h-5" />
-        </Button>
+        <div className="flex items-center gap-1">
+          {onToggleMeetingMode && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                "rounded-full transition-colors",
+                meetingMode 
+                  ? "text-amber-500 bg-amber-100 hover:bg-amber-200" 
+                  : "text-muted-foreground hover:text-amber-500"
+              )}
+              onClick={onToggleMeetingMode}
+              title={meetingMode ? "Meeting Mode ON - Click to disable" : "Enable Meeting Mode (mute sounds)"}
+              data-testid="button-meeting-mode"
+            >
+              <Users className="w-5 h-5" />
+            </Button>
+          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-muted-foreground hover:text-primary rounded-full"
+            onClick={onOpenSettings}
+          >
+            <SettingsIcon className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
+      
+      {/* Meeting Mode Indicator */}
+      {meetingMode && (
+        <div className="mx-6 -mt-2 mb-2 px-3 py-1.5 bg-amber-100 border border-amber-200 rounded-lg flex items-center gap-2">
+          <Users className="w-3.5 h-3.5 text-amber-600" />
+          <span className="text-xs text-amber-700 font-medium">Meeting Mode - Sounds muted</span>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 -mt-8">

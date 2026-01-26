@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useExtensionI18n } from "@/hooks/use-extension-i18n";
 
 interface SettingsProps {
   settings: {
@@ -20,6 +21,7 @@ interface SettingsProps {
 }
 
 export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) {
+  const { t } = useExtensionI18n();
   const breakStartAudioRef = useRef<HTMLAudioElement | null>(null);
   const breakEndAudioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -53,7 +55,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
         >
           <ChevronLeft className="w-6 h-6" />
         </Button>
-        <h2 className="text-lg font-display font-bold">Settings</h2>
+        <h2 className="text-lg font-display font-bold">{t('settings')}</h2>
       </div>
 
       {/* Scrollable Content */}
@@ -62,14 +64,14 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
         <div className="space-y-6">
           <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-2">
             <Clock className="w-4 h-4" />
-            <span className="text-sm uppercase tracking-wide">Timer Intervals</span>
+            <span className="text-sm uppercase tracking-wide">{t('timerIntervals')}</span>
           </div>
 
           <div className="space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <Label>Focus Duration</Label>
-                <span className="font-mono text-muted-foreground">{settings.focusDuration} min</span>
+                <Label>{t('focusDuration')}</Label>
+                <span className="font-mono text-muted-foreground">{settings.focusDuration} {t('min')}</span>
               </div>
               <div className="relative">
                 <Slider
@@ -93,8 +95,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
 
             <div className="space-y-2 mt-6">
               <div className="flex justify-between text-sm">
-                <Label>Break Duration</Label>
-                <span className="font-mono text-muted-foreground">{settings.breakDuration} sec</span>
+                <Label>{t('breakDuration')}</Label>
+                <span className="font-mono text-muted-foreground">{settings.breakDuration} {t('sec')}</span>
               </div>
               <div className="relative">
                 <Slider
@@ -122,14 +124,14 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
         <div className="space-y-6">
           <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-2">
             <Bell className="w-4 h-4" />
-            <span className="text-sm uppercase tracking-wide">Notifications</span>
+            <span className="text-sm uppercase tracking-wide">{t('notifications')}</span>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Volume2 className="w-4 h-4 text-muted-foreground" />
-                <Label htmlFor="sound-toggle">Sound Effects</Label>
+                <Label htmlFor="sound-toggle">{t('soundEffects')}</Label>
               </div>
               <Switch
                 id="sound-toggle"
@@ -141,7 +143,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
             <div className="space-y-4 pl-6">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Volume</span>
+                  <span className="text-muted-foreground">{t('volume')}</span>
                   <span className="font-mono text-muted-foreground">{settings.soundVolume ?? 70}%</span>
                 </div>
                 <Slider
@@ -155,7 +157,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                 />
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Break starts</span>
+                <span className="text-muted-foreground">{t('breakStarts')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -164,11 +166,11 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   data-testid="button-preview-break-start"
                 >
                   <Play className="w-3 h-3" fill="currentColor" />
-                  <span className="text-xs">Preview</span>
+                  <span className="text-xs">{t('preview')}</span>
                 </Button>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Break ends</span>
+                <span className="text-muted-foreground">{t('breakEnds')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -177,7 +179,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   data-testid="button-preview-break-end"
                 >
                   <Play className="w-3 h-3" fill="currentColor" />
-                  <span className="text-xs">Preview</span>
+                  <span className="text-xs">{t('preview')}</span>
                 </Button>
               </div>
             </div>
@@ -189,22 +191,21 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
         <div className="space-y-6">
           <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-2">
             <Users className="w-4 h-4" />
-            <span className="text-sm uppercase tracking-wide">Meeting Mode</span>
+            <span className="text-sm uppercase tracking-wide">{t('meetingMode')}</span>
           </div>
 
           <div className="space-y-4">
             <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
               <p className="text-xs text-amber-700">
-                When enabled, sound alerts are silenced but badge notifications continue. 
-                Perfect for meetings when you still want to track your eye breaks.
+                {t('meetingModeInfo')}
               </p>
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <Label>Auto-disable after</Label>
+                <Label>{t('autoDisable')}</Label>
                 <span className="font-mono text-muted-foreground">
-                  {settings.meetingModeAutoDisableMinutes === 0 ? 'Manual' : `${settings.meetingModeAutoDisableMinutes} min`}
+                  {settings.meetingModeAutoDisableMinutes === 0 ? t('manual') : `${settings.meetingModeAutoDisableMinutes} ${t('min')}`}
                 </span>
               </div>
               <Slider
@@ -217,7 +218,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                 data-testid="slider-meeting-mode-auto-disable"
               />
               <p className="text-xs text-muted-foreground">
-                Set to 0 for manual control, or choose a duration to auto-disable Meeting Mode
+                {t('autoDisableInfo')}
               </p>
             </div>
           </div>
@@ -228,7 +229,7 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
           <summary className="w-full flex items-center justify-between text-primary font-semibold border-b border-border pb-2 hover:opacity-80 transition-opacity cursor-pointer list-none">
             <div className="flex items-center gap-2">
               <Lightbulb className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-wide">Workspace Setup Tips</span>
+              <span className="text-sm uppercase tracking-wide">{t('workspaceSetupTips')}</span>
             </div>
             <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
           </summary>
@@ -239,8 +240,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   <Monitor className="w-4 h-4 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Screen Position</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Position your screen 20-28 inches (50-70 cm) away, with the top at or slightly below eye level</p>
+                  <p className="text-sm font-medium text-foreground">{t('screenPosition')}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('screenPositionDesc')}</p>
                 </div>
               </div>
 
@@ -249,8 +250,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   <Lightbulb className="w-4 h-4 text-blue-500" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Lighting</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Reduce glare by positioning your screen away from windows and bright overhead lights</p>
+                  <p className="text-sm font-medium text-foreground">{t('lighting')}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('lightingDesc')}</p>
                 </div>
               </div>
 
@@ -259,8 +260,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   <Armchair className="w-4 h-4 text-emerald-500" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Posture</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Keep feet flat on the floor with arms parallel to the keyboard</p>
+                  <p className="text-sm font-medium text-foreground">{t('posture')}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('postureDesc')}</p>
                 </div>
               </div>
 
@@ -269,8 +270,8 @@ export function Settings({ settings, onUpdateSettings, onBack }: SettingsProps) 
                   <Eye className="w-4 h-4 text-purple-500" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Blinking</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">Make a conscious effort to blink fully — we blink 40-60% less when using screens</p>
+                  <p className="text-sm font-medium text-foreground">{t('blinking')}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t('blinkingDesc')}</p>
                 </div>
               </div>
           </div>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useExtensionI18n } from "@/hooks/use-extension-i18n";
 
 interface Stats {
   todayBreaks: number;
@@ -37,6 +38,8 @@ export function Popup({
   meetingMode = false,
   onToggleMeetingMode,
 }: PopupProps) {
+  const { t } = useExtensionI18n();
+  
   // Calculate circle stroke properties
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
@@ -50,7 +53,7 @@ export function Popup({
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold font-display text-lg">
             20
           </div>
-          <span className="font-display font-bold text-foreground text-lg">Digital Eye Relief</span>
+          <span className="font-display font-bold text-foreground text-lg">{t('digitalEyeRelief')}</span>
         </div>
         <div className="flex items-center gap-1">
           {onToggleMeetingMode && (
@@ -64,7 +67,7 @@ export function Popup({
                   : "text-muted-foreground hover:text-amber-500"
               )}
               onClick={onToggleMeetingMode}
-              title={meetingMode ? "Meeting Mode ON - Click to disable" : "Enable Meeting Mode (mute sounds)"}
+              title={meetingMode ? t('meetingModeOn') : t('enableMeetingMode')}
               data-testid="button-meeting-mode"
             >
               <Users className="w-5 h-5" />
@@ -85,7 +88,7 @@ export function Popup({
       {meetingMode && (
         <div className="mx-6 -mt-2 mb-2 px-3 py-1.5 bg-amber-100 border border-amber-200 rounded-lg flex items-center gap-2">
           <Users className="w-3.5 h-3.5 text-amber-600" />
-          <span className="text-xs text-amber-700 font-medium">Meeting Mode - Sounds muted</span>
+          <span className="text-xs text-amber-700 font-medium">{t('meetingModeSoundsMuted')}</span>
         </div>
       )}
 
@@ -129,7 +132,7 @@ export function Popup({
               animate={{ opacity: 1, y: 0 }}
               className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1"
             >
-              {status === "idle" ? "Ready" : status === "break" ? "Relax Eyes" : status === "paused" ? "Paused" : "Focusing"}
+              {status === "idle" ? t('ready') : status === "break" ? t('relaxEyes') : status === "paused" ? t('paused') : t('focusing')}
             </motion.span>
             <span className="text-5xl font-display font-bold text-foreground tabular-nums tracking-tight">
               {status === "break" ? `${timeLeft}s` : formatTime(timeLeft)}
@@ -180,8 +183,8 @@ export function Popup({
               <Eye className="w-3.5 h-3.5 text-primary" />
             </div>
             <div className="text-left">
-              <p className="text-xs text-muted-foreground">Today</p>
-              <p className="text-sm font-semibold text-foreground">{stats?.todayBreaks ?? 0} breaks</p>
+              <p className="text-xs text-muted-foreground">{t('today')}</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.todayBreaks ?? 0} {t('breaks')}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -189,8 +192,8 @@ export function Popup({
               <Flame className="w-3.5 h-3.5 text-orange-500" />
             </div>
             <div className="text-left">
-              <p className="text-xs text-muted-foreground">Streak</p>
-              <p className="text-sm font-semibold text-foreground">{stats?.currentStreak ?? 0} days</p>
+              <p className="text-xs text-muted-foreground">{t('streak')}</p>
+              <p className="text-sm font-semibold text-foreground">{stats?.currentStreak ?? 0} {t('days')}</p>
             </div>
           </div>
         </div>

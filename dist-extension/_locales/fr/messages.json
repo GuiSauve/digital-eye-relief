@@ -282,5 +282,25 @@
   "enableMeetingMode": {
     "message": "Activer le Mode Réunion (couper les sons)",
     "description": "Enable meeting mode tooltip"
+  },
+  "reviewEnjoyingApp": {
+    "message": "Vous aimez Digital Eye Relief ?",
+    "description": "Review prompt question"
+  },
+  "reviewThanksPositive": {
+    "message": "Merci ! Un avis aide les autres à nous trouver",
+    "description": "Review prompt positive response"
+  },
+  "reviewThanksNegative": {
+    "message": "Merci pour votre honnêteté ! Aidez-nous à nous améliorer",
+    "description": "Review prompt negative response"
+  },
+  "reviewRateStore": {
+    "message": "Noter",
+    "description": "Rate on store button"
+  },
+  "reviewLeaveFeedback": {
+    "message": "Avis",
+    "description": "Leave feedback button"
   }
 }

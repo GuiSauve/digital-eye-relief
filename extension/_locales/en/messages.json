@@ -282,5 +282,25 @@
   "enableMeetingMode": {
     "message": "Enable Meeting Mode (mute sounds)",
     "description": "Enable meeting mode tooltip"
+  },
+  "reviewEnjoyingApp": {
+    "message": "Enjoying Digital Eye Relief?",
+    "description": "Review prompt question"
+  },
+  "reviewThanksPositive": {
+    "message": "Thanks! A rating helps others find us",
+    "description": "Review prompt positive response"
+  },
+  "reviewThanksNegative": {
+    "message": "Thanks for being honest! Help us improve",
+    "description": "Review prompt negative response"
+  },
+  "reviewRateStore": {
+    "message": "Rate",
+    "description": "Rate on store button"
+  },
+  "reviewLeaveFeedback": {
+    "message": "Feedback",
+    "description": "Leave feedback button"
   }
 }

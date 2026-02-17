@@ -3,6 +3,8 @@ import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye, Users, S
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useExtensionI18n } from "@/hooks/use-extension-i18n";
+import { ReviewPrompt } from "./ReviewPrompt";
+import type { ReviewStep } from "@/hooks/use-review-prompt";
 
 interface Stats {
   todayBreaks: number;
@@ -26,6 +28,11 @@ interface PopupProps {
   onToggleMeetingMode?: () => void;
   language?: string;
   pausedFrom?: "focus" | "break";
+  reviewStep?: ReviewStep;
+  onThumbsUp?: () => void;
+  onThumbsDown?: () => void;
+  onDismissReview?: () => void;
+  onStoreClick?: () => void;
 }
 
 export function Popup({
@@ -43,6 +50,11 @@ export function Popup({
   onToggleMeetingMode,
   language,
   pausedFrom = "focus",
+  reviewStep = "hidden",
+  onThumbsUp,
+  onThumbsDown,
+  onDismissReview,
+  onStoreClick,
 }: PopupProps) {
   const { t } = useExtensionI18n(language);
   
@@ -203,6 +215,18 @@ export function Popup({
         </div>
       </div>
       
+      {/* Review Prompt */}
+      {reviewStep !== "hidden" && onThumbsUp && onThumbsDown && onDismissReview && onStoreClick && (
+        <ReviewPrompt
+          step={reviewStep}
+          onThumbsUp={onThumbsUp}
+          onThumbsDown={onThumbsDown}
+          onDismiss={onDismissReview}
+          onStoreClick={onStoreClick}
+          language={language}
+        />
+      )}
+
       {/* Stats Footer */}
       <div className={cn("p-4 bg-secondary/30 mt-auto", meetingMode ? "pb-6" : "pb-10")}>
         <div className="flex justify-center gap-6">

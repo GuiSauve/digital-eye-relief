@@ -69,6 +69,11 @@ const translations: Record<string, Record<string, string>> = {
     enableMeetingMode: "Enable Meeting Mode (mute sounds)",
     min: "min",
     sec: "sec",
+    reviewEnjoyingApp: "Enjoying Digital Eye Relief?",
+    reviewThanksPositive: "Thanks! A rating helps others find us",
+    reviewThanksNegative: "Thanks for being honest! Help us improve",
+    reviewRateStore: "Rate",
+    reviewLeaveFeedback: "Feedback",
   },
   es: {
     focus: "Enfoque",
@@ -134,6 +139,11 @@ const translations: Record<string, Record<string, string>> = {
     enableMeetingMode: "Activar Modo Reunión (silenciar sonidos)",
     min: "min",
     sec: "seg",
+    reviewEnjoyingApp: "¿Te gusta Digital Eye Relief?",
+    reviewThanksPositive: "¡Gracias! Una valoración nos ayuda mucho",
+    reviewThanksNegative: "¡Gracias por tu honestidad! Ayúdanos a mejorar",
+    reviewRateStore: "Valorar",
+    reviewLeaveFeedback: "Comentar",
   },
   fr: {
     focus: "Concentration",
@@ -199,6 +209,11 @@ const translations: Record<string, Record<string, string>> = {
     enableMeetingMode: "Activer le Mode Réunion (couper les sons)",
     min: "min",
     sec: "sec",
+    reviewEnjoyingApp: "Vous aimez Digital Eye Relief ?",
+    reviewThanksPositive: "Merci ! Un avis aide les autres à nous trouver",
+    reviewThanksNegative: "Merci pour votre honnêteté ! Aidez-nous à nous améliorer",
+    reviewRateStore: "Noter",
+    reviewLeaveFeedback: "Avis",
   },
   de: {
     focus: "Fokus",
@@ -264,6 +279,11 @@ const translations: Record<string, Record<string, string>> = {
     enableMeetingMode: "Meeting-Modus aktivieren (Sounds stumm)",
     min: "Min",
     sec: "Sek",
+    reviewEnjoyingApp: "Gefällt Ihnen Digital Eye Relief?",
+    reviewThanksPositive: "Danke! Eine Bewertung hilft anderen uns zu finden",
+    reviewThanksNegative: "Danke für Ihre Ehrlichkeit! Helfen Sie uns besser zu werden",
+    reviewRateStore: "Bewerten",
+    reviewLeaveFeedback: "Feedback",
   }
 };
 

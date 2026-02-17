@@ -3,6 +3,7 @@ import { Popup } from "@/components/extension/Popup";
 import { Settings } from "@/components/extension/Settings";
 import { NotificationOverlay } from "@/components/extension/NotificationOverlay";
 import { useExtensionTimer } from "@/hooks/use-extension-timer";
+import { useReviewPrompt } from "@/hooks/use-review-prompt";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
@@ -31,6 +32,14 @@ export function ExtensionMockup() {
     toggleMeetingMode,
     pausedFrom,
   } = useExtensionTimer();
+
+  const {
+    reviewStep,
+    onThumbsUp,
+    onThumbsDown,
+    onDismissReview,
+    onStoreClick,
+  } = useReviewPrompt(stats.totalBreaks, status, meetingMode);
 
   const showOverlay = false; // Modal overlay disabled - badge notifications only
 
@@ -325,6 +334,11 @@ export function ExtensionMockup() {
                         onToggleMeetingMode={toggleMeetingMode}
                         language={language}
                         pausedFrom={pausedFrom}
+                        reviewStep={reviewStep}
+                        onThumbsUp={onThumbsUp}
+                        onThumbsDown={onThumbsDown}
+                        onDismissReview={onDismissReview}
+                        onStoreClick={onStoreClick}
                     />
                     ) : (
                     <Settings

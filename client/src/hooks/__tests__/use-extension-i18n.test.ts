@@ -26,6 +26,8 @@ const REQUIRED_KEYS = [
   "blinking", "blinkingDesc",
   "meetingModeSoundsMuted", "meetingModeOn", "enableMeetingMode",
   "min", "sec",
+  "reviewEnjoyingApp", "reviewThanksPositive", "reviewThanksNegative",
+  "reviewRateStore", "reviewLeaveFeedback",
 ];
 
 describe("useExtensionI18n", () => {

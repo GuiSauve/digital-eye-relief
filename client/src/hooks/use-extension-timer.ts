@@ -15,8 +15,8 @@ const playSound = (soundFile: string, volume: number = 70) => {
 };
 
 export function useExtensionTimer({
-  focusDurationMinutes = 0.08,  // DEMO: ~5 seconds, normally 20
-  breakDurationSeconds = 3,     // DEMO: 3 seconds, normally 20
+  focusDurationMinutes = 20,
+  breakDurationSeconds = 20,
 }: UseExtensionTimerProps = {}) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(focusDurationMinutes * 60);

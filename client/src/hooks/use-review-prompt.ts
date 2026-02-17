@@ -9,7 +9,7 @@ interface ReviewPromptState {
   breaksAtLastDismiss: number;
 }
 
-const INITIAL_THRESHOLD = 5;
+const INITIAL_THRESHOLD = 2; // DEMO: normally 5
 const RE_TRIGGER_INTERVAL = 10;
 const MAX_LIFETIME_ATTEMPTS = 3;
 

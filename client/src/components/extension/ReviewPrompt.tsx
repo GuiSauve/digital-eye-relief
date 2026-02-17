@@ -43,7 +43,7 @@ export function ReviewPrompt({
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="overflow-hidden"
       >
-        <div className="mx-4 mb-3 px-3 py-2.5 bg-green-50 border border-green-200/60 rounded-lg" data-testid="review-prompt">
+        <div className="px-3 py-2.5 bg-green-50 border border-green-200/60 rounded-lg" data-testid="review-prompt">
           <div className="flex items-center justify-between gap-2">
             {step === "ask" && (
               <>

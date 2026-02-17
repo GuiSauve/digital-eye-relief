@@ -215,20 +215,21 @@ export function Popup({
         </div>
       </div>
       
-      {/* Review Prompt */}
-      {reviewStep !== "hidden" && onThumbsUp && onThumbsDown && onDismissReview && onStoreClick && (
-        <ReviewPrompt
-          step={reviewStep}
-          onThumbsUp={onThumbsUp}
-          onThumbsDown={onThumbsDown}
-          onDismiss={onDismissReview}
-          onStoreClick={onStoreClick}
-          language={language}
-        />
-      )}
-
       {/* Stats Footer */}
       <div className={cn("p-4 bg-secondary/30 mt-auto", meetingMode ? "pb-6" : "pb-10")}>
+        {/* Review Prompt - positioned above stats */}
+        {reviewStep !== "hidden" && onThumbsUp && onThumbsDown && onDismissReview && onStoreClick && (
+          <div className="mb-3 -mt-1">
+            <ReviewPrompt
+              step={reviewStep}
+              onThumbsUp={onThumbsUp}
+              onThumbsDown={onThumbsDown}
+              onDismiss={onDismissReview}
+              onStoreClick={onStoreClick}
+              language={language}
+            />
+          </div>
+        )}
         <div className="flex justify-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">

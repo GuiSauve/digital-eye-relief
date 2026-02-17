@@ -21,6 +21,7 @@ export function useExtensionTimer({
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(focusDurationMinutes * 60);
   const pausedTimeRef = useRef<number>(0);
+  const pausedFromRef = useRef<"focus" | "break">("focus");
   
   // Settings state (normally would be in Chrome storage)
   const [settings, setSettings] = useState({
@@ -51,14 +52,17 @@ export function useExtensionTimer({
     if (status === "paused" && pausedTimeRef.current > 0) {
       setTimeLeft(pausedTimeRef.current);
       pausedTimeRef.current = 0;
+      setStatus(pausedFromRef.current);
+      return;
     }
     setStatus("focus");
   }, [status]);
 
   const pauseTimer = useCallback(() => {
     pausedTimeRef.current = timeLeft;
+    pausedFromRef.current = status === "break" ? "break" : "focus";
     setStatus("paused");
-  }, [timeLeft]);
+  }, [timeLeft, status]);
 
   const startBreak = useCallback(() => {
     setStatus("break");
@@ -126,9 +130,14 @@ export function useExtensionTimer({
     if (status === "idle") {
       return 0;
     }
-    if (status === "focus" || status === "paused") {
-      // For focus and paused, calculate based on focus duration
+    if (status === "focus") {
       return ((settings.focusDuration * 60 - timeLeft) / (settings.focusDuration * 60)) * 100;
+    }
+    if (status === "paused") {
+      if (pausedFromRef.current === "break") {
+        return ((settings.breakDuration - pausedTimeRef.current) / settings.breakDuration) * 100;
+      }
+      return ((settings.focusDuration * 60 - pausedTimeRef.current) / (settings.focusDuration * 60)) * 100;
     }
     if (status === "break") {
       return ((settings.breakDuration - timeLeft) / settings.breakDuration) * 100;
@@ -157,5 +166,6 @@ export function useExtensionTimer({
     stats,
     meetingMode: settings.meetingMode,
     toggleMeetingMode,
+    pausedFrom: pausedFromRef.current,
   };
 }

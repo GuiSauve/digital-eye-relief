@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye, Users } from "lucide-react";
+import { Play, Pause, RefreshCcw, Settings as SettingsIcon, Flame, Eye, Users, SkipForward } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useExtensionI18n } from "@/hooks/use-extension-i18n";
@@ -20,10 +20,12 @@ interface PopupProps {
   onPause: () => void;
   onReset: () => void;
   onOpenSettings: () => void;
+  onSkipBreak?: () => void;
   stats?: Stats;
   meetingMode?: boolean;
   onToggleMeetingMode?: () => void;
   language?: string;
+  pausedFrom?: "focus" | "break";
 }
 
 export function Popup({
@@ -35,10 +37,12 @@ export function Popup({
   onPause,
   onReset,
   onOpenSettings,
+  onSkipBreak,
   stats,
   meetingMode = false,
   onToggleMeetingMode,
   language,
+  pausedFrom = "focus",
 }: PopupProps) {
   const { t } = useExtensionI18n(language);
   
@@ -129,7 +133,7 @@ export function Popup({
           {/* Timer Display */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <motion.span 
-              key={status}
+              key={status + pausedFrom}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1"
@@ -137,7 +141,7 @@ export function Popup({
               {status === "idle" ? t('ready') : status === "break" ? t('relaxEyes') : status === "paused" ? t('paused') : t('focusing')}
             </motion.span>
             <span className="text-5xl font-display font-bold text-foreground tabular-nums tracking-tight">
-              {status === "break" ? `${timeLeft}s` : formatTime(timeLeft)}
+              {(status === "break" || (status === "paused" && pausedFrom === "break")) ? `${timeLeft}s` : formatTime(timeLeft)}
             </span>
           </div>
         </div>
@@ -155,7 +159,7 @@ export function Popup({
             <RefreshCcw className="w-5 h-5" />
           </Button>
 
-          {status === "idle" || status === "break" || status === "paused" ? (
+          {status === "idle" || status === "paused" ? (
             <Button
               size="lg"
               className="w-16 h-16 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all hover:scale-105"
@@ -163,6 +167,15 @@ export function Popup({
               data-testid="button-play"
             >
               <Play className="w-8 h-8 ml-1" fill="currentColor" />
+            </Button>
+          ) : status === "break" ? (
+            <Button
+              size="lg"
+              className="w-16 h-16 rounded-full bg-blue-400 hover:bg-blue-500 text-white shadow-lg shadow-blue-400/20 transition-all hover:scale-105"
+              onClick={onPause}
+              data-testid="button-pause"
+            >
+              <Pause className="w-8 h-8" fill="currentColor" />
             </Button>
           ) : (
             <Button
@@ -172,6 +185,19 @@ export function Popup({
               data-testid="button-pause"
             >
               <Pause className="w-8 h-8" fill="currentColor" />
+            </Button>
+          )}
+
+          {status === "break" && onSkipBreak && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="w-12 h-12 rounded-full border-2 hover:border-blue-400 hover:text-blue-400 transition-all"
+              onClick={onSkipBreak}
+              data-testid="button-skip"
+              title={t('skip')}
+            >
+              <SkipForward className="w-5 h-5" />
             </Button>
           )}
         </div>

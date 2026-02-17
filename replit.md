@@ -295,3 +295,43 @@ Extended multi-language support to the Chrome extension itself:
 - `extension/_locales/de/messages.json` - German
 
 The extension automatically displays in the user's browser language when available.
+
+## Automated Test Suite (February 2026)
+
+### Testing Framework
+- **Vitest** with jsdom environment for fast, Vite-native testing
+- **React Testing Library** for hook testing via `renderHook`
+- **@testing-library/jest-dom** for enhanced DOM assertions
+
+### Test Commands
+- `npm test` - Run all tests once (use before each release)
+- `npm run test:watch` - Run tests in watch mode during development
+
+### Test Coverage
+
+**Timer Hook Tests** (29 tests in `client/src/hooks/__tests__/use-extension-timer.test.ts`):
+- Initial state and custom configuration
+- Time formatting
+- Start/Focus state transitions
+- Focus → Break automatic transition
+- Break → Focus automatic transition
+- Pause from focus (saves state, stops countdown, resumes correctly)
+- Pause from break (saves break state, resumes to break not focus)
+- Skip break (starts new focus session)
+- Reset from any state
+- Progress calculations for all states
+- Settings changes (idle vs active behavior)
+- Meeting Mode toggle and persistence across states
+- Stats tracking (break counts, streak, skip behavior)
+
+**i18n Hook Tests** (21 tests in `client/src/hooks/__tests__/use-extension-i18n.test.ts`):
+- Translation completeness for all 4 languages (en, es, fr, de)
+- Non-English languages have genuinely translated values
+- Correct translation values per language
+- Fallback to English for unsupported languages
+- Unknown key handling
+- Singular/plural key pairs for all languages
+
+### Configuration Files
+- `vitest.config.ts` - Vitest configuration with path aliases and jsdom
+- `client/src/test-setup.ts` - Test setup with jest-dom matchers

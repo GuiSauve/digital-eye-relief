@@ -7,7 +7,6 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import NotFound from "@/pages/not-found";
 import { ExtensionMockup } from "@/pages/extension-mockup";
 import { Privacy } from "@/pages/privacy";
-import { StatsDashboard } from "@/pages/stats-dashboard";
 
 function Router() {
   return (
@@ -19,13 +18,9 @@ function Router() {
       <Route path="/es/privacy" component={Privacy} />
       <Route path="/fr/privacy" component={Privacy} />
       <Route path="/de/privacy" component={Privacy} />
-      <Route path="/es/stats" component={StatsDashboard} />
-      <Route path="/fr/stats" component={StatsDashboard} />
-      <Route path="/de/stats" component={StatsDashboard} />
       {/* Default English routes */}
       <Route path="/" component={ExtensionMockup} />
       <Route path="/privacy" component={Privacy} />
-      <Route path="/stats" component={StatsDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

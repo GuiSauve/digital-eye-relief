@@ -22,7 +22,7 @@ export function Privacy() {
 
         <div className="bg-white rounded-2xl shadow-lg border border-stone-200 p-8 space-y-8">
           <p className="text-stone-600">
-            <strong>Last updated:</strong> December 2025
+            <strong>Last updated:</strong> February 2026
           </p>
 
           <section>
@@ -35,15 +35,18 @@ export function Privacy() {
           <section>
             <h2 className="text-xl font-bold text-stone-800 mb-3">Data Collection</h2>
             <p className="text-stone-600 leading-relaxed mb-4">
-              <strong>We do not collect any personal data.</strong> Digital Eye Relief is designed with privacy as a core principle.
+              <strong>We do not collect any personal data.</strong> Digital Eye Relief is designed with privacy as a core principle. The extension itself does not track, collect, or transmit any personal information.
             </p>
             <ul className="list-disc list-inside text-stone-600 space-y-2">
-              <li>No personal information is collected</li>
+              <li>No personal information is collected by the extension</li>
               <li>No browsing history is accessed or stored</li>
-              <li>No analytics or tracking is implemented</li>
-              <li>No data is transmitted to external servers</li>
+              <li>No user-level tracking or analytics is implemented within the extension</li>
+              <li>No data is transmitted to our servers</li>
               <li>No account or registration is required</li>
             </ul>
+            <p className="text-stone-600 leading-relaxed mt-4">
+              <strong>Chrome Web Store Analytics:</strong> We use Google's built-in Chrome Web Store analytics to understand aggregate usage trends. This data is collected and processed by Google, not by us, and includes only anonymous, aggregate information such as total install and uninstall counts, geographic distribution of users, and browser/operating system breakdowns. This data cannot be used to identify individual users.
+            </p>
           </section>
 
           <section>
@@ -76,15 +79,18 @@ export function Privacy() {
 
           <section>
             <h2 className="text-xl font-bold text-stone-800 mb-3">Third-Party Services</h2>
+            <p className="text-stone-600 leading-relaxed mb-4">
+              The extension itself does not integrate any third-party services, advertising networks, or in-app analytics. It operates entirely offline and does not make any network requests.
+            </p>
             <p className="text-stone-600 leading-relaxed">
-              Digital Eye Relief does not use any third-party services, analytics platforms, or advertising networks. The extension operates entirely offline and does not make any network requests.
+              However, as the extension is distributed through the Chrome Web Store, Google may collect aggregate analytics data about installs, uninstalls, and user demographics. This data is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Google's Privacy Policy</a>. We only have access to aggregate, anonymized summaries and cannot identify individual users from this data.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-stone-800 mb-3">Data Sharing</h2>
             <p className="text-stone-600 leading-relaxed">
-              We do not sell, trade, or transfer any user data to third parties. Since we don't collect any data, there is nothing to share.
+              We do not sell, trade, or transfer any user data to third parties. The only data associated with the extension is aggregate Chrome Web Store analytics processed by Google, which does not contain any personally identifiable information.
             </p>
           </section>
 
@@ -110,7 +116,7 @@ export function Privacy() {
         </div>
 
         <footer className="mt-8 text-center text-stone-500 text-sm">
-          <p>© 2025 Digital Eye Relief. All rights reserved.</p>
+          <p>© 2026 Digital Eye Relief. All rights reserved.</p>
         </footer>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Popup } from "../client/src/components/extension/Popup";
 import { Welcome } from "../client/src/components/extension/Welcome";
 import { useChromeExtensionTimer } from "./hooks/useChromeExtensionTimer";
+import { useChromeReviewPrompt } from "./hooks/useChromeReviewPrompt";
 import "../client/src/index.css";
 
 function PopupApp() {
@@ -21,6 +22,14 @@ function PopupApp() {
     stats,
     meetingMode,
   } = useChromeExtensionTimer();
+
+  const {
+    reviewStep,
+    onThumbsUp,
+    onThumbsDown,
+    onDismissReview,
+    onStoreClick,
+  } = useChromeReviewPrompt(stats.totalBreaks, status, meetingMode);
 
   useEffect(() => {
     chrome.storage.sync.get(["hasSeenWelcome"], (result) => {
@@ -66,6 +75,11 @@ function PopupApp() {
         stats={stats}
         meetingMode={meetingMode}
         onToggleMeetingMode={toggleMeetingMode}
+        reviewStep={reviewStep}
+        onThumbsUp={onThumbsUp}
+        onThumbsDown={onThumbsDown}
+        onDismissReview={onDismissReview}
+        onStoreClick={onStoreClick}
       />
     </div>
   );

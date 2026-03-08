@@ -79,7 +79,7 @@ const translations: Record<string, Record<string, string>> = {
     goodEvening: "Good evening",
     clickToSetName: "Click to set your name",
     yourName: "Your name",
-    dailyFocus: "Today's Objectives",
+    dailyFocus: "Daily Focus",
     focusPlaceholder: "What's your main focus today?",
     quickLinks: "Quick Links",
     linkTitle: "Title",

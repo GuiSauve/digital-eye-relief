@@ -7,7 +7,7 @@ channel = "stable-24_05"
 packages = ["glib", "nss", "nspr", "atk", "at-spi2-atk", "cups", "libdrm", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "xorg.libX11", "mesa", "expat", "xorg.libXext", "alsa-lib", "pango", "cairo", "libxkbcommon", "gtk3", "dbus-glib", "zip"]
 
 [deployment]
-deploymentTarget = "static"
+deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 publicDir = "dist/public"
 run = ["npm", "run", "start"]

@@ -76,6 +76,17 @@
       "answer": "Cualquiera que pase mucho tiempo mirando pantallas puede beneficiarse de la regla 20-20-20. Esto incluye trabajadores de oficina, programadores, diseñadores, estudiantes, gamers, y cualquiera que use computadoras, tablets o smartphones por períodos prolongados. Es especialmente importante para personas que ya experimentan síntomas de fatiga visual como ojos secos, dolores de cabeza o visión borrosa."
     }
   },
+  "share": {
+    "title": "Comparte el regalo de unos ojos m\u00e1s sanos",
+    "description": "\u00bfConoces a alguien que pasa horas frente a una pantalla? Ay\u00fadalo a proteger sus ojos tambi\u00e9n.",
+    "copyLink": "Copiar enlace",
+    "copied": "\u00a1Copiado!",
+    "shareMessage": "Hola, estoy usando Digital Eye Relief para proteger mis ojos mientras trabajo frente a la pantalla. Te recuerda tomar descansos con la regla 20-20-20. \u00a1Deber\u00edas probarlo!",
+    "emailSubject": "Prueba Digital Eye Relief - Protege tus ojos",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "twitter": "X / Twitter"
+  },
   "cta": {
     "title": "¿Listo para proteger tus ojos?",
     "description": "Comienza a cuidar tus ojos hoy con una herramienta simple y gratuita diseñada para un tiempo de pantalla más saludable.",

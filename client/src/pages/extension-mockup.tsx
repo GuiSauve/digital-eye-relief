@@ -8,13 +8,14 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
 import { cn } from "@/lib/utils";
-import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText } from "lucide-react";
+import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText, Copy, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export function ExtensionMockup() {
   const [view, setView] = useState<"popup" | "settings">("popup");
+  const [copied, setCopied] = useState(false);
   const { language, t } = useLanguage();
   const {
     status,
@@ -419,6 +420,86 @@ export function ExtensionMockup() {
               </div>
             </details>
           </div>
+        </div>
+      </section>
+
+      {/* Share Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-white to-rose-50/50">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Heart className="w-7 h-7 text-rose-500" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-stone-800 mb-3">
+              {t.share.title}
+            </h2>
+            <p className="text-base text-stone-600 max-w-lg mx-auto mb-8">
+              {t.share.description}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button
+                variant="outline"
+                className="rounded-full px-5 py-2.5 border-stone-200 hover:bg-stone-50 transition-all gap-2"
+                data-testid="button-share-copy"
+                onClick={() => {
+                  const url = "https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin";
+                  const text = `${t.share.shareMessage}\n${url}`;
+                  navigator.clipboard.writeText(text).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  });
+                }}
+              >
+                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                {copied ? t.share.copied : t.share.copyLink}
+              </Button>
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent(`${t.share.shareMessage}\nhttps://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="outline"
+                  className="rounded-full px-5 py-2.5 border-stone-200 hover:bg-green-50 hover:border-green-200 hover:text-green-700 transition-all gap-2"
+                  data-testid="button-share-whatsapp"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {t.share.whatsapp}
+                </Button>
+              </a>
+              <a
+                href={`mailto:?subject=${encodeURIComponent(t.share.emailSubject)}&body=${encodeURIComponent(`${t.share.shareMessage}\n\nhttps://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin`)}`}
+              >
+                <Button
+                  variant="outline"
+                  className="rounded-full px-5 py-2.5 border-stone-200 hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700 transition-all gap-2"
+                  data-testid="button-share-email"
+                >
+                  <Mail className="w-4 h-4" />
+                  {t.share.email}
+                </Button>
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`${t.share.shareMessage}\nhttps://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="outline"
+                  className="rounded-full px-5 py-2.5 border-stone-200 hover:bg-stone-100 hover:border-stone-300 transition-all gap-2"
+                  data-testid="button-share-twitter"
+                >
+                  <Send className="w-4 h-4" />
+                  {t.share.twitter}
+                </Button>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

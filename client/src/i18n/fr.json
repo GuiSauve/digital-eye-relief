@@ -76,6 +76,17 @@
       "answer": "Toute personne qui passe beaucoup de temps devant les écrans peut bénéficier de la règle 20-20-20. Cela inclut les employés de bureau, les programmeurs, les designers, les étudiants, les gamers, et toute personne utilisant des ordinateurs, tablettes ou smartphones pendant de longues périodes. C'est particulièrement important pour les personnes qui présentent déjà des symptômes de fatigue oculaire comme les yeux secs, les maux de tête ou la vision floue."
     }
   },
+  "share": {
+    "title": "Offrez le cadeau d'une meilleure sant\u00e9 oculaire",
+    "description": "Vous connaissez quelqu'un qui passe des heures devant un \u00e9cran ? Aidez-le \u00e0 prot\u00e9ger ses yeux aussi.",
+    "copyLink": "Copier le lien",
+    "copied": "Copi\u00e9 !",
+    "shareMessage": "Salut, j'utilise Digital Eye Relief pour prot\u00e9ger mes yeux quand je travaille sur \u00e9cran. \u00c7a rappelle de faire des pauses avec la r\u00e8gle 20-20-20. Tu devrais essayer !",
+    "emailSubject": "Essaie Digital Eye Relief - Prot\u00e8ge tes yeux",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "twitter": "X / Twitter"
+  },
   "cta": {
     "title": "Prêt à protéger vos yeux ?",
     "description": "Commencez à prendre soin de vos yeux aujourd'hui avec un outil simple et gratuit conçu pour un temps d'écran plus sain.",

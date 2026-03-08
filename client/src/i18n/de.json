@@ -76,6 +76,17 @@
       "answer": "Jeder, der viel Zeit vor Bildschirmen verbringt, kann von der 20-20-20-Regel profitieren. Dazu gehören Büroangestellte, Programmierer, Designer, Studenten, Gamer und alle, die Computer, Tablets oder Smartphones über längere Zeiträume nutzen. Es ist besonders wichtig für Menschen, die bereits Symptome von Augenbelastung wie trockene Augen, Kopfschmerzen oder verschwommenes Sehen haben."
     }
   },
+  "share": {
+    "title": "Teilen Sie das Geschenk gesunder Augen",
+    "description": "Kennen Sie jemanden, der stundenlang vor dem Bildschirm sitzt? Helfen Sie auch ihm, seine Augen zu sch\u00fctzen.",
+    "copyLink": "Link kopieren",
+    "copied": "Kopiert!",
+    "shareMessage": "Hey, ich nutze Digital Eye Relief, um meine Augen bei der Bildschirmarbeit zu sch\u00fctzen. Es erinnert dich an Pausen mit der 20-20-20-Regel. Probier es mal aus!",
+    "emailSubject": "Probiere Digital Eye Relief - Sch\u00fctze deine Augen",
+    "whatsapp": "WhatsApp",
+    "email": "E-Mail",
+    "twitter": "X / Twitter"
+  },
   "cta": {
     "title": "Bereit, Ihre Augen zu schützen?",
     "description": "Beginnen Sie noch heute, sich um Ihre Augen zu kümmern, mit einem einfachen, kostenlosen Tool für gesündere Bildschirmzeit.",

@@ -76,6 +76,17 @@
       "answer": "Anyone who spends extended time looking at screens can benefit from the 20-20-20 rule. This includes office workers, programmers, designers, students, gamers, and anyone who uses computers, tablets, or smartphones for prolonged periods. It's especially important for people who already experience symptoms of eye strain like dry eyes, headaches, or blurred vision."
     }
   },
+  "share": {
+    "title": "Share the gift of healthier eyes",
+    "description": "Know someone who spends hours in front of a screen? Help them protect their eyes too.",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "shareMessage": "Hey, I've been using Digital Eye Relief to protect my eyes while working on screens. It reminds you to take breaks using the 20-20-20 rule. You should try it too!",
+    "emailSubject": "Try Digital Eye Relief - Protect Your Eyes",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "twitter": "X / Twitter"
+  },
   "cta": {
     "title": "Ready to protect your eyes?",
     "description": "Start taking care of your eyes today with a simple, free tool designed for healthier screen time.",

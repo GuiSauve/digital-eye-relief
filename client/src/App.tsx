@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import NotFound from "@/pages/not-found";
 import { ExtensionMockup } from "@/pages/extension-mockup";
 import { Privacy } from "@/pages/privacy";
+import { NewTabPreview } from "@/pages/newtab-preview";
 
 function Router() {
   return (
@@ -18,6 +19,8 @@ function Router() {
       <Route path="/es/privacy" component={Privacy} />
       <Route path="/fr/privacy" component={Privacy} />
       <Route path="/de/privacy" component={Privacy} />
+      {/* New Tab preview */}
+      <Route path="/newtab" component={NewTabPreview} />
       {/* Default English routes */}
       <Route path="/" component={ExtensionMockup} />
       <Route path="/privacy" component={Privacy} />

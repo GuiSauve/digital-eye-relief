@@ -335,3 +335,34 @@ The extension automatically displays in the user's browser language when availab
 ### Configuration Files
 - `vitest.config.ts` - Vitest configuration with path aliases and jsdom
 - `client/src/test-setup.ts` - Test setup with jest-dom matchers
+
+## New Tab Page (March 2026)
+
+### Overview
+Added a Momentum-style "New Tab" page that replaces Chrome's default new tab with a beautiful, wellness-focused dashboard.
+
+### Features
+- **Time-of-day greeting** with customizable user name (persisted in Chrome storage)
+- **Live clock and date** display with Nunito display font
+- **20-20-20 timer status** - Shows current focus/break state with mini progress ring
+- **Daily stats** - Today's breaks and streak counter
+- **Daily focus goal** - Text input that persists for the day, resets daily
+- **Quick links** - Customizable bookmark grid with favicon support
+- **Eye exercise of the day** - Rotating curated exercises (7 exercises)
+- **Wellness tip of the day** - Rotating ergonomic/health tips (7 tips)
+- **Inspirational quote** - Daily rotating health & wellness quotes
+
+### Architecture
+- `extension/newtab.html` + `extension/newtab.tsx` - Chrome extension entry point
+- `client/src/components/extension/NewTabPage.tsx` - Main new tab component
+- `client/src/components/extension/EyeExercise.tsx` - Exercise, tip, and quote components
+- `client/src/pages/newtab-preview.tsx` - Web preview at `/newtab` route
+- `extension/manifest.json` - Added `chrome_url_overrides.newtab`
+
+### i18n Support
+All new tab strings are translated in all 4 languages (en, es, fr, de) via:
+- `client/src/hooks/use-extension-i18n.ts` - Fallback translations
+- `extension/_locales/*/messages.json` - Chrome extension i18n
+
+### Design
+Uses existing Sage & Cream design system with calming gradient background, glass-morphism cards, and smooth Framer Motion animations.

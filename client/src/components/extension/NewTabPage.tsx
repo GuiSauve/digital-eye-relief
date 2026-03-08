@@ -365,12 +365,12 @@ export function NewTabPage() {
 
   const statusLabel =
     timerState.status === "focus"
-      ? t("focusing") !== "focusing" ? t("focusing") : "Focusing"
+      ? t("focusing")
       : timerState.status === "break"
-      ? t("relaxEyes") !== "relaxEyes" ? t("relaxEyes") : "Break"
+      ? t("relaxEyes")
       : timerState.status === "paused"
-      ? t("paused") !== "paused" ? t("paused") : "Paused"
-      : t("ready") !== "ready" ? t("ready") : "Ready";
+      ? t("paused")
+      : t("ready");
 
   const greeting = getGreeting(t);
 
@@ -528,7 +528,7 @@ export function NewTabPage() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("todayStats") !== "todayStats" ? t("todayStats") : "Today's Stats"}
+                  {t("todayStats")}
                 </p>
               </div>
             </div>
@@ -538,7 +538,7 @@ export function NewTabPage() {
                   {stats.todayBreaks}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {t("breaks") !== "breaks" ? t("breaks") : "breaks"}
+                  {t("breaks")}
                 </p>
               </div>
               <div>
@@ -546,10 +546,8 @@ export function NewTabPage() {
                   {stats.currentStreak}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {t("streak") !== "streak" ? t("streak") : "streak"}{" "}
-                  {stats.currentStreak === 1
-                    ? t("daySingular") !== "daySingular" ? t("daySingular") : "day"
-                    : t("days") !== "days" ? t("days") : "days"}
+                  {t("streak")}{" "}
+                  {stats.currentStreak === 1 ? t("daySingular") : t("days")}
                 </p>
               </div>
             </div>
@@ -568,7 +566,7 @@ export function NewTabPage() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("dailyFocus") !== "dailyFocus" ? t("dailyFocus") : "Daily Focus"}
+                  {t("dailyFocus")}
                 </p>
               </div>
             </div>
@@ -598,11 +596,7 @@ export function NewTabPage() {
                 onBlur={() => {
                   if (focusGoal.trim()) saveFocusGoal(focusGoal.trim());
                 }}
-                placeholder={
-                  t("focusPlaceholder") !== "focusPlaceholder"
-                    ? t("focusPlaceholder")
-                    : "What's your main focus today?"
-                }
+                placeholder={t("focusPlaceholder")}
                 className="w-full text-sm bg-transparent border-b border-foreground/10 focus:border-primary/40 outline-none text-foreground placeholder:text-foreground/30 py-1 transition-colors"
                 autoFocus={!focusGoalSaved}
                 data-testid="input-focus-goal"
@@ -628,7 +622,7 @@ export function NewTabPage() {
                   <ExternalLink className="w-5 h-5" />
                 </div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("quickLinks") !== "quickLinks" ? t("quickLinks") : "Quick Links"}
+                  {t("quickLinks")}
                 </p>
               </div>
               {!addingLink && (
@@ -654,7 +648,7 @@ export function NewTabPage() {
                     type="text"
                     value={newLinkTitle}
                     onChange={(e) => setNewLinkTitle(e.target.value)}
-                    placeholder={t("linkTitle") !== "linkTitle" ? t("linkTitle") : "Title"}
+                    placeholder={t("linkTitle")}
                     className="w-full text-xs bg-white/80 rounded-lg px-2.5 py-1.5 outline-none border border-foreground/10 focus:border-primary/30"
                     autoFocus
                     data-testid="input-link-title"
@@ -674,7 +668,7 @@ export function NewTabPage() {
                       className="text-xs px-2.5 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer"
                       data-testid="button-save-link"
                     >
-                      {t("save") !== "save" ? t("save") : "Save"}
+                      {t("save")}
                     </button>
                     <button
                       onClick={() => {
@@ -685,7 +679,7 @@ export function NewTabPage() {
                       className="text-xs px-2.5 py-1 rounded-lg bg-foreground/5 text-foreground/50 hover:bg-foreground/10 transition-colors cursor-pointer"
                       data-testid="button-cancel-link"
                     >
-                      {t("cancel") !== "cancel" ? t("cancel") : "Cancel"}
+                      {t("cancel")}
                     </button>
                   </div>
                 </motion.div>
@@ -695,7 +689,7 @@ export function NewTabPage() {
             <div className="space-y-1.5 max-h-[120px] overflow-y-auto">
               {quickLinks.length === 0 && !addingLink && (
                 <p className="text-xs text-foreground/30 text-center py-2">
-                  {t("noLinksYet") !== "noLinksYet" ? t("noLinksYet") : "No links yet"}
+                  {t("noLinksYet")}
                 </p>
               )}
               {quickLinks.map((link) => (
@@ -750,7 +744,7 @@ export function NewTabPage() {
             data-testid="button-open-settings"
           >
             <SettingsIcon className="w-3 h-3" />
-            {t("settings") !== "settings" ? t("settings") : "Settings"}
+            {t("settings")}
           </button>
         </motion.div>
       </div>

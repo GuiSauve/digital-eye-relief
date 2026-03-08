@@ -164,8 +164,8 @@ interface EyeExerciseCardProps {
 
 export function EyeExerciseCard({ t }: EyeExerciseCardProps) {
   const exercise = getExerciseOfDay();
-  const title = t(exercise.titleKey) !== exercise.titleKey ? t(exercise.titleKey) : exercise.titleFallback;
-  const desc = t(exercise.descKey) !== exercise.descKey ? t(exercise.descKey) : exercise.descFallback;
+  const title = t(exercise.titleKey);
+  const desc = t(exercise.descKey);
 
   return (
     <motion.div
@@ -181,7 +181,7 @@ export function EyeExerciseCard({ t }: EyeExerciseCardProps) {
         </div>
         <div>
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            {t("exerciseOfDay") !== "exerciseOfDay" ? t("exerciseOfDay") : "Eye Exercise"}
+            {t("exerciseOfDay")}
           </p>
           <h3 className="font-display font-bold text-foreground">{title}</h3>
         </div>
@@ -193,8 +193,8 @@ export function EyeExerciseCard({ t }: EyeExerciseCardProps) {
 
 export function WellnessTipCard({ t }: EyeExerciseCardProps) {
   const tip = getTipOfDay();
-  const title = t(tip.titleKey) !== tip.titleKey ? t(tip.titleKey) : tip.titleFallback;
-  const desc = t(tip.descKey) !== tip.descKey ? t(tip.descKey) : tip.descFallback;
+  const title = t(tip.titleKey);
+  const desc = t(tip.descKey);
 
   return (
     <motion.div
@@ -210,7 +210,7 @@ export function WellnessTipCard({ t }: EyeExerciseCardProps) {
         </div>
         <div>
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            {t("wellnessTip") !== "wellnessTip" ? t("wellnessTip") : "Wellness Tip"}
+            {t("wellnessTip")}
           </p>
           <h3 className="font-display font-bold text-foreground">{title}</h3>
         </div>

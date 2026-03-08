@@ -143,8 +143,8 @@ export function NewTabPage() {
   const [userName, setUserName] = useState("");
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState("");
-  const [focusGoals, setFocusGoals] = useState<string[]>(["", "", ""]);
-  const [focusGoalsSaved, setFocusGoalsSaved] = useState(false);
+  const [focusGoal, setFocusGoal] = useState("");
+  const [focusGoalSaved, setFocusGoalSaved] = useState(false);
   const [quickLinks, setQuickLinks] = useState<QuickLink[]>([]);
   const [addingLink, setAddingLink] = useState(false);
   const [newLinkTitle, setNewLinkTitle] = useState("");
@@ -173,16 +173,8 @@ export function NewTabPage() {
       setUserName(savedName);
       const savedGoalDate = localStorage.getItem("newtabFocusGoalDate");
       if (savedGoalDate === getFocusDateKey()) {
-        const saved = localStorage.getItem("newtabFocusGoals");
-        if (saved) {
-          try {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed)) {
-              setFocusGoals(parsed);
-              setFocusGoalsSaved(parsed.some((g: string) => g.trim()));
-            }
-          } catch {}
-        }
+        setFocusGoal(localStorage.getItem("newtabFocusGoal") || "");
+        setFocusGoalSaved(!!localStorage.getItem("newtabFocusGoal"));
       }
       const savedLinks = localStorage.getItem("newtabQuickLinks");
       if (savedLinks) {
@@ -196,7 +188,7 @@ export function NewTabPage() {
     chrome!.storage!.sync.get(
       [
         "newtabUserName",
-        "newtabFocusGoals",
+        "newtabFocusGoal",
         "newtabFocusGoalDate",
         "newtabQuickLinks",
         "settings",
@@ -209,12 +201,9 @@ export function NewTabPage() {
       (result) => {
         if (result.newtabUserName) setUserName(result.newtabUserName as string);
         const savedDate = result.newtabFocusGoalDate as string;
-        if (savedDate === getFocusDateKey() && result.newtabFocusGoals) {
-          const goals = result.newtabFocusGoals as string[];
-          if (Array.isArray(goals)) {
-            setFocusGoals(goals);
-            setFocusGoalsSaved(goals.some((g) => g.trim()));
-          }
+        if (savedDate === getFocusDateKey() && result.newtabFocusGoal) {
+          setFocusGoal(result.newtabFocusGoal as string);
+          setFocusGoalSaved(true);
         }
         if (result.newtabQuickLinks) {
           setQuickLinks(result.newtabQuickLinks as QuickLink[]);
@@ -308,17 +297,17 @@ export function NewTabPage() {
     }
   }, [nameInput]);
 
-  const saveFocusGoals = useCallback(
-    (goals: string[]) => {
-      setFocusGoals(goals);
-      setFocusGoalsSaved(true);
+  const saveFocusGoal = useCallback(
+    (goal: string) => {
+      setFocusGoal(goal);
+      setFocusGoalSaved(true);
       if (isChromeExtension()) {
         chrome!.storage!.sync.set({
-          newtabFocusGoals: goals,
+          newtabFocusGoal: goal,
           newtabFocusGoalDate: getFocusDateKey(),
         });
       } else {
-        localStorage.setItem("newtabFocusGoals", JSON.stringify(goals));
+        localStorage.setItem("newtabFocusGoal", goal);
         localStorage.setItem("newtabFocusGoalDate", getFocusDateKey());
       }
     },
@@ -579,27 +568,17 @@ export function NewTabPage() {
               </div>
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("dailyFocus")}
+                  {t("dailyFocus") !== "dailyFocus" ? t("dailyFocus") : "Daily Focus"}
                 </p>
               </div>
             </div>
-            {focusGoalsSaved ? (
+            {focusGoalSaved ? (
               <div className="group relative">
-                <ul className="space-y-1.5 pr-6" data-testid="text-focus-goals">
-                  {focusGoals.map((goal, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                      <span className={cn(
-                        "mt-1.5 w-1.5 h-1.5 rounded-full shrink-0",
-                        goal.trim() ? "bg-violet-400" : "bg-foreground/15"
-                      )} />
-                      <span className={goal.trim() ? "font-medium" : "text-foreground/30 italic"}>
-                        {goal.trim() || "—"}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-sm text-foreground font-medium leading-relaxed pr-6" data-testid="text-focus-goal">
+                  {focusGoal}
+                </p>
                 <button
-                  onClick={() => setFocusGoalsSaved(false)}
+                  onClick={() => setFocusGoalSaved(false)}
                   className="absolute top-0 right-0 p-1 rounded-full opacity-0 group-hover:opacity-100 hover:bg-foreground/10 transition-all cursor-pointer"
                   data-testid="button-edit-goal"
                 >
@@ -607,45 +586,27 @@ export function NewTabPage() {
                 </button>
               </div>
             ) : (
-              <div className="space-y-1.5">
-                {focusGoals.map((goal, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-300 shrink-0" />
-                    <input
-                      type="text"
-                      value={goal}
-                      onChange={(e) => {
-                        const updated = [...focusGoals];
-                        updated[i] = e.target.value;
-                        setFocusGoals(updated);
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          if (i < 2) {
-                            const next = document.querySelector(`[data-testid="input-focus-goal-${i + 1}"]`) as HTMLInputElement;
-                            next?.focus();
-                          } else if (focusGoals.some((g) => g.trim())) {
-                            saveFocusGoals(focusGoals);
-                          }
-                        }
-                      }}
-                      placeholder={`${t("focusPlaceholder")}...`}
-                      className="w-full text-sm bg-transparent border-b border-foreground/10 focus:border-violet-400/40 outline-none text-foreground placeholder:text-foreground/25 py-0.5 transition-colors"
-                      autoFocus={i === 0 && !focusGoalsSaved}
-                      data-testid={`input-focus-goal-${i}`}
-                    />
-                  </div>
-                ))}
-                <button
-                  onClick={() => {
-                    if (focusGoals.some((g) => g.trim())) saveFocusGoals(focusGoals);
-                  }}
-                  className="text-xs px-2.5 py-1 mt-1 rounded-lg bg-violet-500/10 text-violet-600 hover:bg-violet-500/20 transition-colors cursor-pointer"
-                  data-testid="button-save-goals"
-                >
-                  {t("save")}
-                </button>
-              </div>
+              <input
+                type="text"
+                value={focusGoal}
+                onChange={(e) => setFocusGoal(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && focusGoal.trim()) {
+                    saveFocusGoal(focusGoal.trim());
+                  }
+                }}
+                onBlur={() => {
+                  if (focusGoal.trim()) saveFocusGoal(focusGoal.trim());
+                }}
+                placeholder={
+                  t("focusPlaceholder") !== "focusPlaceholder"
+                    ? t("focusPlaceholder")
+                    : "What's your main focus today?"
+                }
+                className="w-full text-sm bg-transparent border-b border-foreground/10 focus:border-primary/40 outline-none text-foreground placeholder:text-foreground/30 py-1 transition-colors"
+                autoFocus={!focusGoalSaved}
+                data-testid="input-focus-goal"
+              />
             )}
           </motion.div>
         </div>

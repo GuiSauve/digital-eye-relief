@@ -60,24 +60,24 @@ function isChromeExtension(): boolean {
 
 function getGreeting(t: (key: string) => string): string {
   const hour = new Date().getHours();
-  if (hour < 12) {
-    const msg = t("goodMorning");
-    return msg !== "goodMorning" ? msg : "Good morning";
+  if (hour < 12) return t("goodMorning");
+  if (hour < 17) return t("goodAfternoon");
+  return t("goodEvening");
+}
+
+function getLocale(): string {
+  if (typeof chrome !== "undefined" && chrome?.i18n?.getUILanguage) {
+    return chrome.i18n.getUILanguage();
   }
-  if (hour < 17) {
-    const msg = t("goodAfternoon");
-    return msg !== "goodAfternoon" ? msg : "Good afternoon";
-  }
-  const msg = t("goodEvening");
-  return msg !== "goodEvening" ? msg : "Good evening";
+  return navigator.language || "en";
 }
 
 function formatClockTime(): string {
-  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  return new Date().toLocaleTimeString(getLocale(), { hour: "2-digit", minute: "2-digit" });
 }
 
 function formatDate(): string {
-  return new Date().toLocaleDateString([], {
+  return new Date().toLocaleDateString(getLocale(), {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -392,31 +392,23 @@ export function NewTabPage() {
             {clock}
           </h1>
 
-          {!editingName && !userName ? (
-            <motion.button
-              onClick={() => {
-                setEditingName(true);
-                setNameInput("");
-              }}
-              className="text-xl text-foreground/40 hover:text-foreground/60 transition-colors font-display cursor-pointer"
-              data-testid="button-set-name"
-            >
-              {t("clickToSetName") !== "clickToSetName" ? t("clickToSetName") : "Click to set your name"}
-            </motion.button>
-          ) : editingName ? (
+          {editingName ? (
             <div className="flex items-center justify-center gap-2">
+              <span className="text-2xl font-display font-bold text-foreground/70">
+                {greeting},
+              </span>
               <input
                 type="text"
                 value={nameInput}
                 onChange={(e) => setNameInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && saveName()}
-                placeholder={t("yourName") !== "yourName" ? t("yourName") : "Your name"}
-                className="text-xl font-display bg-transparent border-b-2 border-primary/40 focus:border-primary outline-none text-center text-foreground px-2 py-1"
+                onKeyDown={(e) => e.key === "Enter" && nameInput.trim() && saveName()}
+                placeholder={t("yourName")}
+                className="text-2xl font-display font-bold bg-transparent border-b-2 border-primary/40 focus:border-primary outline-none text-center text-foreground w-48 py-0.5"
                 autoFocus
                 data-testid="input-name"
               />
               <button
-                onClick={saveName}
+                onClick={() => { if (nameInput.trim()) saveName(); }}
                 className="p-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer"
                 data-testid="button-save-name"
               >
@@ -424,23 +416,39 @@ export function NewTabPage() {
               </button>
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-2 group">
-              <h2
-                className="text-2xl font-display font-bold text-foreground/70"
-                data-testid="text-greeting"
-              >
-                {greeting}, {userName}
-              </h2>
-              <button
-                onClick={() => {
-                  setEditingName(true);
-                  setNameInput(userName);
-                }}
-                className="p-1 rounded-full opacity-0 group-hover:opacity-100 hover:bg-foreground/10 transition-all cursor-pointer"
-                data-testid="button-edit-name"
-              >
-                <Pencil className="w-3.5 h-3.5 text-foreground/40" />
-              </button>
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center gap-2 group">
+                <h2
+                  className="text-2xl font-display font-bold text-foreground/70"
+                  data-testid="text-greeting"
+                >
+                  {greeting}{userName ? `, ${userName}` : ""}
+                </h2>
+                {userName && (
+                  <button
+                    onClick={() => {
+                      setEditingName(true);
+                      setNameInput(userName);
+                    }}
+                    className="p-1 rounded-full opacity-0 group-hover:opacity-100 hover:bg-foreground/10 transition-all cursor-pointer"
+                    data-testid="button-edit-name"
+                  >
+                    <Pencil className="w-3.5 h-3.5 text-foreground/40" />
+                  </button>
+                )}
+              </div>
+              {!userName && (
+                <button
+                  onClick={() => {
+                    setEditingName(true);
+                    setNameInput("");
+                  }}
+                  className="mt-1 text-sm text-foreground/35 hover:text-foreground/55 transition-colors font-sans cursor-pointer"
+                  data-testid="button-set-name"
+                >
+                  {t("clickToSetName")}
+                </button>
+              )}
             </div>
           )}
         </motion.div>

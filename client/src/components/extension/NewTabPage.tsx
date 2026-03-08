@@ -169,12 +169,17 @@ export function NewTabPage() {
 
   useEffect(() => {
     if (!isChromeExtension()) {
-      setUserName("User");
-      setFocusGoal("");
-      setQuickLinks([
-        { id: "1", title: "Google", url: "https://google.com" },
-        { id: "2", title: "GitHub", url: "https://github.com" },
-      ]);
+      const savedName = localStorage.getItem("newtabUserName") || "";
+      setUserName(savedName);
+      const savedGoalDate = localStorage.getItem("newtabFocusGoalDate");
+      if (savedGoalDate === getFocusDateKey()) {
+        setFocusGoal(localStorage.getItem("newtabFocusGoal") || "");
+        setFocusGoalSaved(!!localStorage.getItem("newtabFocusGoal"));
+      }
+      const savedLinks = localStorage.getItem("newtabQuickLinks");
+      if (savedLinks) {
+        try { setQuickLinks(JSON.parse(savedLinks)); } catch {}
+      }
       setStats({ todayBreaks: 3, totalBreaks: 42, currentStreak: 5, lastActiveDate: new Date().toDateString() });
       setTimerState({ status: "focus", timeLeft: 14 * 60 + 30, focusDuration: 20, breakDuration: 20 });
       return;
@@ -287,6 +292,8 @@ export function NewTabPage() {
     setEditingName(false);
     if (isChromeExtension()) {
       chrome!.storage!.sync.set({ newtabUserName: nameInput });
+    } else {
+      localStorage.setItem("newtabUserName", nameInput);
     }
   }, [nameInput]);
 
@@ -299,6 +306,9 @@ export function NewTabPage() {
           newtabFocusGoal: goal,
           newtabFocusGoalDate: getFocusDateKey(),
         });
+      } else {
+        localStorage.setItem("newtabFocusGoal", goal);
+        localStorage.setItem("newtabFocusGoalDate", getFocusDateKey());
       }
     },
     []
@@ -308,6 +318,8 @@ export function NewTabPage() {
     setQuickLinks(links);
     if (isChromeExtension()) {
       chrome!.storage!.sync.set({ newtabQuickLinks: links });
+    } else {
+      localStorage.setItem("newtabQuickLinks", JSON.stringify(links));
     }
   }, []);
 

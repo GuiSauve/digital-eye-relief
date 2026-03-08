@@ -302,5 +302,53 @@
   "reviewLeaveFeedback": {
     "message": "Avis",
     "description": "Leave feedback button"
+  },
+  "goodMorning": {
+    "message": "Bonjour",
+    "description": "Morning greeting on new tab page"
+  },
+  "goodAfternoon": {
+    "message": "Bon Après-midi",
+    "description": "Afternoon greeting on new tab page"
+  },
+  "goodEvening": {
+    "message": "Bonsoir",
+    "description": "Evening greeting on new tab page"
+  },
+  "clickToSetName": {
+    "message": "Cliquez pour définir votre nom",
+    "description": "Placeholder prompt to set user name"
+  },
+  "yourName": {
+    "message": "Votre nom",
+    "description": "Label for name input field"
+  },
+  "dailyFocus": {
+    "message": "Objectif du Jour",
+    "description": "Daily focus section title"
+  },
+  "focusPlaceholder": {
+    "message": "Quel est votre objectif principal aujourd'hui ?",
+    "description": "Placeholder for daily focus input"
+  },
+  "quickLinks": {
+    "message": "Liens Rapides",
+    "description": "Quick links section title"
+  },
+  "linkTitle": {
+    "message": "Titre",
+    "description": "Link title input label"
+  },
+  "noLinksYet": {
+    "message": "Aucun lien pour le moment",
+    "description": "Empty state for quick links"
+  },
+  "exerciseOfDay": {
+    "message": "Exercice Oculaire",
+    "description": "Eye exercise section title"
+  },
+  "wellnessTip": {
+    "message": "Conseil Bien-être",
+    "description": "Wellness tip section title"
   }
 }

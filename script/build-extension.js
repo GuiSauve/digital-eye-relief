@@ -7,12 +7,15 @@ const rootDir = path.resolve(__dirname, '..');
 const distDir = path.join(rootDir, 'dist-extension');
 
 // Move HTML files from extension/ subdirectory to root
-const htmlFiles = ['popup.html', 'options.html'];
+const htmlFiles = ['popup.html', 'options.html', 'newtab.html'];
 htmlFiles.forEach(file => {
   const source = path.join(distDir, 'extension', file);
   const dest = path.join(distDir, file);
   if (fs.existsSync(source)) {
-    fs.renameSync(source, dest);
+    let content = fs.readFileSync(source, 'utf-8');
+    content = content.replace(/(src|href)="\.\.\/(?!\/)/g, '$1="./');
+    fs.writeFileSync(dest, content);
+    fs.unlinkSync(source);
   }
 });
 

@@ -1,6 +1,14 @@
+.claude
 node_modules
 dist
+dist-extension
 .DS_Store
 server/public
 vite.config.ts.*
 *.tar.gz
+*.zip
+.replit
+.agents
+.config
+.local
+attached_assets

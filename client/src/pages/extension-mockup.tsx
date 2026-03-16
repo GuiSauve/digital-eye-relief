@@ -6,7 +6,7 @@ import { useExtensionTimer } from "@/hooks/use-extension-timer";
 
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import generatedImage from '@assets/generated_images/soft_abstract_gradient_with_calming_sage_and_blue_tones.png';
+const generatedImage = '/background.png';
 import { cn } from "@/lib/utils";
 import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText, Copy, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { Link } from "wouter";

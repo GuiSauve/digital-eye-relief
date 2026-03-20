@@ -26,7 +26,6 @@ export default defineConfig({
       input: {
         popup: resolve(__dirname, "extension/popup.html"),
         options: resolve(__dirname, "extension/options.html"),
-        newtab: resolve(__dirname, "extension/newtab.html"),
       },
       output: {
         entryFileNames: "[name].js",

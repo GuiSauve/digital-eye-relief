@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach } from '@jest/globals';
+import { describe, test, expect, beforeEach } from 'vitest';
 import { getMockStorage, setMockStorage, getMockAlarms, triggerAlarm } from './setup';
 
 // Declare chrome as global (set up in setup.ts)

@@ -81,6 +81,40 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
+// Idle detection — pause when user steps away, resume when they return
+// Threshold: 5 minutes of inactivity triggers idle state
+chrome.idle.setDetectionInterval(300);
+
+chrome.idle.onStateChanged.addListener((newState) => {
+  if (newState === 'idle' || newState === 'locked') {
+    // Auto-pause only if currently in focus mode
+    chrome.storage.sync.get(['timerStatus', 'timerStartTime', 'timerDuration'], (result) => {
+      if (result.timerStatus === 'focus' && result.timerStartTime && result.timerDuration) {
+        const elapsed = Date.now() - result.timerStartTime;
+        const remainingMs = Math.max(0, result.timerDuration - elapsed);
+
+        chrome.alarms.clear('focusTimer');
+        chrome.alarms.clear('updateBadge');
+        chrome.storage.sync.set({
+          timerStatus: 'paused',
+          pausedRemainingMs: remainingMs,
+          idlePaused: true
+        });
+        updateBadge('idle');
+      }
+    });
+  } else if (newState === 'active') {
+    // Auto-resume only if the pause was caused by idle (not a manual pause)
+    chrome.storage.sync.get(['timerStatus', 'idlePaused', 'pausedRemainingMs'], (result) => {
+      if (result.timerStatus === 'paused' && result.idlePaused && result.pausedRemainingMs > 0) {
+        const remainingMinutes = result.pausedRemainingMs / 60000;
+        chrome.storage.sync.set({ idlePaused: false, pausedRemainingMs: null });
+        startFocusTimer(remainingMinutes);
+      }
+    });
+  }
+});
+
 // Handle all alarm events in one listener
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'focusTimer') {
@@ -377,6 +411,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'pauseTimer') {
+    // Clear idlePaused flag — manual pause should not trigger auto-resume
+    chrome.storage.sync.set({ idlePaused: false });
     pauseTimers();
     sendResponse({ success: true });
     return true;
@@ -392,11 +428,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Fetch current settings and reset timerDuration to reflect them
     chrome.storage.sync.get(['settings'], (result) => {
       const settings = result.settings || DEFAULT_SETTINGS;
-      chrome.storage.sync.set({ 
+      chrome.storage.sync.set({
         timerStatus: 'idle',
         pausedRemainingMs: null,
         timerStartTime: null,
-        timerDuration: settings.focusDuration * 60 * 1000
+        timerDuration: settings.focusDuration * 60 * 1000,
+        idlePaused: false
       });
       updateBadge('idle');
       sendResponse({ success: true });

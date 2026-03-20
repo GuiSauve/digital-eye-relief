@@ -27,6 +27,27 @@ Push to the `main` branch on GitHub — Netlify auto-deploys automatically. No m
 - **DNS:** Cloudflare (CNAME records — no nameserver changes needed)
 - **GitHub repo:** https://github.com/GuiSauve/digital-eye-relief.git
 
+## Building the Extension (for testing locally or packaging)
+```bash
+# 1. Build with Vite
+npx vite build --config vite.extension.config.ts
+
+# 2. Move HTML files to dist-extension root (Vite puts them in a subdirectory)
+mv dist-extension/extension/popup.html dist-extension/popup.html
+mv dist-extension/extension/options.html dist-extension/options.html
+
+# 3. Copy static extension files
+cp extension/background.js dist-extension/
+cp extension/offscreen.html dist-extension/
+cp extension/offscreen.js dist-extension/
+cp extension/manifest.json dist-extension/
+cp -r extension/icons dist-extension/
+cp -r extension/sounds dist-extension/
+cp -r extension/_locales dist-extension/
+```
+
+Then reload the extension in `chrome://extensions`.
+
 ## Before Packaging for the Chrome Web Store
 **Always run all tests before building a ZIP for upload.** Never hand over a package without confirming all tests pass.
 

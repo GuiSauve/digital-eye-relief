@@ -45,7 +45,7 @@ export function Settings({ settings, onUpdateSettings, onBack, language }: Setti
   };
 
   return (
-    <div className="w-full h-[500px] bg-white flex flex-col overflow-hidden relative font-sans">
+    <div className="w-full h-[500px] bg-background flex flex-col overflow-hidden relative font-sans">
       {/* Header */}
       <div className="p-6 flex items-center gap-4 bg-gradient-to-b from-secondary/50 to-transparent">
         <Button

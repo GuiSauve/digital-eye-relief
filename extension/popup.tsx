@@ -6,6 +6,14 @@ import { useChromeExtensionTimer } from "./hooks/useChromeExtensionTimer";
 import { useChromeReviewPrompt } from "./hooks/useChromeReviewPrompt";
 import "../client/src/index.css";
 
+// Apply dark mode class based on system preference (inline scripts are blocked by extension CSP)
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.classList.add('dark');
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  document.documentElement.classList.toggle('dark', e.matches);
+});
+
 function PopupApp() {
   const [showWelcome, setShowWelcome] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

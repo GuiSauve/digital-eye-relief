@@ -4,9 +4,9 @@
     "description": "Una extensión gratuita de Chrome que te recuerda tomar descansos visuales usando la regla 20-20-20 recomendada médicamente. Reduce la fatiga visual digital y mantente enfocado."
   },
   "hero": {
-    "tagline1": "Protege tus ojos.",
-    "tagline2": "Mantente enfocado.",
-    "description": "Una simple extensión de Chrome que te recuerda tomar descansos visuales usando la regla 20-20-20 recomendada médicamente.",
+    "tagline1": "Tus ojos merecen un descanso.",
+    "subtitle": "Para quienes pasan sus días frente a una pantalla.",
+    "description": "Digital Eye Relief te recuerda descansar la vista cada 20 minutos usando la regla 20-20-20 recomendada médicamente.",
     "addToChrome": "Añadir a Chrome — Es Gratis",
     "tryDemo": "Probar Demo Interactiva"
   },

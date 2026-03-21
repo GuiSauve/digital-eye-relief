@@ -4,9 +4,9 @@
     "description": "Eine kostenlose Chrome-Erweiterung, die Sie daran erinnert, Augenpausen mit der medizinisch empfohlenen 20-20-20-Regel zu machen. Reduzieren Sie digitale Augenbelastung und bleiben Sie fokussiert."
   },
   "hero": {
-    "tagline1": "Schützen Sie Ihre Augen.",
-    "tagline2": "Bleiben Sie fokussiert.",
-    "description": "Eine einfache Chrome-Erweiterung, die Sie daran erinnert, Augenpausen mit der medizinisch empfohlenen 20-20-20-Regel zu machen.",
+    "tagline1": "Ihre Augen verdienen eine Pause.",
+    "subtitle": "Für alle, die ihre Tage vor dem Bildschirm verbringen.",
+    "description": "Digital Eye Relief erinnert Sie daran, Ihre Augen alle 20 Minuten mit der medizinisch empfohlenen 20-20-20-Regel zu entlasten.",
     "addToChrome": "Zu Chrome hinzufügen — Kostenlos",
     "tryDemo": "Interaktive Demo testen"
   },

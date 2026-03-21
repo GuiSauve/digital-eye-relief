@@ -87,32 +87,39 @@ export function ExtensionMockup() {
           </motion.div>
           
           {/* Tagline */}
-          <motion.h1 
+          <motion.h1
             className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-display font-bold text-stone-800 tracking-tight leading-tight w-full break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {t.hero.tagline1}
-            <br />
-            <span className="text-primary">{t.hero.tagline2}</span>
           </motion.h1>
-          
-          <motion.p 
-            className="text-base sm:text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed"
+
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-stone-500 italic max-w-xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {t.hero.subtitle}
+          </motion.p>
+
+          <motion.p
+            className="text-base sm:text-lg md:text-2xl text-stone-600 max-w-2xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             {t.hero.description}
           </motion.p>
           
           {/* CTA Buttons */}
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             <a 
               href="https://chromewebstore.google.com/detail/digital-eye-relief/dpolekhjjdagbjlohnpogappckndikin"

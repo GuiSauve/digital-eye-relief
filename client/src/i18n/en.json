@@ -4,9 +4,9 @@
     "description": "A free Chrome extension that reminds you to take eye breaks using the medically-recommended 20-20-20 rule. Reduce digital eye strain and stay focused."
   },
   "hero": {
-    "tagline1": "Protect your eyes.",
-    "tagline2": "Stay focused.",
-    "description": "A simple Chrome extension that reminds you to take eye breaks using the medically-recommended 20-20-20 rule.",
+    "tagline1": "Your eyes deserve a break.",
+    "subtitle": "For people who spend their days in front of screens.",
+    "description": "Digital Eye Relief reminds you to rest your eyes every 20 minutes using the medically-recommended 20-20-20 rule.",
     "addToChrome": "Add to Chrome — It's Free",
     "tryDemo": "Try Interactive Demo"
   },

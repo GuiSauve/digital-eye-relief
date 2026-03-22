@@ -282,7 +282,7 @@ export function ExtensionMockup() {
                 
                 {/* Mock Browser Toolbar */}
                 <div className="bg-stone-100 border-b border-stone-200 p-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-md px-3 py-1.5 text-xs text-stone-400 flex-1 mr-4">
+                    <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-md px-3 py-1.5 text-xs text-stone-600 flex-1 mr-4">
                         <div className="w-3 h-3 rounded-full bg-stone-200" />
                         <span>chrome://extensions</span>
                     </div>

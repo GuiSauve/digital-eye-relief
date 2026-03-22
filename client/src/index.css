@@ -47,14 +47,14 @@
   --popover: 0 0% 100%;
   --popover-foreground: 200 15% 30%;
 
-  --primary: 140 35% 55%; /* Soft Sage Green */
+  --primary: 140 40% 38%; /* Sage Green - darkened for WCAG AA contrast */
   --primary-foreground: 0 0% 100%;
 
   --secondary: 200 20% 92%; /* Light Cool Gray */
   --secondary-foreground: 200 15% 30%;
 
   --muted: 200 10% 94%;
-  --muted-foreground: 200 10% 60%;
+  --muted-foreground: 200 10% 40%;
 
   --accent: 40 30% 90%; /* Warm Accent */
   --accent-foreground: 200 15% 30%;
@@ -64,7 +64,7 @@
 
   --border: 200 10% 88%;
   --input: 200 10% 88%;
-  --ring: 140 35% 55%;
+  --ring: 140 40% 38%;
 
   --radius: 1rem;
 

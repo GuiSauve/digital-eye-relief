@@ -94,6 +94,7 @@ export function Popup({
           <Button
             variant="ghost"
             size="icon"
+            aria-label="Open settings"
             className="text-muted-foreground hover:text-primary rounded-full"
             onClick={onOpenSettings}
           >
@@ -163,6 +164,7 @@ export function Popup({
           <Button
             variant="outline"
             size="icon"
+            aria-label="Reset timer"
             className="w-12 h-12 rounded-full border-2 hover:border-primary hover:text-primary transition-all"
             onClick={onReset}
             disabled={status === "idle"}
@@ -174,6 +176,7 @@ export function Popup({
           {status === "idle" || status === "paused" ? (
             <Button
               size="lg"
+              aria-label="Start focus timer"
               className="w-16 h-16 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all hover:scale-105"
               onClick={onStart}
               data-testid="button-play"
@@ -183,6 +186,7 @@ export function Popup({
           ) : status === "break" ? (
             <Button
               size="lg"
+              aria-label="Pause break"
               className="w-16 h-16 rounded-full bg-blue-400 hover:bg-blue-500 text-white shadow-lg shadow-blue-400/20 transition-all hover:scale-105"
               onClick={onPause}
               data-testid="button-pause"
@@ -192,6 +196,7 @@ export function Popup({
           ) : (
             <Button
               size="lg"
+              aria-label="Pause focus timer"
               className="w-16 h-16 rounded-full bg-orange-400 hover:bg-orange-500 text-white shadow-lg shadow-orange-400/20 transition-all hover:scale-105"
               onClick={onPause}
               data-testid="button-pause"
@@ -204,10 +209,10 @@ export function Popup({
             <Button
               variant="outline"
               size="icon"
+              aria-label={t('skip')}
               className="w-12 h-12 rounded-full border-2 hover:border-blue-400 hover:text-blue-400 transition-all"
               onClick={onSkipBreak}
               data-testid="button-skip"
-              title={t('skip')}
             >
               <SkipForward className="w-5 h-5" />
             </Button>

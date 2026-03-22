@@ -49,6 +49,7 @@ export function ExtensionMockup() {
         <LanguageSelector />
       </div>
 
+      <main>
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20">
         {/* Background Pattern */}
@@ -287,7 +288,7 @@ export function ExtensionMockup() {
                     </div>
                     
                     {/* Extension Icon with Badge */}
-                    <div className="relative group cursor-pointer p-1 hover:bg-stone-200 rounded transition-colors" onClick={() => setView("popup")}>
+                    <div role="button" aria-label="Open extension popup" className="relative group cursor-pointer p-1 hover:bg-stone-200 rounded transition-colors" onClick={() => setView("popup")}>
                         <div className="w-6 h-6 text-stone-600 flex items-center justify-center">
                             <Eye className="w-5 h-5" />
                         </div>
@@ -546,6 +547,8 @@ export function ExtensionMockup() {
           </div>
         </div>
       </section>
+
+      </main>
 
       {/* Footer */}
       <footer className="py-8 px-4 bg-stone-800 text-stone-400">

@@ -51,6 +51,7 @@ export function Settings({ settings, onUpdateSettings, onBack, language }: Setti
         <Button
           variant="ghost"
           size="icon"
+          aria-label="Back to popup"
           className="-ml-2 rounded-full hover:bg-background/50"
           onClick={onBack}
         >

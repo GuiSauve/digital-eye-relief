@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach } from 'vitest';
-import { getMockStorage, setMockStorage, getMockAlarms, triggerAlarm } from './setup';
+import { getMockStorage, setMockStorage, getMockAlarms, triggerAlarm, triggerStorageChange } from './setup';
 
 // Declare chrome as global (set up in setup.ts)
 declare const chrome: any;
@@ -91,6 +91,22 @@ function resetTimer(): void {
       timerDuration: settings.focusDuration * 60 * 1000
     });
   });
+}
+
+// Mirrors the chrome.storage.onChanged handler in background.js
+function handleSettingsChange(changes: { settings?: { newValue?: Settings; oldValue?: Settings } }): void {
+  if (!changes.settings) return;
+
+  const newSettings = changes.settings.newValue;
+  const oldSettings = changes.settings.oldValue;
+
+  if (newSettings?.focusDuration !== oldSettings?.focusDuration) {
+    chrome.storage.sync.get(['timerStatus'], (result: Record<string, any>) => {
+      if (result.timerStatus === 'focus') {
+        startFocusTimer(newSettings!.focusDuration);
+      }
+    });
+  }
 }
 
 describe('Timer Logic', () => {
@@ -292,30 +308,99 @@ describe('Timer Logic', () => {
   });
 
   describe('Settings Changes', () => {
-    test('changing focus duration should not affect running timer', () => {
+    test('changing focus duration while timer is running should restart with new duration', () => {
+      startFocusTimer(20);
+
+      handleSettingsChange({
+        settings: {
+          oldValue: { ...DEFAULT_SETTINGS, focusDuration: 20 },
+          newValue: { ...DEFAULT_SETTINGS, focusDuration: 5 }
+        }
+      });
+
+      const storage = getMockStorage();
+      expect(storage.timerStatus).toBe('focus');
+      expect(storage.timerDuration).toBe(5 * 60 * 1000);
+    });
+
+    test('changing focus duration while timer is running should reset the alarm', () => {
+      startFocusTimer(20);
+      const alarmsAfterStart = getMockAlarms();
+      const originalAlarmTime = alarmsAfterStart.get('focusTimer')?.scheduledTime;
+
+      // Small delay to ensure new alarm time is measurably different
+      const newAlarmStart = Date.now();
+
+      handleSettingsChange({
+        settings: {
+          oldValue: { ...DEFAULT_SETTINGS, focusDuration: 20 },
+          newValue: { ...DEFAULT_SETTINGS, focusDuration: 5 }
+        }
+      });
+
+      const newAlarmTime = getMockAlarms().get('focusTimer')?.scheduledTime;
+      expect(newAlarmTime).toBeDefined();
+      // New alarm should be ~5 min from now, not ~20 min from original start
+      expect(newAlarmTime!).toBeGreaterThanOrEqual(newAlarmStart + 5 * 60 * 1000 - 100);
+      expect(newAlarmTime!).toBeLessThan(originalAlarmTime!); // shorter than original 20-min alarm
+    });
+
+    test('changing focus duration while timer is idle should not start the timer', () => {
+      setMockStorage({ settings: DEFAULT_SETTINGS, timerStatus: 'idle' });
+
+      handleSettingsChange({
+        settings: {
+          oldValue: { ...DEFAULT_SETTINGS, focusDuration: 20 },
+          newValue: { ...DEFAULT_SETTINGS, focusDuration: 5 }
+        }
+      });
+
+      expect(getMockStorage().timerStatus).toBe('idle');
+      expect(getMockAlarms().has('focusTimer')).toBe(false);
+    });
+
+    test('changing focus duration while timer is paused should not start the timer', () => {
+      setMockStorage({
+        settings: DEFAULT_SETTINGS,
+        timerStatus: 'paused',
+        pausedRemainingMs: 10 * 60 * 1000
+      });
+
+      handleSettingsChange({
+        settings: {
+          oldValue: { ...DEFAULT_SETTINGS, focusDuration: 20 },
+          newValue: { ...DEFAULT_SETTINGS, focusDuration: 5 }
+        }
+      });
+
+      expect(getMockStorage().timerStatus).toBe('paused');
+      expect(getMockAlarms().has('focusTimer')).toBe(false);
+    });
+
+    test('changing a setting other than focusDuration should not affect the timer', () => {
       startFocusTimer(20);
       const originalDuration = getMockStorage().timerDuration;
-      
-      // Change settings
-      setMockStorage({
-        ...getMockStorage(),
-        settings: { ...DEFAULT_SETTINGS, focusDuration: 5 }
+
+      handleSettingsChange({
+        settings: {
+          oldValue: { ...DEFAULT_SETTINGS, soundEnabled: true },
+          newValue: { ...DEFAULT_SETTINGS, soundEnabled: false }
+        }
       });
-      
-      // Timer should still have original duration
+
       expect(getMockStorage().timerDuration).toBe(originalDuration);
     });
 
     test('reset after settings change should use new duration', () => {
       startFocusTimer(20);
-      
+
       setMockStorage({
         ...getMockStorage(),
         settings: { ...DEFAULT_SETTINGS, focusDuration: 10 }
       });
-      
+
       resetTimer();
-      
+
       expect(getMockStorage().timerDuration).toBe(10 * 60 * 1000);
     });
   });

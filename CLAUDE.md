@@ -52,14 +52,11 @@ Then reload the extension in `chrome://extensions`.
 **Always run all tests before building a ZIP for upload.** Never hand over a package without confirming all tests pass.
 
 ```bash
-# Vitest (63 tests)
+# All tests (86 tests) — Vitest runs everything
 npm test
-
-# Jest timer tests (19 tests — must be run separately)
-npx jest tests/timer.test.ts
 ```
 
-Both must show 100% passing before proceeding with the build and zip steps.
+Must show 100% passing before proceeding with the build and zip steps.
 
 ## Key Things to Avoid
 - Do not use `reusePort: true` in server config — it's Linux-only and breaks on macOS

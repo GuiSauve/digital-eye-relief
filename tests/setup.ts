@@ -4,6 +4,7 @@ import { vi, beforeEach } from 'vitest';
 const mockStorage: Record<string, any> = {};
 const mockAlarms: Map<string, { name: string; scheduledTime: number }> = new Map();
 const mockAlarmListeners: Array<(alarm: { name: string }) => void> = [];
+const mockStorageChangeListeners: Array<(changes: Record<string, { newValue?: any; oldValue?: any }>, area: string) => void> = [];
 
 // Mock chrome.storage.sync
 const mockChromeStorage = {
@@ -86,9 +87,20 @@ const mockChromeOffscreen = {
   createDocument: vi.fn(() => Promise.resolve())
 };
 
+// Mock chrome.storage.onChanged
+const mockChromeStorageOnChanged = {
+  addListener: vi.fn((callback: (changes: Record<string, { newValue?: any; oldValue?: any }>, area: string) => void) => {
+    mockStorageChangeListeners.push(callback);
+  }),
+  removeListener: vi.fn((callback: (changes: Record<string, { newValue?: any; oldValue?: any }>, area: string) => void) => {
+    const index = mockStorageChangeListeners.indexOf(callback);
+    if (index > -1) mockStorageChangeListeners.splice(index, 1);
+  })
+};
+
 // Assign mocks to global
 (global as any).chrome = {
-  storage: mockChromeStorage,
+  storage: { ...mockChromeStorage, onChanged: mockChromeStorageOnChanged },
   alarms: mockChromeAlarms,
   action: mockChromeAction,
   notifications: mockChromeNotifications,
@@ -121,9 +133,18 @@ export function getMockAlarms() {
   return mockAlarms;
 }
 
+// Helper to trigger a storage change event
+export function triggerStorageChange(
+  changes: Record<string, { newValue?: any; oldValue?: any }>,
+  area = 'sync'
+) {
+  mockStorageChangeListeners.forEach(listener => listener(changes, area));
+}
+
 // Helper to clear all mocks before each test
 beforeEach(() => {
   clearMockStorage();
   mockAlarms.clear();
+  mockStorageChangeListeners.length = 0;
   vi.clearAllMocks();
 });

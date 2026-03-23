@@ -104,22 +104,22 @@ function OptionsApp() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 dark:bg-background font-sans">
+    <div className="min-h-screen bg-background font-sans">
       {/* Header */}
-      <header className="bg-white dark:bg-card border-b border-stone-200 dark:border-border px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+      <header className="bg-card border-b border-border px-8 py-4 flex items-center justify-between sticky top-0 z-10">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center shadow-sm shadow-primary/30">
             <Eye className="w-5 h-5 text-white" />
           </div>
           <div>
-            <p className="font-bold text-stone-800 dark:text-foreground text-base leading-tight">Digital Eye Relief</p>
-            <p className="text-xs text-stone-400 dark:text-muted-foreground">{t("settings")}</p>
+            <p className="font-bold text-foreground text-base leading-tight">Digital Eye Relief</p>
+            <p className="text-xs text-muted-foreground">{t("settings")}</p>
           </div>
         </div>
         <Button
           variant="ghost"
           size="sm"
-          className="text-stone-400 dark:text-muted-foreground hover:text-stone-700 dark:hover:text-foreground rounded-full"
+          className="text-muted-foreground hover:text-foreground rounded-full"
           onClick={() => window.close()}
         >
           {t("close")}
@@ -140,8 +140,8 @@ function OptionsApp() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Timer Intervals */}
-          <div className="bg-white dark:bg-card rounded-2xl border border-stone-100 dark:border-border shadow-sm p-6 space-y-6">
-            <div className="flex items-center gap-2 text-primary font-semibold border-b border-stone-100 dark:border-border pb-3">
+          <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
+            <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-3">
               <Clock className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">{t("timerIntervals")}</span>
             </div>
@@ -193,8 +193,8 @@ function OptionsApp() {
           </div>
 
           {/* Notifications */}
-          <div className="bg-white dark:bg-card rounded-2xl border border-stone-100 dark:border-border shadow-sm p-6 space-y-6">
-            <div className="flex items-center gap-2 text-primary font-semibold border-b border-stone-100 dark:border-border pb-3">
+          <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
+            <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-3">
               <Bell className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">{t("notifications")}</span>
             </div>
@@ -252,8 +252,8 @@ function OptionsApp() {
         </div>
 
         {/* Meeting Mode */}
-        <div className="bg-white dark:bg-card rounded-2xl border border-stone-100 dark:border-border shadow-sm p-6 space-y-6">
-          <div className="flex items-center gap-2 text-primary font-semibold border-b border-stone-100 dark:border-border pb-3">
+        <div className="bg-card rounded-2xl border border-border shadow-sm p-6 space-y-6">
+          <div className="flex items-center gap-2 text-primary font-semibold border-b border-border pb-3">
             <Users className="w-4 h-4" />
             <span className="text-sm uppercase tracking-wide">{t("meetingMode")}</span>
           </div>
@@ -282,8 +282,8 @@ function OptionsApp() {
         </div>
 
         {/* Workspace Setup Tips */}
-        <details className="group bg-white dark:bg-card rounded-2xl border border-stone-100 dark:border-border shadow-sm p-6">
-          <summary className="flex items-center justify-between text-primary font-semibold border-b border-stone-100 dark:border-border pb-3 cursor-pointer list-none hover:opacity-80 transition-opacity">
+        <details className="group bg-card rounded-2xl border border-border shadow-sm p-6">
+          <summary className="flex items-center justify-between text-primary font-semibold border-b border-border pb-3 cursor-pointer list-none hover:opacity-80 transition-opacity">
             <div className="flex items-center gap-2">
               <Lightbulb className="w-4 h-4" />
               <span className="text-sm uppercase tracking-wide">{t("workspaceSetupTips")}</span>
@@ -291,7 +291,7 @@ function OptionsApp() {
             <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
           </summary>
           <div className="space-y-3 pt-4">
-            <div className="flex gap-3 p-3 bg-stone-50 dark:bg-secondary/30 rounded-lg">
+            <div className="flex gap-3 p-3 bg-muted rounded-lg">
               <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Monitor className="w-4 h-4 text-primary" />
               </div>
@@ -300,7 +300,7 @@ function OptionsApp() {
                 <p className="text-xs text-muted-foreground mt-0.5">{t("screenPositionDesc")}</p>
               </div>
             </div>
-            <div className="flex gap-3 p-3 bg-stone-50 dark:bg-secondary/30 rounded-lg">
+            <div className="flex gap-3 p-3 bg-muted rounded-lg">
               <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Lightbulb className="w-4 h-4 text-blue-500" />
               </div>
@@ -309,7 +309,7 @@ function OptionsApp() {
                 <p className="text-xs text-muted-foreground mt-0.5">{t("lightingDesc")}</p>
               </div>
             </div>
-            <div className="flex gap-3 p-3 bg-stone-50 dark:bg-secondary/30 rounded-lg">
+            <div className="flex gap-3 p-3 bg-muted rounded-lg">
               <div className="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Armchair className="w-4 h-4 text-emerald-500" />
               </div>
@@ -318,7 +318,7 @@ function OptionsApp() {
                 <p className="text-xs text-muted-foreground mt-0.5">{t("postureDesc")}</p>
               </div>
             </div>
-            <div className="flex gap-3 p-3 bg-stone-50 dark:bg-secondary/30 rounded-lg">
+            <div className="flex gap-3 p-3 bg-muted rounded-lg">
               <div className="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Eye className="w-4 h-4 text-purple-500" />
               </div>
@@ -339,11 +339,11 @@ function OptionsApp() {
 
           {feedbackState === "ask" && (
             <div className="text-center space-y-5">
-              <p className="text-stone-700 dark:text-foreground font-medium">Are you enjoying Digital Eye Relief?</p>
+              <p className="text-foreground font-medium">Are you enjoying Digital Eye Relief?</p>
               <div className="flex items-center justify-center gap-3">
                 <Button
                   variant="outline"
-                  className="rounded-full px-6 border-stone-200 hover:bg-green-50 hover:border-green-300 hover:text-green-700 gap-2"
+                  className="rounded-full px-6 border-border hover:bg-green-50 hover:border-green-300 hover:text-green-700 gap-2"
                   onClick={() => handleFeedback("positive")}
                 >
                   <ThumbsUp className="w-4 h-4" />
@@ -351,7 +351,7 @@ function OptionsApp() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="rounded-full px-6 border-stone-200 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-700 gap-2"
+                  className="rounded-full px-6 border-border hover:bg-orange-50 hover:border-orange-300 hover:text-orange-700 gap-2"
                   onClick={() => handleFeedback("negative")}
                 >
                   <ThumbsDown className="w-4 h-4" />
@@ -364,8 +364,8 @@ function OptionsApp() {
           {feedbackState === "positive" && (
             <div className="text-center space-y-4">
               <p className="text-2xl">🎉</p>
-              <p className="text-stone-700 dark:text-foreground font-medium">So glad to hear it!</p>
-              <p className="text-sm text-stone-500 dark:text-muted-foreground max-w-sm mx-auto">
+              <p className="text-foreground font-medium">So glad to hear it!</p>
+              <p className="text-sm text-muted-foreground max-w-sm mx-auto">
                 A quick review on the Chrome Web Store helps others discover the extension — it only takes 30 seconds.
               </p>
               <Button
@@ -381,13 +381,13 @@ function OptionsApp() {
           {feedbackState === "negative" && (
             <div className="text-center space-y-4">
               <p className="text-2xl">🙏</p>
-              <p className="text-stone-700 dark:text-foreground font-medium">Thank you for being honest.</p>
-              <p className="text-sm text-stone-500 dark:text-muted-foreground max-w-sm mx-auto">
+              <p className="text-foreground font-medium">Thank you for being honest.</p>
+              <p className="text-sm text-muted-foreground max-w-sm mx-auto">
                 Your feedback helps make the extension better. What could we improve?
               </p>
               <Button
                 variant="outline"
-                className="rounded-full px-6 border-stone-200 hover:bg-stone-100 gap-2"
+                className="rounded-full px-6 border-border hover:bg-muted gap-2"
                 onClick={() =>
                   window.open(
                     `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent("Digital Eye Relief — Feedback")}`,

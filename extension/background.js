@@ -389,6 +389,22 @@ function stopTimers() {
   updateBadge('idle');
 }
 
+// Restart focus timer when focusDuration setting changes mid-run
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== 'sync' || !changes.settings) return;
+
+  const newSettings = changes.settings.newValue;
+  const oldSettings = changes.settings.oldValue;
+
+  if (newSettings?.focusDuration !== oldSettings?.focusDuration) {
+    chrome.storage.sync.get(['timerStatus'], (result) => {
+      if (result.timerStatus === 'focus') {
+        startFocusTimer(newSettings.focusDuration);
+      }
+    });
+  }
+});
+
 // Handle messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'startTimer') {

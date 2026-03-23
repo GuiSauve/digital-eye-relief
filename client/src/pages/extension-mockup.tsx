@@ -6,7 +6,7 @@ import { useExtensionTimer } from "@/hooks/use-extension-timer";
 
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LanguageSelector } from "@/components/LanguageSelector";
-const generatedImage = '/background.png';
+const generatedImage = '/background.webp';
 import { cn } from "@/lib/utils";
 import { Eye, Chrome, Timer, Bell, Volume2, Sparkles, Heart, Shield, ArrowDown, HelpCircle, ChevronDown, FileText, Copy, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { Link } from "wouter";

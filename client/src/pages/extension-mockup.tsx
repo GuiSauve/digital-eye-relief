@@ -120,7 +120,7 @@ export function ExtensionMockup() {
             >
               <Button 
                 size="lg" 
-                className="h-auto min-h-[3.5rem] px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full sm:w-auto whitespace-normal"
+                className="h-auto min-h-[3.5rem] px-6 sm:px-8 py-3 text-base sm:text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full sm:w-auto whitespace-normal border-0"
                 data-testid="button-add-to-chrome"
               >
                 <Chrome className="w-5 h-5 mr-2 flex-shrink-0" />
@@ -523,7 +523,7 @@ export function ExtensionMockup() {
           >
             <Button 
               size="lg" 
-              className="h-auto min-h-[4rem] px-6 sm:px-10 py-4 text-lg sm:text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full whitespace-normal"
+              className="h-auto min-h-[4rem] px-6 sm:px-10 py-4 text-lg sm:text-xl rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all w-full whitespace-normal border-0"
               data-testid="button-download-cta"
             >
               <Chrome className="w-6 h-6 mr-3 flex-shrink-0" />
